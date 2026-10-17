@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AN:RIEL所属VTuber・タレントプロフィール。">
+  <title>TALENT | AN:RIEL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/talent.css">
+</head>
+<body class="talent-profile-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../top.html" class="header-logo"><img src="../images/logo.png" alt="AN:RIEL"></a>
+      <nav class="global-nav" id="globalNav">
+        <a href="../top.html">TOP</a>
+        <a href="../news.html">NEWS</a>
+        <a href="../about.html">ABOUT</a>
+        <a href="../talent.html">TALENT</a>
+        <a href="../schedule.html">SCHEDULE</a>
+        <a href="../goods.html">GOODS</a>
+        <a href="../audition.html">AUDITION</a>
+        <a href="../guideline.html">GUIDELINE</a>
+        <a href="../contact.html">CONTACT</a>
+      </nav>
+      <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <main id="talentProfilePage" class="talent-profile-main">
+    <div id="talentProfileLoading" class="talent-profile-loading"><p>LOADING...</p></div>
+    <div id="talentProfileContent" class="talent-profile-content" hidden>
+      <section class="talent-profile-hero">
+        <div class="talent-profile-hero-inner">
+          <div class="talent-profile-visual"><img id="talentProfileImage" class="talent-profile-character" alt="" hidden></div>
+          <div class="talent-profile-hero-info">
+            <div id="talentProfileLogoArea" class="talent-profile-logo-area" hidden><img id="talentProfileLogo" class="talent-profile-logo" alt=""></div>
+            <div class="talent-profile-name-area">
+              <p id="talentProfileGeneration" class="talent-profile-generation"></p>
+              <h1 id="talentProfileName" class="talent-profile-name"></h1>
+              <p id="talentProfileNameEn" class="talent-profile-name-en"></p>
+            </div>
+            <div id="talentProfileSocial" class="talent-profile-social"></div>
+            <div id="talentProfileIntroduction" class="talent-hero-block" hidden>
+              <div class="talent-profile-section-heading"><p class="talent-profile-section-en">PROFILE</p><h2>プロフィール</h2></div>
+              <div id="talentProfileText" class="talent-profile-text"></div>
+            </div>
+            <div id="talentVoiceSection" class="talent-hero-block" hidden>
+              <div class="talent-profile-section-heading"><p class="talent-profile-section-en">SAMPLE VOICE</p><h2>サンプルボイス</h2></div>
+              <div id="talentProfileVoices" class="talent-profile-voices"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 2段目：プロフィール項目 / ハッシュタグ -->
+      <section id="talentDetailsSection" class="talent-profile-section" hidden>
+        <div class="talent-profile-section-inner talent-detail-columns">
+          <div class="talent-detail-column talent-details-left">
+            <div id="talentProfileBasics" class="talent-detail-block" hidden>
+              <div class="talent-profile-section-heading"><p class="talent-profile-section-en">INFORMATION</p><h2>プロフィール項目</h2></div>
+              <dl id="talentProfileData" class="talent-profile-data"></dl>
+              <div id="talentCreatorSection" hidden><div id="talentProfileCreators" class="talent-profile-creators"></div></div>
+            </div>
+          </div>
+          <div class="talent-detail-column talent-details-right">
+            <div id="talentHashtagSection" class="talent-detail-block" hidden>
+              <div class="talent-profile-section-heading"><p class="talent-profile-section-en">HASHTAG</p><h2>ハッシュタグ</h2></div>
+              <div id="talentProfileHashtags" class="talent-profile-hashtags"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 3段目：ピックアップ動画 / 直近1日分の配信予定 -->
+      <section id="talentRelatedSection" class="talent-profile-section talent-related-section">
+        <div class="talent-profile-section-inner talent-related-columns">
+          <div id="talentMovieSection" class="talent-detail-block" hidden>
+            <div class="talent-profile-section-heading"><p class="talent-profile-section-en">PICKUP MOVIE</p><h2>ピックアップ動画</h2></div>
+            <div class="talent-profile-movie"><div id="talentProfileMovieFrame" class="talent-profile-movie-frame"></div></div>
+          </div>
+          <div id="talentScheduleSection" class="talent-detail-block">
+            <div class="talent-profile-section-heading"><p class="talent-profile-section-en">SCHEDULE</p><h2>配信予定</h2></div>
+            <div id="talentProfileSchedules" class="talent-schedule-list" hidden></div>
+            <p id="talentScheduleEmpty" class="talent-related-note">配信予定なし</p>
+            <a class="talent-related-more" href="../schedule.html">SCHEDULEを見る →</a>
+          </div>
+        </div>
+      </section>
+      <section class="talent-profile-back-area"><a href="../talent.html" class="talent-profile-back">← TALENT一覧へ</a></section>
+    </div>
+    <div id="talentProfileError" class="talent-profile-error" hidden><p>TALENT情報を読み込めませんでした。</p><a href="../talent.html">TALENT一覧へ戻る</a></div>
+  </main>
+  <footer class="site-footer"><div class="footer-inner">
+    <a href="../top.html" class="footer-logo"><img src="../images/logo.png" alt="AN:RIEL"></a>
+    <nav class="footer-nav">
+      <a href="../top.html">TOP</a><a href="../news.html">NEWS</a><a href="../about.html">ABOUT</a><a href="../talent.html">TALENT</a><a href="../schedule.html">SCHEDULE</a><a href="../goods.html">GOODS</a><a href="../audition.html">AUDITION</a><a href="../guideline.html">GUIDELINE</a><a href="../contact.html">CONTACT</a>
+    </nav>
+    <div class="footer-social-area"><p class="footer-social-label">FOLLOW / CONTACT</p><div class="footer-social">
+      <a href="https://x.com/ANRIEL_2026" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">X</span><span class="footer-social-sub">OFFICIAL ACCOUNT</span></a>
+      <a href="https://www.youtube.com/@ANRIEL-2026/videos" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">YOUTUBE</span><span class="footer-social-sub">OFFICIAL CHANNEL</span></a>
+      <a href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">MARSHMALLOW</span><span class="footer-social-sub">QUESTION BOX</span></a>
+    </div></div><p class="copyright">© 2026 AN:RIEL</p>
+  </div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/talent-profile.js"></script>
+  <script src="../js/media-guard.js"></script>
+</body>
+</html>

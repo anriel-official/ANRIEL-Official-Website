@@ -1,0 +1,1421 @@
+/* ==================================================
+
+   AN:RIEL
+
+   TALENT
+
+================================================== */
+
+
+
+/* TALENT LIST */
+
+
+
+.talent-page {
+
+  min-height: 100vh;
+
+}
+
+
+
+.talent-generation-section {
+
+  padding: 30px 24px 100px;
+
+}
+
+
+
+.talent-list-inner {
+
+  width: min(1000px, 100%);
+
+  margin: 0 auto;
+
+}
+
+
+
+.generation-heading {
+
+  margin-bottom: 45px;
+
+  text-align: center;
+
+}
+
+
+
+.generation-number {
+
+  margin: 0 0 6px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  color: #777;
+
+}
+
+
+
+.generation-title {
+
+  margin: 0;
+
+  font-size: 27px;
+
+  font-weight: 800;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.04em;
+
+}
+
+
+
+.talent-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 220px));
+
+  justify-content: center;
+
+  align-items: end;
+
+  column-gap: 90px;
+
+  row-gap: 70px;
+
+}
+
+
+
+.talent-list-card {
+
+  display: block;
+
+  width: 100%;
+
+  text-decoration: none;
+
+  background: transparent;
+
+  border: 0;
+
+  box-shadow: none;
+
+  transition: transform 0.3s ease;
+
+}
+
+
+
+.talent-list-card:hover {
+
+  transform: translateY(-7px);
+
+}
+
+
+
+.talent-list-image {
+
+  width: 100%;
+
+  height: 310px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  background: transparent;
+
+}
+
+
+
+.talent-list-image img {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  object-position: center bottom;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+}
+
+
+
+.talent-list-card:hover .talent-list-image img {
+
+  transform: scale(1.025);
+
+  opacity: 0.85;
+
+}
+
+
+
+.talent-image-placeholder {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  color: #aaa;
+
+}
+
+
+
+.coming-generation {
+
+  position: relative;
+
+  padding-top: 100px;
+
+  padding-bottom: 130px;
+
+}
+
+
+
+.coming-generation::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 50%;
+
+  width: min(1000px, calc(100% - 48px));
+
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background: rgba(0, 0, 0, 0.08);
+
+}
+
+
+
+.generation-coming-soon {
+
+  min-height: 250px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+}
+
+
+
+.generation-coming-soon p {
+
+  margin: 0;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(18px, 3vw, 28px);
+
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+
+  color: rgba(0, 0, 0, 0.35);
+
+  text-align: center;
+
+}
+
+
+
+.talent-loading {
+
+  min-height: 300px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  color: #888;
+
+}
+
+
+
+/* TALENT PROFILE */
+
+
+
+.talent-profile-main {
+
+  --talent-main-color: #ffffff;
+
+  --talent-background-color: #ffffff;
+
+  --talent-text-color: #222222;
+
+  min-height: 100vh;
+
+  color: var(--talent-text-color);
+
+  background: var(--talent-background-color);
+
+}
+
+
+
+.talent-profile-loading,
+
+.talent-profile-error {
+
+  min-height: 65vh;
+
+  padding: 80px 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 20px;
+
+  text-align: center;
+
+}
+
+
+
+.talent-profile-error a {
+
+  color: inherit;
+
+}
+
+
+
+.talent-profile-content {
+
+  width: 100%;
+
+}
+
+
+
+.talent-profile-hero {
+
+  padding: 60px 24px 80px;
+
+}
+
+
+
+.talent-profile-hero-inner {
+
+  width: min(1100px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+
+  gap: clamp(40px, 7vw, 90px);
+
+  align-items: center;
+
+}
+
+
+
+.talent-profile-visual {
+
+  min-height: 650px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+}
+
+
+
+.talent-profile-character {
+
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  max-height: 720px;
+
+  object-fit: contain;
+
+  object-position: center bottom;
+
+}
+
+
+
+.talent-profile-logo-area {
+
+  margin-bottom: 35px;
+
+}
+
+
+
+.talent-profile-logo {
+
+  display: block;
+
+  width: min(330px, 100%);
+
+  max-height: 170px;
+
+  object-fit: contain;
+
+  object-position: left center;
+
+}
+
+
+
+.talent-profile-generation {
+
+  margin: 0 0 10px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  opacity: 0.62;
+
+}
+
+
+
+.talent-profile-name {
+
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 72px);
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.03em;
+
+}
+
+
+
+.talent-profile-name-en {
+
+  margin: 8px 0 0;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0.62;
+
+}
+
+
+
+.talent-profile-social {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 38px;
+
+}
+
+
+
+.talent-profile-social-link,
+
+.talent-profile-back {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 13px 25px;
+
+  color: var(--talent-text-color);
+
+  text-decoration: none;
+
+  border: 1px solid currentColor;
+
+  border-radius: 999px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+}
+
+
+
+.talent-profile-social-link {
+
+  min-width: 140px;
+
+}
+
+
+
+.talent-profile-social-link:hover,
+
+.talent-profile-back:hover {
+
+  transform: translateY(-2px);
+
+  opacity: 0.6;
+
+}
+
+
+
+.talent-profile-section {
+
+  padding: 85px 24px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.talent-profile-section-inner {
+
+  width: min(1000px, 100%);
+
+  margin: 0 auto;
+
+}
+
+
+
+.talent-profile-section-heading {
+
+  margin-bottom: 42px;
+
+}
+
+
+
+.talent-profile-section-en {
+
+  margin: 0 0 7px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  opacity: 0.55;
+
+}
+
+
+
+.talent-profile-section-heading h2 {
+
+  margin: 0;
+
+  font-size: clamp(25px, 4vw, 34px);
+
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+
+}
+
+
+
+.talent-profile-about {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+
+  gap: clamp(45px, 8vw, 90px);
+
+  align-items: start;
+
+}
+
+
+
+.talent-profile-text {
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  line-height: 2.15;
+
+}
+
+
+
+.talent-profile-data {
+
+  margin: 0;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+
+}
+
+
+
+.talent-profile-data-row {
+
+  display: grid;
+
+  grid-template-columns: 110px 1fr;
+
+  gap: 18px;
+
+  padding: 17px 3px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+
+}
+
+
+
+.talent-profile-data-row dt {
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  opacity: 0.62;
+
+}
+
+
+
+.talent-profile-data-row dd {
+
+  margin: 0;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+
+
+.talent-profile-hashtags {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+}
+
+
+
+.talent-profile-hashtag {
+
+  padding: 20px 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+}
+
+
+
+.talent-profile-hashtag-label {
+
+  min-width: 95px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  opacity: 0.6;
+
+}
+
+
+
+.talent-profile-hashtag-text {
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  word-break: break-word;
+
+}
+
+
+
+.talent-profile-movie {
+
+  width: min(850px, 100%);
+
+}
+
+
+
+.talent-profile-movie-frame {
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #000;
+
+}
+
+
+
+.talent-profile-movie-frame iframe {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  border: 0;
+
+}
+
+
+
+.talent-profile-movie-title {
+
+  margin: 18px 0 0;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  line-height: 1.7;
+
+}
+
+
+
+#talentProfileIllustrator {
+
+  display: inline-block;
+
+  color: var(--talent-text-color);
+
+  font-size: clamp(18px, 3vw, 24px);
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  border-bottom: 1px solid currentColor;
+
+}
+
+
+
+#talentProfileIllustrator[href]:hover {
+
+  opacity: 0.6;
+
+}
+
+
+
+.talent-profile-back-area {
+
+  padding: 45px 24px 120px;
+
+  text-align: center;
+
+}
+
+
+
+/* RESPONSIVE */
+
+
+
+@media (max-width: 900px) {
+
+  .talent-list {
+
+    grid-template-columns: repeat(2, minmax(0, 210px));
+
+    column-gap: 55px;
+
+    row-gap: 55px;
+
+  }
+
+
+
+  .talent-list-image {
+
+    height: 290px;
+
+  }
+
+
+
+  .talent-profile-hero-inner {
+
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+
+    gap: 35px;
+
+  }
+
+
+
+  .talent-profile-visual {
+
+    min-height: 540px;
+
+  }
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  .talent-generation-section {
+
+    padding: 20px 16px 75px;
+
+  }
+
+
+
+  .generation-heading {
+
+    margin-bottom: 30px;
+
+  }
+
+
+
+  .generation-title {
+
+    font-size: 23px;
+
+  }
+
+
+
+  .talent-list {
+
+    grid-template-columns: repeat(2, minmax(0, 150px));
+
+    column-gap: 18px;
+
+    row-gap: 40px;
+
+  }
+
+
+
+  .talent-list-image {
+
+    height: 220px;
+
+  }
+
+
+
+  .coming-generation {
+
+    padding-top: 75px;
+
+    padding-bottom: 95px;
+
+  }
+
+
+
+  .coming-generation::before {
+
+    width: calc(100% - 32px);
+
+  }
+
+
+
+  .generation-coming-soon {
+
+    min-height: 180px;
+
+    border-radius: 20px;
+
+  }
+
+
+
+  .generation-coming-soon p {
+
+    font-size: 17px;
+
+    letter-spacing: 0.18em;
+
+  }
+
+
+
+  .talent-profile-hero {
+
+    padding: 35px 16px 60px;
+
+  }
+
+
+
+  .talent-profile-hero-inner {
+
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+
+  }
+
+
+
+  .talent-profile-visual {
+
+    min-height: 0;
+
+    height: 520px;
+
+  }
+
+
+
+  .talent-profile-character {
+
+    height: 100%;
+
+  }
+
+
+
+  .talent-profile-hero-info {
+
+    text-align: center;
+
+  }
+
+
+
+  .talent-profile-logo {
+
+    width: min(280px, 85%);
+
+    margin: 0 auto;
+
+    object-position: center;
+
+  }
+
+
+
+  .talent-profile-social {
+
+    justify-content: center;
+
+  }
+
+
+
+  .talent-profile-section {
+
+    padding: 65px 16px;
+
+  }
+
+
+
+  .talent-profile-section-heading {
+
+    margin-bottom: 30px;
+
+  }
+
+
+
+  .talent-profile-about,
+
+  .talent-profile-hashtags {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+
+  .talent-profile-about {
+
+    gap: 40px;
+
+  }
+
+
+
+  .talent-profile-movie-frame {
+
+    border-radius: 12px;
+
+  }
+
+
+
+  .talent-profile-back-area {
+
+    padding: 30px 16px 90px;
+
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  .talent-list {
+
+    grid-template-columns: repeat(2, minmax(0, 135px));
+
+    column-gap: 14px;
+
+    row-gap: 32px;
+
+  }
+
+
+
+  .talent-list-image {
+
+    height: 200px;
+
+  }
+
+
+
+  .generation-coming-soon {
+
+    min-height: 150px;
+
+  }
+
+
+
+  .generation-coming-soon p {
+
+    font-size: 15px;
+
+  }
+
+
+
+  .talent-profile-visual {
+
+    height: 430px;
+
+  }
+
+
+
+  .talent-profile-social {
+
+    flex-direction: column;
+
+  }
+
+
+
+  .talent-profile-social-link {
+
+    width: 100%;
+
+  }
+
+
+
+  .talent-profile-data-row {
+
+    grid-template-columns: 95px 1fr;
+
+    gap: 12px;
+
+  }
+
+
+
+  .talent-profile-hashtag {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+
+  }
+
+
+
+  .talent-profile-hashtag-label {
+
+    min-width: 0;
+
+  }
+
+}
+
+/* Dynamic profile fields / creator / sample voice */
+.talent-profile-text { white-space: pre-line; overflow-wrap: anywhere; }
+.talent-profile-about-single { grid-template-columns: minmax(0,1fr); }
+.talent-profile-data:empty { display:none; }
+.talent-profile-data-row dt { overflow-wrap:anywhere; }
+.talent-profile-voices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.talent-profile-voice { padding:22px; border:1px solid rgba(0,0,0,.12); border-radius:16px; }
+.talent-profile-voice p { margin:0 0 16px; font-size:14px; font-weight:700; }
+.talent-profile-voice audio { display:block; width:100%; }
+.talent-profile-creators { display:grid; gap:20px; }
+.talent-profile-creator { display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; }
+.talent-profile-creator span { min-width:130px; font-size:12px; font-weight:700; opacity:.65; }
+.talent-profile-creator strong,.talent-profile-creator-link { font-size:18px; font-weight:700; color:inherit; }
+.talent-profile-creator-link:hover { opacity:.6; }
+[hidden] { display:none !important; }
+@media(max-width:768px) { .talent-profile-voices { grid-template-columns:1fr; } }
+
+/* ==================================================
+   TALENT PROFILE — TWO-COLUMN HERO + DETAIL LAYOUT
+   ================================================== */
+.talent-profile-main { --talent-text-color:#222; color:var(--talent-text-color); }
+.talent-profile-hero { padding:64px 24px 100px; }
+.talent-profile-hero-inner {
+  width:min(1200px,100%); margin:auto;
+  display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  gap:clamp(36px,5vw,84px); align-items:stretch;
+}
+.talent-profile-visual { min-height:0; height:auto; align-items:stretch; position:relative; }
+.talent-profile-character {
+  width:100%; height:100%; max-height:none; min-height:0;
+  object-fit:contain; object-position:center bottom;
+}
+.talent-profile-hero-info { min-width:0; display:flex; flex-direction:column; align-items:stretch; }
+.talent-profile-logo-area { margin-bottom:24px; }
+.talent-profile-logo { width:min(340px,100%); }
+.talent-profile-generation {
+  margin:0 0 14px; font-size:clamp(25px,3vw,42px);
+  font-weight:800; letter-spacing:.06em; opacity:1; line-height:1.3;
+}
+.talent-profile-name { font-size:clamp(34px,4.6vw,58px); }
+.talent-profile-social { margin-top:25px; gap:10px; }
+.talent-profile-social-link { min-width:0; padding:10px 18px; }
+.talent-hero-block { margin-top:44px; }
+.talent-hero-block .talent-profile-section-heading { margin-bottom:20px; }
+.talent-hero-block .talent-profile-section-heading h2 { font-size:clamp(22px,2.5vw,28px); }
+.talent-profile-text { line-height:2; }
+.talent-profile-voices { grid-template-columns:1fr; gap:12px; }
+.talent-profile-voice { padding:16px 18px; border-radius:12px; }
+.talent-profile-voice p { margin-bottom:10px; }
+.talent-profile-movie { width:100%; }
+.talent-profile-movie-frame { border-radius:12px; }
+.talent-profile-section { padding:75px 24px; }
+.talent-detail-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(32px,6vw,100px); }
+.talent-detail-column { min-width:0; }
+.talent-profile-data-row { grid-template-columns:minmax(105px,.42fr) minmax(0,1fr); }
+.talent-profile-creators { gap:0; border-top:1px solid rgba(0,0,0,.14); }
+.talent-profile-creator { display:grid; grid-template-columns:minmax(105px,.42fr) minmax(0,1fr); gap:18px; padding:17px 3px; border-bottom:1px solid rgba(0,0,0,.14); }
+.talent-profile-creator span { min-width:0; }
+.talent-profile-creator strong,.talent-profile-creator-link { overflow-wrap:anywhere; font-size:14px; }
+.talent-related-note { margin:0 0 20px; font-size:14px; opacity:.7; }
+.talent-related-more { display:inline-flex; color:inherit; text-decoration:none; font-size:12px; font-weight:800; letter-spacing:.1em; padding:13px 22px; border:1px solid currentColor; border-radius:999px; }
+.talent-related-more:hover { opacity:.65; }
+.talent-related-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; }
+@media(max-width:768px) {
+  .talent-profile-hero { padding:35px 16px 65px; }
+  .talent-profile-hero-inner { grid-template-columns:1fr; gap:26px; }
+  .talent-profile-visual { height:min(115vw,600px); min-height:0; }
+  .talent-profile-character { height:100%; }
+  .talent-profile-hero-info { text-align:left; }
+  .talent-profile-logo { margin:0; }
+  .talent-profile-social { justify-content:flex-start; flex-direction:row; }
+  .talent-profile-social-link { width:auto; }
+  .talent-hero-block { margin-top:34px; }
+  .talent-detail-columns { grid-template-columns:1fr; gap:52px; }
+  .talent-related-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:480px) {
+  .talent-profile-visual { height:105vw; }
+  .talent-profile-social { gap:8px; }
+  .talent-profile-social-link { padding:10px 14px; }
+  .talent-profile-creator { grid-template-columns:100px minmax(0,1fr); }
+}
+
+/* 2026-10: compact three-row profile */
+.talent-profile-page .talent-profile-main { background:transparent; }
+.talent-profile-page .talent-profile-hero { padding:26px 20px 22px; background:transparent; }
+.talent-profile-page .talent-profile-hero-inner { gap:clamp(20px,3vw,44px); align-items:start; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); }
+.talent-profile-page .talent-profile-visual { align-self:start; display:flex; align-items:flex-start; justify-content:center; height:auto; min-height:0; }
+.talent-profile-page .talent-profile-character { display:block; width:100%; height:auto; max-height:740px; object-fit:contain; object-position:center top; }
+.talent-profile-page .talent-profile-logo-area { margin-bottom:10px; }
+.talent-profile-page .talent-profile-logo { max-width:260px; max-height:140px; object-fit:contain; object-position:left center; }
+.talent-profile-page .talent-profile-generation { font-size:clamp(15px,1.8vw,23px); margin:0 0 5px; }
+.talent-profile-page .talent-profile-name { font-size:clamp(25px,3vw,39px); margin:0 0 3px; line-height:1.3; }
+.talent-profile-page .talent-profile-name-en { margin:0; }
+.talent-profile-page .talent-profile-social { margin-top:13px; gap:7px; }
+.talent-profile-page .talent-profile-social-link { padding:8px 13px; }
+.talent-profile-page .talent-hero-block { margin-top:20px; }
+.talent-profile-page .talent-profile-section-heading { margin-bottom:13px; }
+.talent-profile-page .talent-profile-section-heading h2 { font-size:clamp(19px,2vw,23px); }
+.talent-profile-page .talent-hero-block .talent-profile-section-heading { margin-bottom:10px; }
+.talent-profile-page .talent-hero-block .talent-profile-section-heading h2 { font-size:clamp(19px,2vw,23px); }
+.talent-profile-page .talent-profile-text { line-height:1.75; }
+.talent-profile-page .talent-profile-voices { gap:9px; }
+.talent-profile-page .talent-profile-voice { padding:11px 14px; }
+.talent-profile-page .talent-profile-voice p { margin-bottom:6px; }
+.talent-profile-page .talent-profile-voice audio { width:100%; }
+.talent-profile-page .talent-profile-section { padding:24px 20px; background:transparent; }
+.talent-profile-page .talent-profile-section-inner { width:min(1200px,100%); margin-inline:auto; }
+.talent-profile-page .talent-detail-columns,.talent-profile-page .talent-related-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(22px,3vw,44px); }
+.talent-profile-page .talent-detail-column { display:flex; flex-direction:column; gap:25px; min-width:0; }
+.talent-profile-page .talent-detail-block { min-width:0; }
+.talent-profile-page .talent-profile-data,.talent-profile-page .talent-profile-creators,.talent-profile-page .talent-profile-hashtags { display:block; border-top:1px solid rgba(0,0,0,.15); }
+.talent-profile-page .talent-profile-data-row,.talent-profile-page .talent-profile-creator,.talent-profile-page .talent-profile-hashtag { display:grid; grid-template-columns:minmax(95px,.38fr) minmax(0,1fr); gap:12px; padding:13px 4px; border-bottom:1px solid rgba(0,0,0,.15); align-items:center; margin:0; }
+.talent-profile-page .talent-profile-creator span,.talent-profile-page .talent-profile-hashtag-label { min-width:0; font-size:13px; font-weight:700; opacity:.7; }
+.talent-profile-page .talent-profile-creator strong,.talent-profile-page .talent-profile-creator-link { font-size:14px; }
+.talent-profile-page .talent-profile-creator-link { text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1px; font-weight:800; }
+.talent-profile-page .talent-profile-creator-link:hover { opacity:.65; }
+.talent-profile-page .talent-profile-movie-title { display:none; }
+.talent-profile-page .talent-profile-movie-frame { border-radius:8px; overflow:hidden; }
+.talent-profile-page .talent-related-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.talent-profile-page .talent-related-note { margin-bottom:12px; }
+.talent-profile-page .talent-related-more { border-radius:5px; padding:10px 16px; }
+.talent-profile-page img { -webkit-user-drag:none; user-select:none; -webkit-user-select:none; }
+@media (max-width:768px) {
+ .talent-profile-page .talent-profile-hero { padding:20px 16px 12px; }
+ .talent-profile-page .talent-profile-hero-inner { grid-template-columns:1fr; gap:18px; }
+ .talent-profile-page .talent-profile-visual { height:auto; max-height:none; }
+ .talent-profile-page .talent-profile-character { height:auto; max-height:550px; }
+ .talent-profile-page .talent-profile-section { padding:20px 16px; }
+ .talent-profile-page .talent-detail-columns,.talent-profile-page .talent-related-columns { grid-template-columns:1fr; gap:22px; }
+ .talent-profile-page .talent-detail-column { gap:22px; }
+ .talent-profile-page .talent-profile-social { flex-direction:row; flex-wrap:wrap; }
+ .talent-profile-page .talent-profile-social-link { width:auto; }
+}
+@media (max-width:480px) {
+ .talent-profile-page .talent-profile-visual { height:auto; }
+ .talent-profile-page .talent-profile-character { max-height:440px; }
+ .talent-profile-page .talent-profile-creator,.talent-profile-page .talent-profile-hashtag,.talent-profile-page .talent-profile-data-row { grid-template-columns:105px minmax(0,1fr); gap:10px; }
+}
+
+/* 2026-10: TALENT profile spacing and final credits */
+/* Fixed header overlap: reserve space before the first row. */
+.talent-profile-page .talent-profile-main { padding-top:clamp(90px, 9vw, 124px); }
+.talent-profile-page .talent-profile-hero { padding-top:12px; }
+.talent-profile-page .talent-profile-hero-inner { align-items:start; }
+.talent-profile-page .talent-profile-visual,
+.talent-profile-page .talent-profile-hero-info { padding-top:0; margin-top:0; }
+.talent-profile-page .talent-profile-character { object-position:center top; }
+.talent-profile-page .talent-profile-text { max-width:38ch; white-space:pre-line; overflow-wrap:anywhere; }
+.talent-profile-page .talent-profile-voices { max-width:380px; grid-template-columns:1fr; }
+.talent-profile-page .talent-profile-voice { max-width:380px; box-sizing:border-box; }
+.talent-profile-page .talent-profile-voice audio { width:100%; max-width:335px; }
+.talent-profile-page .talent-profile-movie { max-width:380px; }
+.talent-profile-page .talent-profile-movie-frame { width:100%; max-width:380px; aspect-ratio:16/9; }
+.talent-profile-page .talent-profile-movie-frame iframe { display:block; width:100%; height:100%; }
+/* Hashtags: plain information rows, left aligned and without cards. */
+.talent-profile-page .talent-profile-hashtags { display:block; text-align:left; background:none; border-radius:0; padding:0; box-shadow:none; }
+.talent-profile-page .talent-profile-hashtag { display:grid; grid-template-columns:minmax(95px,.38fr) minmax(0,1fr); align-items:center; justify-items:start; text-align:left; gap:12px; padding:13px 4px; margin:0; border:0; border-bottom:1px solid rgba(0,0,0,.15); border-radius:0; background:none; box-shadow:none; }
+.talent-profile-page .talent-profile-hashtag-label,
+.talent-profile-page .talent-profile-hashtag-text { display:block; text-align:left; margin:0; padding:0; border:0; background:none; border-radius:0; }
+/* Credits at the very end, no separate creator heading. */
+.talent-profile-page .talent-creators-footer { padding-top:6px; padding-bottom:12px; }
+.talent-profile-page .talent-creators-footer .talent-profile-section-inner { max-width:1200px; }
+.talent-profile-page .talent-creators-footer .talent-profile-creators { max-width:570px; }
+.talent-profile-page .talent-creators-footer .talent-profile-creator { padding:10px 4px; }
+@media(max-width:768px) {
+ .talent-profile-page .talent-profile-main { padding-top:90px; }
+ .talent-profile-page .talent-profile-hero { padding-top:12px; }
+ .talent-profile-page .talent-profile-text { max-width:36ch; }
+ .talent-profile-page .talent-profile-voices,.talent-profile-page .talent-profile-movie { max-width:100%; }
+}
+
+/* Final creator rows, appended to profile information */
+.talent-profile-page #talentCreatorSection .talent-profile-creators { border-top:0; max-width:none; }
+.talent-profile-page #talentCreatorSection .talent-profile-creator { grid-template-columns:minmax(95px,.38fr) minmax(0,1fr); padding:13px 4px; }
+.talent-profile-page #talentCreatorSection .talent-profile-creator:first-child { border-top:0; }
+.talent-profile-page #talentCreatorSection .talent-profile-creator-link { overflow-wrap:anywhere; }
+
+/* 2026-10-09: centered three-row layout */
+.talent-profile-page .talent-profile-main { background:transparent; }
+.talent-profile-page .talent-profile-hero-inner,
+.talent-profile-page .talent-profile-section-inner { width:min(1100px,calc(100% - 8px)); max-width:1100px; margin-inline:auto; }
+.talent-profile-page .talent-profile-hero-inner { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+.talent-profile-page .talent-profile-section { padding-block:25px; }
+.talent-profile-page .talent-detail-columns,
+.talent-profile-page .talent-related-columns { grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(22px,4vw,54px); }
+.talent-profile-page .talent-profile-movie { width:min(380px,100%); }
+.talent-profile-page .talent-related-section .talent-profile-movie-frame { width:100%; }
+.talent-profile-page .talent-schedule-list { display:grid; gap:10px; margin-bottom:14px; }
+.talent-profile-page .talent-schedule-card { padding:13px 15px; border:1px solid rgba(0,0,0,.13); border-radius:5px; background:rgba(255,255,255,.12); }
+.talent-profile-page .talent-schedule-date { font-size:12px; font-weight:800; letter-spacing:.05em; opacity:.72; }
+.talent-profile-page .talent-schedule-title { margin:7px 0 0; font-size:14px; font-weight:700; overflow-wrap:anywhere; }
+.talent-profile-page .talent-schedule-title a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.talent-profile-page .talent-related-more { border-radius:5px; }
+@media(max-width:768px) {
+ .talent-profile-page .talent-profile-hero-inner,
+ .talent-profile-page .talent-profile-section-inner { width:100%; }
+ .talent-profile-page .talent-profile-hero-inner,
+ .talent-profile-page .talent-detail-columns,
+ .talent-profile-page .talent-related-columns { grid-template-columns:1fr; }
+}
+
+/* Creator credits share the profile row design and always appear last. */
+.talent-profile-page .talent-profile-credit-row dd { overflow-wrap:anywhere; }
+.talent-profile-page .talent-profile-credit-row .talent-profile-creator-link { color:inherit; text-decoration:underline; text-underline-offset:4px; font-weight:700; }
+
+/* TALENT list: Japanese name below each character image */
+.talent-list-name {
+  margin: 14px 0 0;
+  color: #222;
+  font-size: clamp(15px, 1.8vw, 19px);
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.talent-list-card:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+@media (max-width: 768px) {
+  .talent-list-name { margin-top: 10px; font-size: 15px; }
+}
+
+/* 期生ごとの表示人数（PC）。スマートフォンは従来どおり2列 */
+@media (min-width: 901px) {
+  .talent-generation-section .talent-list {
+    grid-template-columns: repeat(var(--generation-columns, 3), minmax(0, 220px));
+    column-gap: clamp(16px, 4vw, 90px);
+  }
+}

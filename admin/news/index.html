@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>NEWS管理 | AN:RIEL ADMIN</title>
+<link href="../../css/admin.css" rel="stylesheet"/>
+<style>body:not(.news-access-ready) main { visibility:hidden; }</style>
+</head>
+<body class="admin-page" data-admin-feature="news">
+<!-- ==================================================
+
+       HEADER
+
+  ================================================== -->
+<header class="admin-header">
+<div class="admin-header-inner">
+<div class="admin-header-logo">
+<img alt="AN:RIEL" src="../../images/logo.png"/>
+</div>
+<div class="admin-header-right">
+<a class="admin-site-button" href="ここにURLを入れる" onclick="return false;" aria-disabled="true" title="リンク準備中">公式サイト ↗</a>
+
+<span class="admin-header-label">
+
+          ADMIN
+
+        </span>
+<button class="logout-button" id="logoutButton" type="button">
+
+          LOGOUT
+
+        </button>
+</div>
+</div>
+</header>
+<!-- ==================================================
+
+       MAIN
+
+  ================================================== -->
+<main class="admin-main">
+<div class="admin-container">
+<!-- ==================================================
+
+           TITLE
+
+      ================================================== -->
+<div class="admin-title-area">
+<h1>
+
+          NEWS管理
+
+        </h1>
+</div>
+<!-- ==================================================
+
+           ADMIN MENU
+
+      ================================================== -->
+<nav aria-label="管理メニュー" class="admin-tabs">
+<a class="admin-tab" href="../index.html">
+
+          管理TOP
+
+        </a>
+<a class="admin-tab" href="../top/index.html">
+
+          TOP画像管理
+
+        </a>
+<a aria-current="page" class="admin-tab active" href="./index.html">
+
+          NEWS管理
+
+        </a>
+<a class="admin-tab" href="../schedule/index.html">
+
+          SCHEDULE管理
+
+        </a>
+<a class="admin-tab" href="../goods/index.html">
+
+          GOODS管理
+
+        </a>
+<a class="admin-tab" href="../talent/index.html">TALENT管理</a>
+<a class="admin-tab" hidden="" href="../permissions/index.html" id="newsPermissionsMenu">権限管理</a>
+</nav>
+<!-- ==================================================
+
+           NEWS PANEL
+
+      ================================================== -->
+<section class="admin-panel active" id="newsPanel">
+<!-- ==================================================
+
+             PANEL HEADING
+
+        ================================================== -->
+<div class="panel-heading">
+<div>
+<h2>
+
+              NEWS管理
+
+            </h2>
+<p class="panel-description">
+
+              お知らせの追加・編集
+
+            </p>
+</div>
+</div>
+<!-- ==================================================
+
+             NEWS NAVIGATION
+
+        ================================================== -->
+<div class="news-admin-navigation">
+<button class="news-admin-nav-button active" data-news-view="list" id="newsListTabButton" type="button">
+
+            NEWS一覧
+
+          </button>
+<button class="news-admin-nav-button" data-news-view="new" id="newsNewTabButton" type="button">
+
+            NEWS追加
+
+          </button>
+<button class="news-admin-nav-button" data-news-view="category" id="newsCategoryTabButton" type="button">
+
+            カテゴリー編集
+
+          </button>
+</div>
+<!-- ==================================================
+
+             NEWS LIST VIEW
+
+        ================================================== -->
+<div class="news-admin-view active" id="newsListView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+                NEWS一覧
+
+              </h3>
+<p class="news-view-description">
+
+                登録済みNEWSの編集・削除
+
+              </p>
+</div>
+<button class="admin-secondary-button" id="reloadNewsButton" type="button">
+
+              再読み込み
+
+            </button>
+</div>
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+                  登録NEWS
+
+                </h3>
+<p class="list-count" id="newsListCount">
+
+                  読み込み中...
+
+                </p>
+</div>
+</div>
+<div class="admin-list" id="adminNewsList">
+<p class="loading-text">
+
+                読み込み中...
+
+              </p>
+</div>
+<div class="news-pagination hidden" id="newsPagination"></div>
+</div>
+</div>
+<!-- ==================================================
+
+             NEWS NEW / EDIT VIEW
+
+        ================================================== -->
+<div class="news-admin-view" id="newsNewView">
+<div class="editor-card" id="newsFormArea">
+<div class="editor-heading">
+<h3 id="newsFormTitle">
+
+                NEWSを追加
+
+              </h3>
+<button aria-label="閉じる" class="close-editor-button" id="newsCancelButton" type="button">
+
+                ×
+
+              </button>
+</div>
+<form id="newsForm">
+<input id="newsId" type="hidden"/>
+<!-- ==================================================
+
+                   TITLE
+
+              ================================================== -->
+<div class="form-group">
+<label for="newsTitle">
+
+                  タイトル
+
+                </label>
+<input id="newsTitle" placeholder="NEWSタイトル" required="" type="text"/>
+</div>
+<!-- ==================================================
+
+                   SLUG + CATEGORY
+
+              ================================================== -->
+<div class="form-row">
+<div class="form-group">
+<label for="newsSlug">
+
+                    slug
+
+                  </label>
+<input autocomplete="off" id="newsSlug" placeholder="news-20261005" type="text"/>
+<p class="form-help">
+
+                    英数字とハイフンのみ。未入力の場合は自動生成。<br/>
+
+                    例：NEWS ＋ 2026/10/05 → news-20261005
+
+                  </p>
+</div>
+<div class="form-group">
+<label for="newsCategory">
+
+                    カテゴリー
+
+                  </label>
+<select id="newsCategory" required="">
+<option value="">
+
+                      選択してください
+
+                    </option>
+</select>
+</div>
+</div>
+<!-- ==================================================
+
+                   BODY
+
+              ================================================== -->
+<div class="form-group">
+<label for="newsBody">
+
+                  本文
+
+                </label>
+<textarea id="newsBody" placeholder="NEWS本文" rows="14"></textarea>
+</div>
+<!-- ==================================================
+
+                   IMAGE
+
+              ================================================== -->
+<div class="form-group">
+<label>
+
+                  記事画像
+
+                </label>
+<div class="news-image-drop-zone" id="newsImageDropZone" role="button" tabindex="0">
+<p class="news-image-drop-title">
+
+                    画像をドラッグ＆ドロップ
+
+                  </p>
+<p class="news-image-drop-sub">
+
+                    またはクリックして画像を選択
+
+                  </p>
+<p class="news-image-drop-limit">
+
+                    JPEG / PNG / WebP / GIF・1枚5MBまで
+
+                  </p>
+</div>
+<input accept="image/jpeg,image/png,image/webp,image/gif" hidden="" id="newsImageInput" multiple="" type="file"/>
+<p class="news-image-message" id="newsImageMessage"></p>
+<div class="news-image-list" id="newsImageList"></div>
+</div>
+<!-- ==================================================
+
+               PUBLISHED DATE + PUBLISHED
+
+               ================================================== -->
+<div class="form-row news-publish-row">
+<div class="form-group">
+<label for="newsPublishedAt">
+
+                    公開日
+
+                  </label>
+<input id="newsPublishedAt" type="datetime-local"/>
+</div>
+<div class="form-group checkbox-group news-publish-check">
+<label class="form-label">
+
+                    公開設定
+
+                  </label>
+<label class="checkbox-label">
+<input id="newsPublished" type="checkbox"/>
+<span>
+
+                      すぐに公開する
+
+                    </span>
+</label>
+</div>
+</div>
+<!-- ==================================================
+
+                   MESSAGE
+
+              ================================================== -->
+<p class="form-message" id="newsFormMessage"></p>
+<!-- ==================================================
+
+                   ACTIONS
+
+              ================================================== -->
+<div class="editor-actions">
+<button class="admin-primary-button" type="submit">
+
+                  保存
+
+                </button>
+<button class="admin-secondary-button" id="newsCancelButtonBottom" type="button">
+
+                  キャンセル
+
+                </button>
+</div>
+</form>
+</div>
+</div>
+<!-- ==================================================
+
+             CATEGORY VIEW
+
+        ================================================== -->
+<div class="news-admin-view" id="newsCategoryView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+                カテゴリー編集
+
+              </h3>
+<p class="news-view-description">
+
+                NEWSカテゴリーの追加・削除
+
+              </p>
+</div>
+<button class="admin-primary-button small" id="openCategoryFormButton" type="button">
+
+              ＋ カテゴリー追加
+
+            </button>
+</div>
+<!-- ==================================================
+
+               CATEGORY FORM
+
+          ================================================== -->
+<div class="editor-card hidden" id="categoryFormArea">
+<div class="editor-heading">
+<h3>
+
+                カテゴリー追加
+
+              </h3>
+<button aria-label="閉じる" class="close-editor-button" id="cancelCategoryButton" type="button">
+
+                ×
+
+              </button>
+</div>
+<div class="form-group">
+<label for="newCategoryName">
+
+                カテゴリー名
+
+              </label>
+<input id="newCategoryName" placeholder="カテゴリー名" type="text"/>
+</div>
+<p class="form-message" id="categoryFormMessage"></p>
+<div class="editor-actions">
+<button class="admin-primary-button" id="addCategoryButton" type="button">
+
+                追加
+
+              </button>
+<button class="admin-secondary-button" id="cancelCategoryButtonBottom" type="button">
+
+                キャンセル
+
+              </button>
+</div>
+</div>
+<!-- ==================================================
+
+               CATEGORY LIST
+
+          ================================================== -->
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+                  登録カテゴリー
+
+                </h3>
+</div>
+<button class="reload-button" id="reloadCategoryButton" type="button">
+
+                再読み込み
+
+              </button>
+</div>
+<div class="admin-category-list" id="adminCategoryList">
+<p class="loading-text">
+
+                読み込み中...
+
+              </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- ==================================================
+
+       SCRIPTS
+
+  ================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../../js/supabase.js"></script>
+<script src="../js/admin-navigation.js"></script>
+<script src="../js/category-admin.js"></script>
+<script src="../js/news-admin.js"></script>
+<!-- ==================================================
+
+       NEWS PAGE CONTROL
+
+  ================================================== -->
+<script>
+
+    const newsListTabButton =
+
+      document.getElementById(
+
+        "newsListTabButton"
+
+      );
+
+    const newsNewTabButton =
+
+      document.getElementById(
+
+        "newsNewTabButton"
+
+      );
+
+    const newsCategoryTabButton =
+
+      document.getElementById(
+
+        "newsCategoryTabButton"
+
+      );
+
+    const newsListView =
+
+      document.getElementById(
+
+        "newsListView"
+
+      );
+
+    const newsNewView =
+
+      document.getElementById(
+
+        "newsNewView"
+
+      );
+
+    const newsCategoryView =
+
+      document.getElementById(
+
+        "newsCategoryView"
+
+      );
+
+    // ==================================================
+
+    // SWITCH NEWS VIEW
+
+    // ==================================================
+
+    async function switchNewsView(
+
+      view,
+
+      options = {}
+
+    ) {
+
+      if (!window.ANRIEL_NEWS_ACCESS?.view) return;
+      if (view !== "list" && !window.ANRIEL_NEWS_ACCESS.edit) view = "list";
+
+      const {
+
+        resetForm = true,
+
+        updateUrl = true
+
+      } = options;
+
+      // ------------------------------------------
+
+      // RESET
+
+      // ------------------------------------------
+
+      newsListView
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      newsNewView
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      newsCategoryView
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      newsListTabButton
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      newsNewTabButton
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      newsCategoryTabButton
+
+        ?.classList.remove(
+
+          "active"
+
+        );
+
+      // ------------------------------------------
+
+      // NEW
+
+      // ------------------------------------------
+
+      if (view === "new") {
+
+        newsNewView
+
+          ?.classList.add(
+
+            "active"
+
+          );
+
+        newsNewTabButton
+
+          ?.classList.add(
+
+            "active"
+
+          );
+
+        if (
+
+          typeof loadNewsCategories ===
+
+          "function"
+
+        ) {
+
+          await loadNewsCategories();
+
+        }
+
+        if (
+
+          resetForm &&
+
+          typeof openNewNewsForm ===
+
+          "function"
+
+        ) {
+
+          openNewNewsForm();
+
+        }
+
+        if (updateUrl) {
+
+          history.replaceState(
+
+            null,
+
+            "",
+
+            "?view=new"
+
+          );
+
+        }
+
+        return;
+
+      }
+
+      // ------------------------------------------
+
+      // CATEGORY
+
+      // ------------------------------------------
+
+      if (view === "category") {
+
+        newsCategoryView
+
+          ?.classList.add(
+
+            "active"
+
+          );
+
+        newsCategoryTabButton
+
+          ?.classList.add(
+
+            "active"
+
+          );
+
+        if (
+
+          typeof loadNewsCategories ===
+
+          "function"
+
+        ) {
+
+          await loadNewsCategories();
+
+        }
+
+        if (updateUrl) {
+
+          history.replaceState(
+
+            null,
+
+            "",
+
+            "?view=category"
+
+          );
+
+        }
+
+        return;
+
+      }
+
+      // ------------------------------------------
+
+      // LIST
+
+      // ------------------------------------------
+
+      newsListView
+
+        ?.classList.add(
+
+          "active"
+
+        );
+
+      newsListTabButton
+
+        ?.classList.add(
+
+          "active"
+
+        );
+
+      // カテゴリーと記事一覧は独立しているため、一覧表示時は同時に取得。
+      // 閲覧権限の確認と各関数内のエラー処理は従来どおり。
+      await Promise.all([
+        typeof loadNewsCategories === "function"
+          ? loadNewsCategories()
+          : Promise.resolve(),
+        typeof loadNews === "function"
+          ? loadNews(typeof currentNewsPage !== "undefined" ? currentNewsPage : 1)
+          : Promise.resolve()
+      ]);
+
+      if (updateUrl) {
+
+        history.replaceState(
+
+          null,
+
+          "",
+
+          "?view=list"
+
+        );
+
+      }
+
+    }
+
+    window.switchNewsView =
+
+      switchNewsView;
+
+    // ==================================================
+
+    // TAB EVENTS
+
+    // ==================================================
+
+    newsListTabButton
+
+      ?.addEventListener(
+
+        "click",
+
+        async () => {
+
+          await switchNewsView(
+
+            "list"
+
+          );
+
+        }
+
+      );
+
+    newsNewTabButton
+
+      ?.addEventListener(
+
+        "click",
+
+        async () => {
+
+          await switchNewsView(
+
+            "new"
+
+          );
+
+        }
+
+      );
+
+    newsCategoryTabButton
+
+      ?.addEventListener(
+
+        "click",
+
+        async () => {
+
+          await switchNewsView(
+
+            "category"
+
+          );
+
+        }
+
+      );
+
+    // ==================================================
+
+    // AUTH + INITIAL VIEW
+
+    // ==================================================
+
+    document.addEventListener(
+
+      "DOMContentLoaded",
+
+      async () => {
+
+        try {
+
+          const {
+
+            data,
+
+            error
+
+          } =
+
+            await supabaseClient
+
+              .auth
+
+              .getSession();
+
+          if (error) {
+
+            console.error(
+
+              "セッション確認エラー:",
+
+              error
+
+            );
+
+            return;
+
+          }
+
+          if (!data.session) {
+
+            window.location.replace(
+
+              "../login.html"
+
+            );
+
+            return;
+
+          }
+
+          // サーバーのRLS判定関数でNEWS権限を確認
+          const account = await supabaseClient.functions.invoke("admin-account", { method: "GET" });
+          if (account.error || !account.data?.user?.is_active) {
+            document.body.classList.add("news-access-ready");
+            document.body.innerHTML = "<main style='padding:40px'>管理アカウントの認証に失敗</main>";
+            return;
+          }
+          if (account.data.user.must_change_password) {
+            location.replace("../account/index.html");
+            return;
+          }
+          const [viewPermission, editPermission] = await Promise.all([
+            supabaseClient.rpc("has_admin_feature_permission", { requested_feature: "news", requested_action: "view" }),
+            supabaseClient.rpc("has_admin_feature_permission", { requested_feature: "news", requested_action: "edit" })
+          ]);
+          if (viewPermission.error || editPermission.error || viewPermission.data !== true) {
+            document.body.classList.add("news-access-ready");
+            document.body.innerHTML = "<main style='padding:40px'>NEWS管理の閲覧権限なし</main>";
+            return;
+          }
+          const permissionsMenu = document.getElementById("newsPermissionsMenu");
+          if (permissionsMenu && ["owner", "engineer"].includes(account.data.user.role)) {
+            permissionsMenu.hidden = false;
+          }
+          window.ANRIEL_NEWS_ACCESS = { view: true, edit: editPermission.data === true };
+          document.body.classList.add("news-access-ready");
+          if (!window.ANRIEL_NEWS_ACCESS.edit) {
+            [newsNewTabButton, newsCategoryTabButton, document.getElementById("newNewsButton"), document.getElementById("openCategoryFormButton")].forEach(el => { if(el) el.hidden = true; });
+            document.querySelectorAll(".admin-news-tab-button").forEach(el => { if(el !== newsListTabButton) el.hidden = true; });
+          }
+
+          // ------------------------------------------
+
+          // URL
+
+          // ------------------------------------------
+
+          const params =
+
+            new URLSearchParams(
+
+              window.location.search
+
+            );
+
+          let initialView =
+
+            params.get(
+
+              "view"
+
+            );
+
+          const initialAction =
+
+            params.get(
+
+              "action"
+
+            );
+
+          if (
+
+            initialAction ===
+
+            "new"
+
+          ) {
+
+            initialView =
+
+              "new";
+
+          }
+
+          if (
+
+            ![
+
+              "list",
+
+              "new",
+
+              "category"
+
+            ].includes(
+
+              initialView
+
+            )
+
+          ) {
+
+            initialView =
+
+              "list";
+
+          }
+
+          await switchNewsView(
+
+            initialView,
+
+            {
+
+              resetForm: true,
+
+              updateUrl: false
+
+            }
+
+          );
+
+        } catch (error) {
+
+          console.error(
+
+            "NEWS管理画面初期化エラー:",
+
+            error
+
+          );
+
+        }
+
+        // ------------------------------------------
+
+        // LOGOUT
+
+        // ------------------------------------------
+
+        const logoutButton =
+
+          document.getElementById(
+
+            "logoutButton"
+
+          );
+
+        logoutButton
+
+          ?.addEventListener(
+
+            "click",
+
+            async () => {
+
+              try {
+
+                const {
+
+                  error
+
+                } =
+
+                  await supabaseClient
+
+                    .auth
+
+                    .signOut();
+
+                if (error) {
+
+                  console.error(
+
+                    "ログアウトエラー:",
+
+                    error
+
+                  );
+
+                  alert(
+
+                    "ログアウトに失敗しました。"
+
+                  );
+
+                  return;
+
+                }
+
+                window.location.replace(
+
+                  "../login.html"
+
+                );
+
+              } catch (error) {
+
+                console.error(
+
+                  "ログアウトエラー:",
+
+                  error
+
+                );
+
+                alert(
+
+                  "ログアウトに失敗しました。"
+
+                );
+
+              }
+
+            }
+
+          );
+
+      }
+
+    );
+
+    // ==================================================
+
+    // VISIBILITY CHANGE
+
+    // ==================================================
+
+    document.addEventListener(
+
+      "visibilitychange",
+
+      async () => {
+
+        if (
+
+          document.visibilityState !==
+
+          "visible"
+
+        ) {
+
+          return;
+
+        }
+
+        if (
+
+          newsListView
+
+            ?.classList.contains(
+
+              "active"
+
+            )
+
+        ) {
+
+          if (
+
+            typeof loadNews ===
+
+            "function"
+
+          ) {
+
+            await loadNews(
+
+              typeof currentNewsPage !==
+
+                "undefined"
+
+                ? currentNewsPage
+
+                : 1
+
+            );
+
+          }
+
+        }
+
+        if (
+
+          newsCategoryView
+
+            ?.classList.contains(
+
+              "active"
+
+            )
+
+        ) {
+
+          if (
+
+            typeof loadNewsCategories ===
+
+            "function"
+
+          ) {
+
+            await loadNewsCategories();
+
+          }
+
+        }
+
+      }
+
+    );
+
+  </script>
+</body>
+</html>

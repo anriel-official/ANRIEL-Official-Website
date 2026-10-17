@@ -1,0 +1,44 @@
+/* AN:RIEL | GUIDELINE */
+.guideline-page { min-height: 100vh; }
+.guideline-layout { width: min(940px, calc(100% - 48px)); margin: 0 auto; padding: 55px 0 130px; }
+.guideline-intro { max-width: 790px; margin-bottom: 72px; }
+.guideline-eyebrow { color: #747c9b; font: 700 11px/1.5 "Montserrat", sans-serif; letter-spacing: .2em; margin: 0 0 18px; }
+.guideline-intro h2 { margin: 0 0 34px; color: #15171c; font-size: clamp(29px, 4.2vw, 46px); font-weight: 800; letter-spacing: .035em; line-height: 1.45; }
+.guideline-intro p:not(.guideline-eyebrow) { color: #4f5159; font-size: 14px; line-height: 2.2; margin: 0 0 12px; }
+.guideline-toc { padding: 30px 34px 32px; border: 1px solid #e6e7ec; background: rgba(255,255,255,.75); margin-bottom: 75px; }
+.guideline-toc h3 { margin: 0 0 23px; font: 800 14px/1.4 "Montserrat", sans-serif; letter-spacing: .12em; color: #20232a; }
+.guideline-toc h3 span { font: 600 12px/1.4 sans-serif; letter-spacing: 0; color: #777; margin-left: 10px; }
+.guideline-toc ol { list-style: decimal-leading-zero; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 36px; padding-left: 25px; margin: 0; }
+.guideline-toc li { padding-left: 5px; font-size: 12px; color: #8790a5; }
+.guideline-toc a { color: #353840; font-size: 13px; text-decoration: none; line-height: 1.6; transition: color .2s; }
+.guideline-toc a:hover { color: #6474bd; }
+.guideline-content { max-width: 840px; margin: 0 auto; }
+.guideline-section { scroll-margin-top: 100px; padding: 0 0 50px; margin-bottom: 55px; border-bottom: 1px solid #e4e6eb; }
+.guideline-section h3 { display: flex; align-items: baseline; gap: 20px; margin: 0 0 28px; color: #16181d; font-size: clamp(19px,2.5vw,23px); line-height: 1.55; font-weight: 800; letter-spacing: .02em; }
+.guideline-section h3 span { flex-shrink: 0; color: #8390c5; font: 800 14px/1.5 "Montserrat", sans-serif; letter-spacing: .08em; }
+.guideline-section p { margin: 0 0 17px; color: #454952; font-size: 14px; line-height: 2.1; overflow-wrap: anywhere; }
+.guideline-section ul { margin: 16px 0 25px; padding: 20px 26px 20px 42px; background: #f7f8fa; border-left: 2px solid #a4add6; }
+.guideline-section li { color: #454952; font-size: 13px; line-height: 1.95; margin: 4px 0; overflow-wrap: anywhere; }
+.guideline-section li::marker { color: #8390c5; }
+.guideline-note { padding: 22px 26px; margin: 22px 0; background: #f5f6fa; border: 1px solid #e3e6f0; }
+.guideline-note strong { display: block; margin-bottom: 10px; color: #262a36; font-size: 13px; }
+.guideline-note p { margin: 0; color: #707581; font-size: 12px; }
+.guideline-contact { display: inline-flex; gap: 30px; align-items: center; justify-content: space-between; min-width: 210px; margin-top: 18px; padding: 15px 20px; color: #fff; background: #1d202a; font: 700 12px/1.5 "Montserrat", sans-serif; letter-spacing: .12em; text-decoration: none; transition: background .2s,transform .2s; }
+.guideline-contact:hover { background: #5263a0; transform: translateY(-2px); }
+.guideline-bottom { text-align: right; }
+.guideline-bottom a { color: #6c7180; font: 700 11px/1.5 "Montserrat", sans-serif; text-decoration: none; letter-spacing: .12em; }
+.guideline-bottom a:hover { color: #5263a0; }
+@media (max-width: 700px) {
+  .guideline-layout { width: min(100% - 32px, 620px); padding: 38px 0 90px; }
+  .guideline-intro { margin-bottom: 45px; }
+  .guideline-intro h2 { margin-bottom: 25px; }
+  .guideline-intro p:not(.guideline-eyebrow) { font-size: 13px; }
+  .guideline-toc { padding: 24px 22px; margin-bottom: 55px; }
+  .guideline-toc ol { grid-template-columns: 1fr; gap: 10px; }
+  .guideline-section { margin-bottom: 40px; padding-bottom: 35px; }
+  .guideline-section h3 { gap: 12px; margin-bottom: 20px; }
+  .guideline-section h3 span { font-size: 12px; }
+  .guideline-section p { font-size: 13px; }
+  .guideline-section ul { padding: 17px 18px 17px 35px; }
+  .guideline-section li { font-size: 12px; }
+}

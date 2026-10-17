@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>ADMIN | AN:RIEL</title>
+<link href="../css/admin.css" rel="stylesheet"/>
+<style>
+
+    /* ========================================
+
+       ADMIN TOP
+
+       機能一覧
+
+    ========================================= */
+
+    .admin-function-sections {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 42px;
+
+    }
+
+    .admin-function-section {
+
+      width: 100%;
+
+    }
+
+    /* セクションタイトル */
+
+    .admin-function-section-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+
+      padding: 0 2px;
+
+    }
+
+    .admin-function-section-title {
+
+      margin: 0;
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.04em;
+
+    }
+
+    .admin-function-section-link {
+
+      color: #777;
+
+      font-size: 12px;
+
+      text-decoration: none;
+
+      transition:
+
+        color 0.2s ease;
+
+    }
+
+    .admin-function-section-link:hover {
+
+      color: #111;
+
+    }
+
+    /* 一覧本体 */
+
+    .admin-function-list {
+
+      overflow: hidden;
+
+      background: #fff;
+
+      border: 1px solid #e4e5e8;
+
+      border-radius: 10px;
+
+    }
+
+    /* 各機能 */
+
+    .admin-function-item {
+
+      display: grid;
+
+      grid-template-columns:
+
+        minmax(150px, 210px)
+
+        1fr
+
+        30px;
+
+      align-items: center;
+
+      gap: 24px;
+
+      min-height: 82px;
+
+      padding:
+
+        18px
+
+        22px;
+
+      color: #111;
+
+      text-decoration: none;
+
+      border-bottom:
+
+        1px solid #ececef;
+
+      transition:
+
+        background 0.18s ease,
+
+        padding-left 0.18s ease;
+
+    }
+
+    .admin-function-item:last-child {
+
+      border-bottom: none;
+
+    }
+
+    .admin-function-item:hover {
+
+      background: #f8f8f9;
+
+      padding-left: 26px;
+
+    }
+
+    /* 機能名 */
+
+    .admin-function-name {
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.02em;
+
+    }
+
+    /* 説明 */
+
+    .admin-function-description {
+
+      color: #777;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+    }
+
+    /* 矢印 */
+
+    .admin-function-arrow {
+
+      color: #999;
+
+      font-size: 18px;
+
+      text-align: right;
+
+      transition:
+
+        transform 0.18s ease,
+
+        color 0.18s ease;
+
+    }
+
+    .admin-function-item:hover
+
+    .admin-function-arrow {
+
+      color: #111;
+
+      transform:
+
+        translateX(3px);
+
+    }
+
+    /* ========================================
+
+       RESPONSIVE
+
+    ========================================= */
+
+    @media (max-width: 700px) {
+
+      .admin-function-sections {
+
+        gap: 32px;
+
+      }
+
+      .admin-function-item {
+
+        grid-template-columns:
+
+          1fr
+
+          24px;
+
+        gap:
+
+          6px
+
+          14px;
+
+        min-height: auto;
+
+        padding:
+
+          17px
+
+          18px;
+
+      }
+
+      .admin-function-item:hover {
+
+        padding-left: 18px;
+
+      }
+
+      .admin-function-name {
+
+        grid-column: 1;
+
+        grid-row: 1;
+
+        font-size: 14px;
+
+      }
+
+      .admin-function-description {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        font-size: 12px;
+
+      }
+
+      .admin-function-arrow {
+
+        grid-column: 2;
+
+        grid-row:
+
+          1 / 3;
+
+        align-self: center;
+
+      }
+
+    }
+    /* 認証・権限確認が完了するまで管理機能を非表示 */
+    body:not(.admin-access-ready) .admin-main { display: none; }
+    .admin-access-message { max-width: 680px; margin: 60px auto; padding: 24px; text-align: center; color: #444; }
+    .admin-function-section[hidden], .admin-tab[hidden] { display: none !important; }
+</style>
+</head>
+<body class="admin-page" data-admin-feature="home">
+<!-- ========================================
+
+       HEADER
+
+  ========================================= -->
+<header class="admin-header">
+<div class="admin-header-inner">
+<div class="admin-header-logo">
+<img alt="AN:RIEL" src="../images/logo.png"/>
+</div>
+<div class="admin-header-right">
+<a aria-disabled="true" class="admin-site-button" href="ここにURLを入れる" onclick="return false;" title="リンク準備中">公式サイト ↗</a>
+<span class="admin-header-label">
+
+          ADMIN
+
+        </span>
+<button class="logout-button" id="logoutButton" type="button">
+
+          LOGOUT
+
+        </button>
+</div>
+</div>
+</header>
+<!-- ========================================
+
+       MAIN
+
+  ========================================= -->
+<main class="admin-main">
+<div class="admin-container">
+<!-- TITLE -->
+<div class="admin-title-area">
+<h1>管理画面</h1>
+</div>
+<!-- ========================================
+
+           ADMIN MENU
+
+      ========================================= -->
+<nav aria-label="管理メニュー" class="admin-tabs">
+<a aria-current="page" class="admin-tab active" href="./index.html">
+
+          管理TOP
+
+        </a>
+<a class="admin-tab" data-feature="top" href="./top/index.html">
+
+          TOP画像管理
+
+        </a>
+<a class="admin-tab" data-feature="news" href="./news/index.html">
+
+          NEWS管理
+
+        </a>
+<a class="admin-tab" data-feature="schedule" href="./schedule/index.html">
+
+          SCHEDULE管理
+
+        </a>
+<a class="admin-tab" data-feature="goods" href="./goods/index.html">
+
+          GOODS管理
+
+        </a>
+<a class="admin-tab" data-feature="talent" href="./talent/index.html">TALENT管理</a>
+<a class="admin-tab" data-feature="contact" href="./contact/index.html">CONTACT管理</a><a class="admin-tab" data-feature="permissions" href="./permissions/index.html">権限管理</a>
+</nav>
+<!-- ========================================
+
+           PANEL
+
+      ========================================= -->
+<section class="admin-panel active">
+<div class="panel-heading">
+<div>
+<h2>管理TOP</h2>
+<p class="panel-description">
+
+              管理機能一覧
+
+            </p>
+</div>
+</div>
+<!-- ========================================
+
+             FUNCTION LIST
+
+        ========================================= -->
+<div class="admin-function-sections">
+<!-- ====================================
+
+               TOP
+
+          ===================================== -->
+<!-- ====================================
+
+               NEWS
+
+          ===================================== -->
+<!-- ====================================
+
+     TALENT
+
+\\===================================== -->
+<!-- ====================================
+
+               SCHEDULE
+
+          ===================================== -->
+<!-- ====================================
+
+               GOODS
+
+          ===================================== -->
+<section class="admin-function-section" data-feature="top">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+                TOP
+
+              </h3>
+<a class="admin-function-section-link" href="./top/index.html">
+
+                TOP画像管理を開く →
+
+              </a>
+</div>
+<div class="admin-function-list">
+<!-- TOP IMAGE LIST -->
+<a class="admin-function-item" href="./top/index.html?view=list">
+<div class="admin-function-name">
+
+                  TOP画像一覧
+
+                </div>
+<div class="admin-function-description">
+
+                  公式サイトTOPに表示する画像の確認・編集・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- TOP IMAGE ADD -->
+<a class="admin-function-item" href="./top/index.html?view=form&amp;action=new">
+<div class="admin-function-name">
+
+                  TOP画像追加
+
+                </div>
+<div class="admin-function-description">
+
+                  TOPスライダーに新しい画像を追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+</div>
+</section><section class="admin-function-section" data-feature="news">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+                NEWS
+
+              </h3>
+<a class="admin-function-section-link" href="./news/index.html">
+
+                NEWS管理を開く →
+
+              </a>
+</div>
+<div class="admin-function-list">
+<!-- NEWS LIST -->
+<a class="admin-function-item" href="./news/index.html?view=list">
+<div class="admin-function-name">
+
+                  NEWS一覧
+
+                </div>
+<div class="admin-function-description">
+
+                  登録済みNEWSの確認・編集・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- NEWS ADD -->
+<a class="admin-function-item" href="./news/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
+
+                  NEWS追加
+
+                </div>
+<div class="admin-function-description">
+
+                  新しいNEWSを追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- NEWS CATEGORY -->
+<a class="admin-function-item" href="./news/index.html?view=category">
+<div class="admin-function-name">
+
+                  カテゴリー編集
+
+                </div>
+<div class="admin-function-description">
+
+                  NEWSカテゴリーの追加・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+</div>
+</section><section class="admin-function-section" data-feature="talent">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+      TALENT
+
+    </h3>
+<a class="admin-function-section-link" href="./talent/index.html">
+
+      TALENT管理を開く →
+
+    </a>
+</div>
+<div class="admin-function-list">
+<!-- TALENT LIST -->
+<a class="admin-function-item" href="./talent/index.html?view=list">
+<div class="admin-function-name">
+
+        TALENT一覧
+
+      </div>
+<div class="admin-function-description">
+
+        登録済みタレントの確認・編集・削除
+
+      </div>
+<div class="admin-function-arrow">
+
+        →
+
+      </div>
+</a>
+<!-- TALENT ADD -->
+<a class="admin-function-item" href="./talent/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
+
+        TALENT追加
+
+      </div>
+<div class="admin-function-description">
+
+        新しいタレントを追加
+
+      </div>
+<div class="admin-function-arrow">
+
+        →
+
+      </div>
+</a>
+<!-- PROFILE FIELD MANAGEMENT -->
+<a class="admin-function-item" href="./talent/index.html?view=profile-fields">
+<div class="admin-function-name">
+
+        プロフィール項目管理
+
+      </div>
+<div class="admin-function-description">
+
+        プロフィール・ハッシュタグの項目設定
+
+      </div>
+<div class="admin-function-arrow">
+
+        →
+
+      </div>
+</a>
+</div>
+</section><section class="admin-function-section" data-feature="schedule">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+                SCHEDULE
+
+              </h3>
+<a class="admin-function-section-link" href="./schedule/index.html">
+
+                SCHEDULE管理を開く →
+
+              </a>
+</div>
+<div class="admin-function-list">
+<!-- SCHEDULE LIST -->
+<a class="admin-function-item" href="./schedule/index.html?view=list">
+<div class="admin-function-name">
+
+                  SCHEDULE一覧
+
+                </div>
+<div class="admin-function-description">
+
+                  登録済みスケジュールの確認・編集・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- SCHEDULE ADD -->
+<a class="admin-function-item" href="./schedule/index.html?view=new">
+<div class="admin-function-name">
+
+                  SCHEDULE追加
+
+                </div>
+<div class="admin-function-description">
+
+                  新しいスケジュールを追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- YOUTUBE -->
+<a class="admin-function-item" href="./schedule/index.html?view=youtube">
+<div class="admin-function-name">
+
+                  YouTube連携
+
+                </div>
+<div class="admin-function-description">
+
+                  YouTube自動取得の時刻設定・手動取得
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- YOUTUBE TALENTS -->
+<a class="admin-function-item" href="./schedule/index.html?view=talent">
+<div class="admin-function-name">
+
+                  連携タレント
+
+                </div>
+<div class="admin-function-description">
+
+                  YouTubeからスケジュールを取得するタレントを管理
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- AUTO DELETE -->
+<a class="admin-function-item" href="./schedule/index.html?view=auto-delete">
+<div class="admin-function-name">
+
+                  自動削除設定
+
+                </div>
+<div class="admin-function-description">
+
+                  終了したスケジュールの自動削除設定
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+</div>
+</section><section class="admin-function-section" data-feature="goods">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+                GOODS
+
+              </h3>
+<a class="admin-function-section-link" href="./goods/index.html">
+
+                GOODS管理を開く →
+
+              </a>
+</div>
+<div class="admin-function-list">
+<!-- GOODS LIST -->
+<a class="admin-function-item" href="./goods/index.html?view=list">
+<div class="admin-function-name">
+
+                  GOODS一覧
+
+                </div>
+<div class="admin-function-description">
+
+                  登録済み商品の確認・編集・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- GOODS ADD -->
+<a class="admin-function-item" href="./goods/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
+
+                  GOODS追加
+
+                </div>
+<div class="admin-function-description">
+
+                  新しい商品を追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- GOODS CATEGORY -->
+<a class="admin-function-item" href="./goods/index.html?view=category">
+<div class="admin-function-name">
+
+                  カテゴリー編集
+
+                </div>
+<div class="admin-function-description">
+
+                  グッズカテゴリーの追加・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+</div>
+</section><section class="admin-function-section" data-feature="contact">
+<div class="admin-function-section-header"><h3 class="admin-function-section-title">CONTACT管理</h3><a class="admin-function-section-link" href="./contact/index.html">CONTACT管理を開く →</a></div>
+<div class="admin-function-list"><a class="admin-function-item" href="./contact/index.html"><div class="admin-function-name">お問い合わせ一覧</div><div class="admin-function-description">お問い合わせの確認・対応状況の管理</div><div class="admin-function-arrow">→</div></a></div>
+</section><section class="admin-function-section" data-feature="permissions">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">権限管理</h3>
+<a class="admin-function-section-link" href="./permissions/index.html">権限管理を開く →</a>
+</div>
+<div class="admin-function-list">
+<a class="admin-function-item" href="./permissions/index.html">
+<div class="admin-function-name">アカウント管理</div>
+<div class="admin-function-description">管理者・エンジニア・スタッフの権限確認とアカウント管理</div>
+<div class="admin-function-arrow">→</div>
+</a>
+</div>
+</section></div>
+</section>
+</div>
+</main>
+<!-- ========================================
+
+       SUPABASE
+
+  ========================================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="./js/admin-navigation.js"></script>
+<!-- ========================================
+
+       AUTH
+
+  ========================================= -->
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const logoutButton = document.getElementById("logoutButton");
+    logoutButton?.addEventListener("click", async () => {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) {
+        alert("ログアウトに失敗");
+        return;
+      }
+      window.location.replace("./login.html");
+    });
+
+    function showError(message) {
+      document.querySelector(".admin-main")?.remove();
+      const panel = document.createElement("div");
+      panel.className = "admin-access-message";
+      panel.textContent = message;
+      document.body.appendChild(panel);
+    }
+
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
+      if (sessionError || !sessionData.session) {
+        window.location.replace("./login.html");
+        return;
+      }
+
+      // サーバー側で本人・管理アカウントの有効状態を確認
+      const { data, error } = await supabaseClient.functions.invoke(
+        "admin-account",
+        { method: "GET" }
+      );
+      if (error || !data?.user || data.user.is_active !== true) {
+        showError("管理アカウントの認証に失敗。管理者に確認してください。");
+        return;
+      }
+      if (data.user.must_change_password === true) {
+        window.location.replace("./account/index.html");
+        return;
+      }
+
+      const role = data.user.role;
+      const isManager = role === "owner" || role === "engineer";
+      if (!isManager && role !== "staff") {
+        showError("管理アカウントの権限なし");
+        return;
+      }
+
+      if (!isManager) {
+        // 同じ機能の権限確認をまとめ、並列実行して待ち時間を削減
+        const elements = [...document.querySelectorAll("[data-feature]")];
+        const featureNames = [...new Set(
+          elements.map((el) => el.getAttribute("data-feature")).filter(Boolean)
+        )].filter((feature) => feature !== "permissions");
+
+        const checks = await Promise.all(featureNames.map(async (feature) => {
+          try {
+            const { data: allowed, error: permissionError } = await supabaseClient.rpc(
+              "has_admin_feature_permission",
+              { requested_feature: feature, requested_action: "view" }
+            );
+            return [feature, !permissionError && allowed === true];
+          } catch (error) {
+            console.error("権限確認エラー:", feature, error);
+            return [feature, false];
+          }
+        }));
+        const permissions = new Map(checks);
+        for (const el of elements) {
+          const feature = el.getAttribute("data-feature");
+          el.hidden = feature === "permissions" || permissions.get(feature) !== true;
+        }
+      }
+
+      document.body.classList.add("admin-access-ready");
+    } catch (error) {
+      console.error("Admin access check failed:", error);
+      showError("権限確認中にエラーが発生。再読み込みしてください。");
+    }
+  });
+</script></body>
+</html>

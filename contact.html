@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AN:RIEL（アンリエル）へのお問い合わせはこちら。">
+  <title>CONTACT | AN:RIEL</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="top.html" class="header-logo"><img src="images/logo.png" alt="AN:RIEL"></a>
+      <nav class="global-nav" id="globalNav" aria-label="メインメニュー">
+        <a href="top.html">TOP</a>
+        <a href="news.html">NEWS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="talent.html">TALENT</a>
+        <a href="schedule.html">SCHEDULE</a>
+        <a href="goods.html">GOODS</a>
+        <a href="audition.html">AUDITION</a>
+        <a href="guideline.html">GUIDELINE</a>
+        <a href="contact.html" class="active" aria-current="page">CONTACT</a>
+      </nav>
+      <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く" aria-controls="globalNav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="contact-page">
+    <section class="page-header">
+      <div class="page-header-inner">
+        <h1 class="page-title">CONTACT</h1>
+        <p class="page-title-jp">お問い合わせ</p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="contact-inner">
+        <div class="contact-panel">
+          <p class="contact-lead">AN:RIELへのお問い合わせはこちらから。</p>
+          <p class="contact-notice">内容を確認のうえ、必要に応じて担当者よりご連絡いたします。すべてのお問い合わせへの返信をお約束するものではありません。</p>
+
+          <form id="contactForm" class="contact-form">
+            <div class="contact-field">
+              <label for="contactName">お名前 <span class="contact-required">必須</span></label>
+              <input id="contactName" name="name" type="text" autocomplete="name" maxlength="100" required placeholder="お名前">
+            </div>
+            <div class="contact-field">
+              <label for="contactEmail">メールアドレス <span class="contact-required">必須</span></label>
+              <input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" required placeholder="example@example.com">
+            </div>
+            <div class="contact-field">
+              <label for="contactCategory">お問い合わせ種別 <span class="contact-required">必須</span></label>
+              <select id="contactCategory" name="category" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="一般お問い合わせ">一般お問い合わせ</option>
+                <option value="企業・コラボ">企業・コラボ</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <div class="contact-field">
+              <label for="contactMessage">お問い合わせ内容 <span class="contact-required">必須</span></label>
+              <textarea id="contactMessage" name="message" rows="9" maxlength="10000" required placeholder="お問い合わせ内容を入力"></textarea>
+            </div>
+            <div class="contact-honeypot" aria-hidden="true">
+              <label for="contactWebsite">ウェブサイト</label>
+              <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="contact-privacy">ご入力いただいた情報は、お問い合わせへの対応に使用します。</p>
+            <p id="contactResult" class="contact-result" role="status" aria-live="polite"></p>
+            <button id="contactSubmit" class="contact-submit" type="submit">送信する <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="top.html" class="footer-logo"><img src="images/logo.png" alt="AN:RIEL"></a>
+      <nav class="footer-nav" aria-label="フッターメニュー">
+        <a href="top.html">TOP</a>
+        <a href="news.html">NEWS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="talent.html">TALENT</a>
+        <a href="schedule.html">SCHEDULE</a>
+        <a href="goods.html">GOODS</a>
+        <a href="audition.html">AUDITION</a>
+        <a href="guideline.html">GUIDELINE</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+      <div class="footer-social-area">
+        <p class="footer-social-label">FOLLOW / CONTACT</p>
+        <div class="footer-social">
+          <a href="https://x.com/ANRIEL_2026" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">X</span><span class="footer-social-sub">OFFICIAL ACCOUNT</span></a>
+          <a href="https://www.youtube.com/@ANRIEL-2026/videos" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">YOUTUBE</span><span class="footer-social-sub">OFFICIAL CHANNEL</span></a>
+          <a href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy" target="_blank" rel="noopener noreferrer" class="footer-social-link"><span class="footer-social-name">MARSHMALLOW</span><span class="footer-social-sub">QUESTION BOX</span></a>
+        </div>
+      </div>
+      <p class="copyright">© 2026 AN:RIEL</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

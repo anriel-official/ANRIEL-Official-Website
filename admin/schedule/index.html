@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>SCHEDULE ADMIN | AN:RIEL</title>
+<link href="../../css/admin.css" rel="stylesheet"/>
+<style>
+
+    /* SCHEDULE画面だけNEWS管理と同じ配置に統一 */
+
+    #schedulePanel,
+
+    #schedulePanel .panel-heading,
+
+    #schedulePanel .schedule-view-heading,
+
+    #schedulePanel .admin-list-card,
+
+    #schedulePanel .list-heading {
+
+      text-align: left;
+
+    }
+
+
+
+    #schedulePanel .panel-heading,
+
+    #schedulePanel .schedule-view-heading,
+
+    #schedulePanel .list-heading {
+
+      justify-content: space-between;
+
+      align-items: flex-start;
+
+    }
+
+
+
+    #schedulePanel .panel-heading > div,
+
+    #schedulePanel .schedule-view-heading > div,
+
+    #schedulePanel .list-heading > div {
+
+      width: auto;
+
+      margin-left: 0;
+
+      margin-right: 0;
+
+      text-align: left;
+
+    }
+
+
+
+    #schedulePanel .schedule-admin-navigation {
+
+      justify-content: flex-start;
+
+      text-align: left;
+
+    }
+
+
+
+    @media (max-width: 640px) {
+
+      #schedulePanel .panel-heading,
+
+      #schedulePanel .schedule-view-heading,
+
+      #schedulePanel .list-heading {
+
+        flex-direction: column;
+
+      }
+
+    }
+
+  </style>
+</head>
+<body class="admin-page" data-admin-feature="schedule">
+<!-- ==================================================
+
+
+
+       HEADER
+
+
+
+  ================================================== -->
+<header class="admin-header">
+<div class="admin-header-inner">
+<div class="admin-header-logo"><img alt="AN:RIEL" src="../../images/logo.png"/></div>
+<div class="admin-header-right">
+<a class="admin-site-button" href="ここにURLを入れる" onclick="return false;" aria-disabled="true" title="リンク準備中">公式サイト ↗</a>
+
+<span class="admin-header-label">ADMIN</span>
+<button class="logout-button" id="logoutButton" type="button">LOGOUT</button>
+</div>
+</div>
+</header>
+<!-- ==================================================
+
+
+
+       MAIN
+
+
+
+  ================================================== -->
+<main class="admin-main">
+<div class="admin-container">
+<!-- ==================================================
+
+
+
+           TITLE
+
+
+
+      ================================================== -->
+<div class="admin-title-area">
+<h1>
+
+
+
+          SCHEDULE管理
+
+
+
+        </h1>
+</div>
+<!-- ==================================================
+
+
+
+           ADMIN NAVIGATION
+
+
+
+      ================================================== -->
+<nav aria-label="管理メニュー" class="admin-tabs">
+<a class="admin-tab" href="../index.html">管理TOP</a>
+<a class="admin-tab" href="../top/index.html">TOP画像管理</a>
+<a class="admin-tab" href="../news/index.html">NEWS管理</a>
+<a aria-current="page" class="admin-tab active" href="../schedule/index.html">SCHEDULE管理</a>
+<a class="admin-tab" href="../goods/index.html">GOODS管理</a>
+<a class="admin-tab" href="../talent/index.html">TALENT管理</a>
+</nav>
+<!-- ==================================================
+
+
+
+           PANEL
+
+
+
+      ================================================== -->
+<section class="admin-panel active" id="schedulePanel">
+<!-- ==================================================
+
+
+
+             PANEL HEADING
+
+
+
+        ================================================== -->
+<div class="panel-heading">
+<div>
+<h2>
+
+
+
+              SCHEDULE管理
+
+
+
+            </h2>
+<p class="panel-description">
+
+
+
+              配信予定の登録・YouTube連携・自動管理
+
+
+
+            </p>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             SCHEDULE NAVIGATION
+
+
+
+        ================================================== -->
+<div class="schedule-admin-navigation">
+<button class="schedule-admin-nav-button active" data-schedule-view="list" id="scheduleListTabButton" type="button">
+
+
+
+            SCHEDULE一覧
+
+
+
+          </button>
+<button class="schedule-admin-nav-button" data-schedule-view="new" id="scheduleNewTabButton" type="button">
+
+
+
+            SCHEDULE追加
+
+
+
+          </button>
+<button class="schedule-admin-nav-button" data-schedule-view="weekly" id="scheduleWeeklyTabButton" type="button">週間スケジュール</button>
+<button class="schedule-admin-nav-button" data-schedule-view="youtube" id="scheduleYoutubeTabButton" type="button">
+
+
+
+            YouTube連携
+
+
+
+          </button>
+<button class="schedule-admin-nav-button" data-schedule-view="talent" id="scheduleTalentTabButton" type="button">
+
+
+
+            連携タレント
+
+
+
+          </button>
+<button class="schedule-admin-nav-button" data-schedule-view="auto-delete" id="scheduleAutoDeleteTabButton" type="button">
+
+
+
+            自動削除設定
+
+
+
+          </button>
+</div>
+<!-- ==================================================
+
+
+
+             SCHEDULE LIST
+
+
+
+        ================================================== -->
+<div class="schedule-admin-view" id="scheduleWeeklyView">
+<div class="schedule-view-heading"><div><h3>週間スケジュール</h3><p class="schedule-view-description">配信予定の上に表示する画像を管理</p></div></div>
+<div class="editor-card weekly-editor">
+<h3>週間スケジュール画像</h3>
+<p class="form-help">推奨比率 16:9 / JPG・PNG・WebP・GIF / 最大5MB</p>
+<div id="weeklyDropzone" class="weekly-dropzone" tabindex="0" role="button" aria-label="週間スケジュール画像を選択">画像をドラッグ＆ドロップ、またはクリックして選択</div>
+<input id="weeklyFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+<img id="weeklyPreview" alt="週間スケジュールのプレビュー" style="display:none;max-width:100%;max-height:480px;object-fit:contain;margin:20px 0;">
+<label class="weekly-publish"><input type="checkbox" id="weeklyPublished"> 公開する</label>
+<p id="weeklyMessage" class="form-help" role="status" aria-live="polite"></p>
+<div class="weekly-actions"><button id="weeklySave" type="button" class="primary-button">保存</button><button id="weeklyDelete" type="button" class="reload-button">画像を削除</button></div>
+</div></div>
+<div class="schedule-admin-view active" id="scheduleListView">
+<div class="schedule-view-heading">
+<div>
+<h3>
+
+
+
+                SCHEDULE一覧
+
+
+
+              </h3>
+<p class="schedule-view-description">
+
+
+
+                登録されている配信予定
+
+
+
+              </p>
+</div>
+</div>
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+
+
+                  登録済みSCHEDULE
+
+
+
+                </h3>
+<p class="form-help" id="scheduleListCount"></p>
+</div>
+<button class="reload-button" id="reloadScheduleButton" type="button">
+
+
+
+                再読み込み
+
+
+
+              </button>
+</div>
+<div class="admin-schedule-list" id="adminScheduleList">
+<p class="loading-text">
+
+
+
+                読み込み中...
+
+
+
+              </p>
+</div>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             SCHEDULE ADD / EDIT
+
+
+
+        ================================================== -->
+<div class="schedule-admin-view" id="scheduleNewView">
+<div class="schedule-view-heading">
+<div>
+<h3>
+
+
+
+                SCHEDULE追加
+
+
+
+              </h3>
+<p class="schedule-view-description">
+
+
+
+                配信予定を登録
+
+
+
+              </p>
+</div>
+</div>
+<div class="editor-card" id="scheduleFormArea">
+<div class="editor-heading">
+<h3 id="scheduleFormTitle">
+
+
+
+                SCHEDULEを追加
+
+
+
+              </h3>
+<button aria-label="閉じる" class="close-editor-button" id="scheduleCancelButton" type="button">
+
+
+
+                ×
+
+
+
+              </button>
+</div>
+<form id="scheduleForm">
+<input id="scheduleId" type="hidden"/>
+<!-- TALENT -->
+<div class="form-group">
+<label for="scheduleTalent">
+
+
+
+                  タレント
+
+
+
+                </label>
+<select id="scheduleTalent" required="">
+<option value="">
+
+
+
+                    タレントを選択
+
+
+
+                  </option>
+</select>
+<p class="form-help">
+
+
+
+                  連携タレントに登録されているタレントから選択します。
+
+
+
+                </p>
+</div>
+<!-- DATE / TIME -->
+<div class="form-row">
+<div class="form-group">
+<label for="scheduleDate">
+
+
+
+                    日付
+
+
+
+                  </label>
+<input id="scheduleDate" required="" type="date"/>
+</div>
+<div class="form-group">
+<label for="scheduleTime">
+
+
+
+                    開始時刻
+
+
+
+                  </label>
+<input id="scheduleTime" required="" type="time"/>
+</div>
+</div>
+<!-- URL -->
+<div class="form-group">
+<label for="scheduleUrl">
+
+
+
+                  配信URL
+
+
+
+                </label>
+<input id="scheduleUrl" placeholder="https://..." type="url"/>
+</div>
+<!-- THUMBNAIL -->
+<div class="form-group schedule-thumbnail-manager">
+<label>
+
+
+
+                  サムネイル
+
+
+
+                </label>
+<input id="scheduleThumbnail" type="hidden"/>
+<div class="schedule-youtube-thumbnail">
+<button class="admin-secondary-button" id="scheduleYoutubeThumbnailButton" type="button">
+
+
+
+                    YouTubeから取得
+
+
+
+                  </button>
+</div>
+<p class="form-help">
+
+
+
+                  YouTubeの配信URLから取得するか、画像をアップロードできます。
+
+
+
+                </p>
+<div aria-label="サムネイル画像をアップロード" class="news-image-drop-zone schedule-image-drop-zone" id="scheduleImageDropZone" role="button" tabindex="0">
+<div class="news-image-drop-icon">
+
+
+
+                    ＋
+
+
+
+                  </div>
+<p class="news-image-drop-title">
+
+
+
+                    画像をドロップ
+
+
+
+                  </p>
+<p class="news-image-drop-sub">
+
+
+
+                    またはクリックして選択
+
+
+
+                  </p>
+<p class="news-image-drop-limit">
+
+
+
+                    JPEG / PNG / WEBP / GIF
+
+
+
+                  </p>
+</div>
+<input accept="image/jpeg,image/png,image/webp,image/gif" hidden="" id="scheduleImageInput" type="file"/>
+<p class="news-image-message" id="scheduleImageMessage"></p>
+<div class="schedule-thumbnail-preview-area hidden" id="scheduleThumbnailPreviewArea">
+<p class="schedule-thumbnail-preview-label">
+
+
+
+                    現在のサムネイル
+
+
+
+                  </p>
+<div class="schedule-thumbnail-preview">
+<img alt="サムネイルプレビュー" id="scheduleThumbnailPreview" src=""/>
+</div>
+<div class="schedule-thumbnail-actions">
+<button class="admin-secondary-button" id="scheduleThumbnailDeleteButton" type="button">
+
+
+
+                      削除
+
+
+
+                    </button>
+</div>
+</div>
+</div>
+<!-- PUBLISHED -->
+<div class="form-group checkbox-group">
+<label class="checkbox-label">
+<input checked="" id="schedulePublished" type="checkbox"/>
+<span>
+
+
+
+                    公開する
+
+
+
+                  </span>
+</label>
+</div>
+<!-- ACTIONS -->
+<div class="editor-actions">
+<button class="admin-primary-button" type="submit">
+
+
+
+                  保存
+
+
+
+                </button>
+<button class="admin-secondary-button" id="scheduleCancelButtonBottom" type="button">
+
+
+
+                  キャンセル
+
+
+
+                </button>
+</div>
+<p class="form-message" id="scheduleFormMessage"></p>
+</form>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             YOUTUBE
+
+
+
+        ================================================== -->
+<div class="schedule-admin-view" id="scheduleYoutubeView">
+<div class="schedule-view-heading">
+<div>
+<h3>
+
+
+
+                YouTube連携
+
+
+
+              </h3>
+<p class="schedule-view-description">
+
+
+
+                YouTubeの配信予定を自動取得
+
+
+
+              </p>
+</div>
+</div>
+<!-- AUTO SYNC -->
+<div class="editor-card youtube-sync-settings-card">
+<div class="editor-heading">
+<div>
+<h3>
+
+
+
+                  自動取得設定
+
+
+
+                </h3>
+<p class="form-help">
+
+
+
+                  YouTubeから配信予定を取得する時刻を設定します。
+
+
+
+                </p>
+</div>
+</div>
+<div class="youtube-sync-master-row">
+<label class="checkbox-label">
+<input id="youtubeSyncEnabled" type="checkbox"/>
+<span>
+
+
+
+                  自動取得を有効にする
+
+
+
+                </span>
+</label>
+</div>
+<div class="youtube-sync-times-area">
+<div class="youtube-sync-times-heading">
+<span>
+
+
+
+                  取得時刻
+
+
+
+                </span>
+<span class="form-help">
+
+
+
+                  日本時間（JST）
+
+
+
+                </span>
+</div>
+<div class="youtube-sync-time-list" id="youtubeSyncTimeList">
+<p class="loading-text">
+
+
+
+                  読み込み中...
+
+
+
+                </p>
+</div>
+<div class="youtube-sync-small-actions">
+<button class="admin-secondary-button" id="addYoutubeSyncTimeButton" type="button">
+
+
+
+                  ＋ 取得時刻を追加
+
+
+
+                </button>
+<button class="admin-primary-button" id="saveYoutubeSyncSettingsButton" type="button">
+
+
+
+                  設定を保存
+
+
+
+                </button>
+</div>
+</div>
+<p class="form-message" id="youtubeSyncSettingsMessage"></p>
+</div>
+<!-- MANUAL SYNC -->
+<div class="admin-list-card youtube-manual-sync-card">
+<div class="list-heading">
+<div>
+<h3>
+
+
+
+                  今すぐ取得
+
+
+
+                </h3>
+<p class="form-help">
+
+
+
+                  登録されているタレントのYouTubeチャンネルから配信予定を取得します。
+
+
+
+                </p>
+</div>
+<button class="admin-primary-button" id="youtubeSyncNowButton" type="button">
+
+
+
+                YouTubeから今すぐ取得
+
+
+
+              </button>
+</div>
+<p class="form-message" id="youtubeSyncNowMessage"></p>
+</div>
+</div>
+<!-- ==================================================
+
+             LINKED TALENT
+
+        ================================================== -->
+<div class="schedule-admin-view" id="scheduleTalentView">
+<div class="schedule-view-heading">
+<div>
+<h3>
+
+                連携タレント
+
+              </h3>
+<p class="schedule-view-description">
+
+                YouTube自動取得に使用するタレント
+
+              </p>
+</div>
+<a class="admin-primary-button small" href="../talent/index.html">
+
+              TALENT管理を開く
+
+            </a>
+</div>
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+                  YouTube連携タレント
+
+                </h3>
+<p class="form-help">
+
+                  タレント情報・YouTube連携設定はTALENT管理から変更します。
+
+                </p>
+</div>
+</div>
+<div class="youtube-talent-list" id="youtubeTalentList">
+<p class="loading-text">
+
+                読み込み中...
+
+              </p>
+</div>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             AUTO DELETE
+
+
+
+        ================================================== -->
+<div class="schedule-admin-view" id="scheduleAutoDeleteView">
+<div class="schedule-view-heading">
+<div>
+<h3>
+
+
+
+                自動削除設定
+
+
+
+              </h3>
+<p class="schedule-view-description">
+
+
+
+                古いSCHEDULEを自動的に整理
+
+
+
+              </p>
+</div>
+</div>
+<div class="editor-card">
+<div class="editor-heading">
+<div>
+<h3>
+
+
+
+                  古いSCHEDULEの自動削除
+
+
+
+                </h3>
+<p class="form-help">
+
+
+
+                  指定した日数より古いSCHEDULEを自動的に削除します。
+
+
+
+                </p>
+</div>
+</div>
+<div class="form-group checkbox-group">
+<label class="checkbox-label">
+<input id="scheduleAutoDeleteEnabled" type="checkbox"/>
+<span>
+
+
+
+                  自動削除を有効にする
+
+
+
+                </span>
+</label>
+</div>
+<div class="form-group">
+<label for="scheduleAutoDeleteKeepDays">
+
+
+
+                保持日数
+
+
+
+              </label>
+<div class="schedule-auto-delete-days">
+<input id="scheduleAutoDeleteKeepDays" max="365" min="0" step="1" type="number" value="1"/>
+<span>
+
+
+
+                  日前まで残す
+
+
+
+                </span>
+</div>
+<p class="form-help">
+
+
+
+                例：1日に設定した場合、昨日と今日以降のSCHEDULEを残します。
+
+
+
+              </p>
+<p class="form-help">
+
+
+
+                3日に設定した場合、3日前までのSCHEDULEを残し、それより古いものを削除します。
+
+
+
+              </p>
+</div>
+<div class="form-group">
+<label>
+
+
+
+                最終実行
+
+
+
+              </label>
+<p class="form-help" id="scheduleAutoDeleteLastRun">
+
+
+
+                -
+
+
+
+              </p>
+</div>
+<div class="editor-actions">
+<button class="admin-primary-button" id="saveScheduleAutoDeleteSettingsButton" type="button">
+
+
+
+                設定を保存
+
+
+
+              </button>
+</div>
+<p class="form-message" id="scheduleAutoDeleteMessage"></p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- ==================================================
+
+
+
+       SUPABASE
+
+
+
+  ================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase.js"></script>
+<script src="../js/admin-navigation.js"></script>
+<!-- ==================================================
+
+
+
+       ADMIN JS
+
+
+
+  ================================================== -->
+<script src="../js/schedule-admin.js"></script>
+<script src="../js/weekly-schedule-admin.js"></script>
+<script src="../js/youtube-admin.js"></script>
+<!-- ==================================================
+
+
+
+       AUTH
+
+
+
+  ================================================== -->
+<script>
+
+
+
+    document.addEventListener(
+
+
+
+      "DOMContentLoaded",
+
+
+
+      async () => {
+
+
+
+        try {
+
+
+
+          const {
+
+
+
+            data,
+
+
+
+            error
+
+
+
+          } =
+
+
+
+            await supabaseClient
+
+
+
+              .auth
+
+
+
+              .getSession();
+
+
+
+          if (
+
+
+
+            error ||
+
+
+
+            !data.session
+
+
+
+          ) {
+
+
+
+            window.location.href =
+
+
+
+              "../login.html";
+
+
+
+            return;
+
+
+
+          }
+
+
+
+        } catch (error) {
+
+
+
+          console.error(
+
+
+
+            "Session check error:",
+
+
+
+            error
+
+
+
+          );
+
+
+
+          window.location.href =
+
+
+
+            "../login.html";
+
+
+
+          return;
+
+
+
+        }
+
+
+
+        const logoutButton =
+
+
+
+          document.getElementById(
+
+
+
+            "logoutButton"
+
+
+
+          );
+
+
+
+        logoutButton
+
+
+
+          ?.addEventListener(
+
+
+
+            "click",
+
+
+
+            async () => {
+
+
+
+              try {
+
+
+
+                const {
+
+
+
+                  error
+
+
+
+                } =
+
+
+
+                  await supabaseClient
+
+
+
+                    .auth
+
+
+
+                    .signOut();
+
+
+
+                if (error) {
+
+
+
+                  console.error(
+
+
+
+                    "Logout error:",
+
+
+
+                    error
+
+
+
+                  );
+
+
+
+                  alert(
+
+
+
+                    "ログアウトに失敗しました。"
+
+
+
+                  );
+
+
+
+                  return;
+
+
+
+                }
+
+
+
+                window.location.href =
+
+
+
+                  "../login.html";
+
+
+
+              } catch (error) {
+
+
+
+                console.error(
+
+
+
+                  "Logout error:",
+
+
+
+                  error
+
+
+
+                );
+
+
+
+                alert(
+
+
+
+                  "ログアウトに失敗しました。"
+
+
+
+                );
+
+
+
+              }
+
+
+
+            }
+
+
+
+          );
+
+
+
+      }
+
+
+
+    );
+
+
+
+  </script>
+</body>
+</html>

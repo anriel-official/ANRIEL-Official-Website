@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="AN:RIEL所属VTuberの配信スケジュール。"
+  >
+
+  <title>SCHEDULE | AN:RIEL</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/schedule.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+
+      <a
+        href="top.html"
+        class="header-logo"
+      >
+
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+
+      </a>
+
+
+      <nav
+        class="global-nav"
+        id="globalNav"
+      >
+
+        <a href="top.html">
+          TOP
+        </a>
+
+        <a href="news.html">
+          NEWS
+        </a>
+
+        <a href="about.html">
+          ABOUT
+        </a>
+
+        <a href="talent.html">
+          TALENT
+        </a>
+
+        <a
+          href="schedule.html"
+          class="active"
+        >
+          SCHEDULE
+        </a>
+
+        <a href="goods.html">
+          GOODS
+        </a>
+
+        <a href="audition.html">
+          AUDITION
+        </a>
+
+        <a href="guideline.html">
+          GUIDELINE
+        </a>
+
+        <a href="contact.html">
+          CONTACT
+        </a>
+
+      </nav>
+
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="メニューを開く"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ========================================
+       MAIN
+  ========================================= -->
+
+  <main class="schedule-page">
+
+
+    <!-- ========================================
+         PAGE TITLE
+    ========================================= -->
+
+    <section class="page-header">
+
+      <div class="page-header-inner">
+
+        <h1 class="page-title">
+          SCHEDULE
+        </h1>
+
+        <p class="page-title-jp">
+          配信スケジュール
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         SCHEDULE
+    ========================================= -->
+
+    <section class="schedule-section">
+
+      <div class="schedule-inner">
+
+
+        <section id="weeklySchedule" class="weekly-public" hidden aria-label="週間スケジュール">
+          <p class="schedule-heading-en">WEEKLY SCHEDULE</p>
+          <h2>週間スケジュール</h2>
+          <img id="weeklyScheduleImage" alt="AN:RIEL 週間スケジュール" loading="lazy">
+        </section>
+
+        <div class="schedule-heading">
+
+          <p class="schedule-heading-en">
+            STREAMING SCHEDULE
+          </p>
+
+          <h2>
+            配信予定
+          </h2>
+
+          <p class="schedule-description">
+            AN:RIEL所属タレントの配信予定をご覧いただけます。
+          </p>
+
+        </div>
+
+
+
+        <!-- Supabaseからここへ自動表示 -->
+
+        <div
+          id="scheduleList"
+          class="schedule-list"
+        >
+
+          <div class="schedule-loading">
+            SCHEDULEを読み込んでいます...
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+
+
+      <!-- FOOTER LOGO -->
+
+      <a
+        href="top.html"
+        class="footer-logo"
+      >
+
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+
+      </a>
+
+
+
+      <!-- FOOTER NAVIGATION -->
+
+      <nav class="footer-nav">
+
+        <a href="top.html">
+          TOP
+        </a>
+
+        <a href="news.html">
+          NEWS
+        </a>
+
+        <a href="about.html">
+          ABOUT
+        </a>
+
+        <a href="talent.html">
+          TALENT
+        </a>
+
+        <a href="schedule.html">
+          SCHEDULE
+        </a>
+
+        <a href="goods.html">
+          GOODS
+        </a>
+
+        <a href="audition.html">
+          AUDITION
+        </a>
+
+        <a href="guideline.html">
+          GUIDELINE
+        </a>
+
+        <a href="contact.html">
+          CONTACT
+        </a>
+
+      </nav>
+
+
+
+      <!-- ========================================
+           FOOTER SOCIAL
+      ========================================= -->
+
+      <div class="footer-social-area">
+
+        <p class="footer-social-label">
+          FOLLOW / CONTACT
+        </p>
+
+
+        <div class="footer-social">
+
+
+          <!-- X -->
+
+          <a
+            href="https://x.com/ANRIEL_2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              X
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL ACCOUNT
+            </span>
+
+          </a>
+
+
+
+          <!-- YOUTUBE -->
+
+          <a
+            href="https://www.youtube.com/@ANRIEL-2026/videos"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              YOUTUBE
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL CHANNEL
+            </span>
+
+          </a>
+
+
+
+          <!-- MARSHMALLOW -->
+
+          <a
+            href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              MARSHMALLOW
+            </span>
+
+            <span class="footer-social-sub">
+              QUESTION BOX
+            </span>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- COPYRIGHT -->
+
+      <p class="copyright">
+        © 2026 AN:RIEL
+      </p>
+
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- ========================================
+       SCRIPT
+  ========================================= -->
+
+
+  <!-- Supabase -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
+  <!-- Supabase設定 -->
+
+  <script src="js/supabase.js"></script>
+
+
+  <!-- 共通 -->
+
+  <script src="js/main.js"></script>
+
+
+  <!-- SCHEDULE -->
+
+  <script src="js/schedule.js"></script>
+<script src="js/weekly-schedule.js"></script>
+
+
+</body>
+
+</html>

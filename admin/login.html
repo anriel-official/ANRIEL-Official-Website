@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>ADMIN LOGIN | AN:RIEL</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    .login-form button:disabled { opacity:.55; cursor:wait; }
+  </style>
+</head>
+<body class="admin-login-page">
+  <main class="login-wrapper">
+    <section class="login-card">
+      <div class="login-logo"><img src="../images/logo.png" alt="AN:RIEL"></div>
+      <p class="login-label">ADMINISTRATION</p>
+      <h1>ADMIN LOGIN</h1>
+      <p class="login-description">管理者アカウントでログイン</p>
+      <form id="loginForm" class="login-form">
+        <div class="form-group"><label for="email">EMAIL</label><input type="email" id="email" autocomplete="email" placeholder="Email" required></div>
+        <div class="form-group"><label for="password">PASSWORD</label><input type="password" id="password" autocomplete="current-password" placeholder="Password" required></div>
+        <button type="submit" id="loginButton" class="admin-primary-button">LOGIN</button>
+      </form>
+      <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
+      <a href="../top.html" class="back-site-link">← OFFICIAL SITE</a>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('loginMessage');
+    const button = document.getElementById('loginButton');
+    let busy = false;
+    function status(text, error = false) {
+      message.textContent = text;
+      message.className = error ? 'form-message error' : 'form-message';
+    }
+    async function routeUser() {
+      const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+      if (sessionError || !sessionData.session) return false;
+      const { data, error } = await supabaseClient.functions.invoke('admin-account', { method: 'GET' });
+      if (error || !data?.user) {
+        status('管理者情報を確認できません。アカウントの登録・有効状態を確認', true);
+        return false;
+      }
+      if (data.user.must_change_password) {
+        location.replace('account/index.html');
+      } else {
+        location.replace('index.html');
+      }
+      return true;
+    }
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (busy) return;
+      busy = true;
+      button.disabled = true;
+      status('ログイン確認中...');
+      try {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) {
+          status('メールアドレスまたはパスワードを確認', true);
+          return;
+        }
+        await routeUser();
+      } catch (error) {
+        console.error(error);
+        status('通信エラー。時間をおいて再試行', true);
+      } finally {
+        busy = false;
+        button.disabled = false;
+      }
+    });
+    (async () => {
+      try { await routeUser(); } catch (error) { console.error(error); }
+    })();
+  </script>
+</body>
+</html>

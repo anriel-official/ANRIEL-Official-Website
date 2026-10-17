@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>権限管理 | AN:RIEL ADMIN</title>
+<link href="../../css/admin.css" rel="stylesheet"/>
+<style>
+.permission-card{background:#fff;border:1px solid #e4e5e8;border-radius:8px;padding:24px;margin-top:22px}
+.permission-card h3{margin:0 0 16px;font-size:17px}.permission-card p{color:#555;line-height:1.8}
+.permission-detail{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid #eee}
+.permission-detail:last-child{border-bottom:0}.permission-detail strong{font-size:13px}
+.permission-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.permission-button{border:1px solid #20232a;border-radius:5px;padding:10px 14px;background:#20232a;color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.permission-button.secondary{background:#fff;color:#20232a}.permission-button.danger{background:#fff;color:#b42318;border-color:#b42318}.permission-button:disabled{opacity:.5;cursor:not-allowed}
+.permission-table-wrap{overflow-x:auto}.permission-table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
+.permission-table th,.permission-table td{padding:12px 9px;border-bottom:1px solid #eee;vertical-align:middle}.permission-table th{background:#f7f7f9;white-space:nowrap}
+.permission-table .email{color:#666;font-size:12px;overflow-wrap:anywhere}.permission-table .empty{text-align:center;color:#777;padding:24px}
+.permission-table .permission-button{padding:7px 10px;font-size:12px}
+.permission-form{display:grid;gap:16px}.permission-field{display:grid;gap:7px}.permission-field label{font-weight:700;font-size:13px}
+.permission-field input,.permission-field select{box-sizing:border-box;width:100%;max-width:520px;min-height:42px;border:1px solid #d7d9df;border-radius:5px;background:#fff;padding:10px 12px;font:inherit;font-size:14px}
+.permission-help{font-size:12px;color:#666;line-height:1.7}.permission-note{padding:14px 16px;margin-top:16px;background:#fafafa;border:1px solid #e4e5e8;border-radius:5px;font-size:13px;line-height:1.8}
+.permission-message{margin-top:12px;font-size:13px;white-space:pre-wrap}.permission-message.error{color:#b42318}.permission-message.success{color:#177245}
+.permission-hidden{display:none!important}
+@media(max-width:600px){.permission-card{padding:16px}.permission-detail{grid-template-columns:1fr;gap:3px}.permission-table th,.permission-table td{padding:8px 6px}}
+</style>
+</head>
+<body class="admin-page" data-admin-feature="permissions">
+<header class="admin-header"><div class="admin-header-inner"><div class="admin-header-logo"><img alt="AN:RIEL" src="../../images/logo.png"/></div><div class="admin-header-right">
+<a class="admin-site-button" href="ここにURLを入れる" onclick="return false;" aria-disabled="true" title="リンク準備中">公式サイト ↗</a><span class="admin-header-label">ADMIN</span><button class="logout-button" id="logoutButton" type="button">LOGOUT</button></div></div></header>
+<main class="admin-main"><div class="admin-container">
+<div class="admin-title-area"><h1>権限管理</h1></div>
+<nav aria-label="管理メニュー" class="admin-tabs"></nav>
+<section class="admin-panel active">
+<div class="panel-heading"><div><h2>運営スタッフ管理</h2><p class="panel-description">アカウント管理・CONTACTアクセス権限</p></div></div>
+<div class="permission-card" id="loadingMessage" role="status">管理者情報を確認中...</div>
+<div hidden="" id="permissionContent">
+<section class="permission-card"><h3>ログイン中の管理アカウント</h3>
+<div class="permission-detail"><strong>表示名</strong><span id="adminDisplayName">—</span></div>
+<div class="permission-detail"><strong>権限</strong><span id="adminRole">—</span></div>
+<div class="permission-detail"><strong>利用状態</strong><span id="adminActive">—</span></div>
+</section>
+<section class="permission-card"><h3>アカウント一覧</h3>
+<div class="permission-table-wrap"><table class="permission-table"><thead><tr><th>表示名・メールアドレス</th><th>種別</th><th>状態</th><th>CONTACT</th><th>操作</th></tr></thead><tbody id="accountRows"><tr><td class="empty" colspan="5">読み込み中...</td></tr></tbody></table></div>
+<div class="permission-actions"><button class="permission-button secondary" id="reloadButton" type="button">再読み込み</button><button class="permission-button" id="showCreateButton" type="button">＋ アカウント追加</button></div>
+<p class="permission-help">編集・停止・再開・削除はスタッフのみ。最上位管理者・白瀬はまやは変更対象外。</p>
+</section>
+<section class="permission-card permission-hidden" id="createSection"><h3>アカウント新規登録</h3>
+<form autocomplete="off" class="permission-form" id="createForm">
+<div class="permission-field"><label for="accountRole">アカウント種別</label><select id="accountRole"><option value="staff">スタッフ</option><option id="ownerOption" value="owner">最上位管理者</option></select></div>
+<div class="permission-field"><label for="accountName">表示名</label><input id="accountName" maxlength="100" required="" type="text"/></div>
+<div class="permission-field"><label for="accountEmail">メールアドレス</label><input id="accountEmail" maxlength="254" required="" type="email"/></div>
+<div class="permission-field"><label for="accountPassword">初期パスワード</label><input autocomplete="new-password" id="accountPassword" maxlength="128" minlength="12" required="" type="password"/><span class="permission-help">12文字以上。登録後のパスワード表示不可。</span></div>
+<div class="permission-field" id="createContactField"><label for="createContact">CONTACT管理</label><select id="createContact"><option value="none">アクセス不可</option><option value="view">閲覧のみ</option><option value="edit">閲覧・編集</option></select></div>
+<div class="permission-note permission-hidden" id="ownerNotice">最上位管理者は1名のみ。全機能への権限を付与。登録後の変更・削除不可。</div>
+<div class="permission-actions"><button class="permission-button" id="createSubmit" type="submit">登録</button><button class="permission-button secondary" id="cancelCreate" type="button">キャンセル</button></div>
+</form><div aria-live="polite" class="permission-message" id="createMessage" role="status"></div>
+</section>
+<section class="permission-card permission-hidden" id="editSection"><h3>スタッフ編集</h3>
+<form autocomplete="off" class="permission-form" id="editForm">
+<div class="permission-field"><label for="editName">表示名</label><input id="editName" maxlength="100" required="" type="text"/></div>
+<div class="permission-field"><label for="editEmail">メールアドレス</label><input id="editEmail" maxlength="254" required="" type="email"/></div>
+<div class="permission-field"><label for="editContact">CONTACT管理</label><select id="editContact"><option value="none">アクセス不可</option><option value="view">閲覧のみ</option><option value="edit">閲覧・編集</option></select></div>
+<div class="permission-note">TOP・NEWS・SCHEDULE・GOODS・TALENTはスタッフ全員が利用可能。</div>
+<div class="permission-actions"><button class="permission-button" id="editSubmit" type="submit">変更を保存</button><button class="permission-button secondary" id="cancelEdit" type="button">キャンセル</button></div>
+</form><div aria-live="polite" class="permission-message" id="editMessage" role="status"></div>
+</section>
+<div class="permission-note">アカウントの停止・削除は管理機能へのアクセスに影響。削除前に関連データと外部キー設定を確認。</div>
+</div></section></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../../js/supabase.js"></script><script src="../js/admin-navigation.js"></script>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id);
+const ROLES={owner:"最上位管理者",engineer:"白瀬はまや",staff:"スタッフ"};
+let users=[],current=null,editingId=null,busy=false;
+function contactValue(value){return value==="edit"?{can_view:true,can_edit:true}:value==="view"?{can_view:true,can_edit:false}:{can_view:false,can_edit:false};}
+function contactMode(user){const p=(user.permissions||[]).find(x=>x.feature==="contact");return p?.can_edit?"edit":p?.can_view?"view":"none";}
+function contactLabel(mode){return {none:"アクセス不可",view:"閲覧のみ",edit:"閲覧・編集"}[mode]||"アクセス不可";}
+function message(id,text,type=""){const e=$(id);e.textContent=text;e.className=`permission-message ${type}`;}
+async function invoke(action="",options={method:"GET"}){
+const endpoint=action?`admin-users?action=${encodeURIComponent(action)}`:"admin-users";
+const {data,error}=await supabaseClient.functions.invoke(endpoint,options);
+if(error){let detail=error.message||"通信エラー";if(error.context instanceof Response){const r=await error.context.json().catch(()=>null);detail=r?.error||`HTTP ${error.context.status}`;}throw Error(detail);}
+if(data?.error)throw Error(data.error);return data;
+}
+function td(tr,value){const e=document.createElement("td");e.textContent=value;tr.appendChild(e);return e;}
+function button(text,kind,handler){const b=document.createElement("button");b.type="button";b.className=`permission-button ${kind}`;b.textContent=text;b.addEventListener("click",handler);return b;}
+function hideForms(){ $("createSection").classList.add("permission-hidden");$("editSection").classList.add("permission-hidden");editingId=null;}
+function render(){const tbody=$("accountRows");tbody.replaceChildren();
+if(!users.length){const tr=document.createElement("tr"),e=td(tr,"登録アカウントなし");e.colSpan=5;e.className="empty";tbody.appendChild(tr);}
+for(const u of users){const tr=document.createElement("tr");const info=document.createElement("td");const name=document.createElement("strong");name.textContent=u.display_name||"—";const email=document.createElement("div");email.className="email";email.textContent=u.email||"—";info.append(name,email);tr.appendChild(info);td(tr,ROLES[u.role]||u.role);td(tr,u.is_active?"有効":"停止中");td(tr,u.role==="staff"?contactLabel(contactMode(u)):"全権限");const actions=document.createElement("td");const group=document.createElement("div");group.className="permission-actions";group.style.marginTop="0";
+if(u.role==="staff"){
+group.append(button("編集","secondary",()=>openEdit(u)));
+group.append(button(u.is_active?"停止":"再開","secondary",()=>changeStatus(u)));
+group.append(button("削除","danger",()=>deleteStaff(u)));
+}else{const span=document.createElement("span");span.className="permission-help";span.textContent="変更不可";group.append(span);}
+actions.appendChild(group);tr.appendChild(actions);tbody.appendChild(tr);}
+const ownerExists=users.some(u=>u.role==="owner");const allowOwner=current?.role==="engineer"&&!ownerExists;$("ownerOption").hidden=!allowOwner;$("ownerOption").disabled=!allowOwner;if(!allowOwner&&$("accountRole").value==="owner")$("accountRole").value="staff";updateRole();}
+function updateRole(){const owner=$("accountRole").value==="owner";$("createContactField").classList.toggle("permission-hidden",owner);$("ownerNotice").classList.toggle("permission-hidden",!owner);}
+async function load(){ $("reloadButton").disabled=true;try{const result=await invoke("list");if(!Array.isArray(result?.users))throw Error("アカウント一覧の形式が不正");users=result.users;current=result.current_user;if(!current||!["owner","engineer"].includes(current.role))throw Error("操作権限なし");$("adminDisplayName").textContent=current.display_name||"—";$("adminRole").textContent=ROLES[current.role]||"—";$("adminActive").textContent=current.is_active?"有効":"停止中";render();$("loadingMessage").hidden=true;$("permissionContent").hidden=false;}catch(e){$("loadingMessage").hidden=false;$("loadingMessage").textContent=`取得失敗：${e.message}`;throw e;}finally{$("reloadButton").disabled=false;}}
+function openEdit(u){if(busy)return;hideForms();editingId=u.user_id;$("editName").value=u.display_name||"";$("editEmail").value=u.email||"";$("editContact").value=contactMode(u);message("editMessage","");$("editSection").classList.remove("permission-hidden");$("editSection").scrollIntoView({behavior:"smooth",block:"start"});}
+async function post(payload){return invoke("",{method:"POST",body:payload});}
+async function changeStatus(u){if(busy)return;const action=u.is_active?"suspend":"resume";if(!confirm(`スタッフ「${u.display_name}」を${u.is_active?"停止":"再開"}する？`))return;busy=true;try{await post({action,user_id:u.user_id});await load();}catch(e){alert(`処理失敗：${e.message}`);}finally{busy=false;}}
+async function deleteStaff(u){if(busy)return;if(!confirm(`スタッフ「${u.display_name}」を完全削除する？\nこの操作は取り消せません。`))return;const check=prompt("削除する場合は「削除」と入力");if(check!=="削除")return;busy=true;try{await post({action:"delete",user_id:u.user_id,confirm:true});hideForms();await load();}catch(e){alert(`削除失敗：${e.message}`);}finally{busy=false;}}
+document.addEventListener("DOMContentLoaded",async()=>{
+$("logoutButton").addEventListener("click",async()=>{await supabaseClient.auth.signOut();location.replace("../login.html");});
+$("reloadButton").addEventListener("click",()=>load().catch(console.error));
+$("showCreateButton").addEventListener("click",()=>{if(busy)return;hideForms();$("createForm").reset();updateRole();message("createMessage","");$("createSection").classList.remove("permission-hidden");$("createSection").scrollIntoView({behavior:"smooth",block:"start"});});
+$("cancelCreate").addEventListener("click",()=>{if(!busy)hideForms();});$("cancelEdit").addEventListener("click",()=>{if(!busy)hideForms();});$("accountRole").addEventListener("change",updateRole);
+$("createForm").addEventListener("submit",async e=>{e.preventDefault();if(busy)return;const role=$("accountRole").value;const payload={action:"create",role,display_name:$("accountName").value.trim(),email:$("accountEmail").value.trim(),password:$("accountPassword").value,...(role==="staff"?{contact_permission:contactValue($("createContact").value)}:{})};if(!confirm(`「${payload.display_name}」を登録する？`))return;busy=true;$("createSubmit").disabled=true;message("createMessage","登録処理中...");try{await post(payload);$("createForm").reset();message("createMessage","登録完了。初期パスワードは安全な方法で共有。","success");await load();}catch(err){message("createMessage",`登録失敗：${err.message}`,"error");}finally{busy=false;$("createSubmit").disabled=false;}});
+$("editForm").addEventListener("submit",async e=>{e.preventDefault();if(busy||!editingId)return;const payload={action:"update",user_id:editingId,display_name:$("editName").value.trim(),email:$("editEmail").value.trim(),contact_permission:contactValue($("editContact").value)};if(!confirm("スタッフ情報を保存する？"))return;busy=true;$("editSubmit").disabled=true;message("editMessage","保存処理中...");try{await post(payload);message("editMessage","変更を保存しました。","success");await load();}catch(err){message("editMessage",`保存失敗：${err.message}`,"error");}finally{busy=false;$("editSubmit").disabled=false;}});
+try{const {data:{session},error}=await supabaseClient.auth.getSession();if(error||!session){location.replace("../login.html");return;}await load();}catch(e){console.error("権限管理画面エラー",e);}
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+/* CONTACT | NEWS・SCHEDULE共通デザイン */
+.contact-page { padding-top: 80px; }
+.contact-section { padding: 40px 24px 120px; }
+.contact-inner { width: min(1000px, 100%); margin: 0 auto; }
+.contact-panel {
+  padding: clamp(28px, 5vw, 55px);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
+}
+.contact-lead { margin: 0 0 10px; font-size: 18px; font-weight: 700; line-height: 1.8; }
+.contact-notice { margin: 0 0 40px; font-size: 13px; color: #666; line-height: 2; }
+.contact-form { display: grid; gap: 28px; }
+.contact-field { display: grid; gap: 11px; }
+.contact-field label { font-size: 13px; font-weight: 700; }
+.contact-required { display: inline-block; margin-left: 8px; padding: 3px 7px; border: 1px solid #222; font-size: 10px; font-weight: 600; line-height: 1.3; }
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%; box-sizing: border-box; padding: 15px 17px;
+  border: 1px solid rgba(0,0,0,.2); border-radius: 6px;
+  background: #fff; color: #111; font: inherit; font-size: 14px; line-height: 1.7;
+  transition: border-color .2s, box-shadow .2s;
+}
+.contact-field textarea { min-height: 220px; resize: vertical; }
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus { outline: none; border-color: #111; box-shadow: 0 0 0 3px rgba(0,0,0,.06); }
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: #999; }
+.contact-privacy { margin: 0; color: #666; font-size: 12px; line-height: 1.9; }
+.contact-result { display: none; margin: 0; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.8; }
+.contact-result.is-success { display: block; color: #185a38; background: #eef8f1; }
+.contact-result.is-error { display: block; color: #a52b2b; background: #fff0f0; }
+.contact-submit {
+  display: flex; justify-content: center; align-items: center; gap: 22px;
+  width: min(320px, 100%); min-height: 58px; margin: 4px auto 0;
+  border: 1px solid #111; border-radius: 5px;
+  background: #111; color: #fff; cursor: pointer;
+  font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .12em;
+  transition: background .2s, color .2s, opacity .2s;
+}
+.contact-submit:hover:not(:disabled) { background: #fff; color: #111; }
+.contact-submit:disabled { opacity: .5; cursor: wait; }
+.contact-honeypot { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 768px) {
+  .contact-page { padding-top: 68px; }
+  .contact-section { padding: 30px 16px 90px; }
+  .contact-panel { padding: 28px 20px; }
+  .contact-lead { font-size: 16px; }
+  .contact-notice { margin-bottom: 32px; }
+  .contact-form { gap: 24px; }
+  .contact-field textarea { min-height: 180px; }
+}

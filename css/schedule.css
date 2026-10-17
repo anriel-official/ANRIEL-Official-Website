@@ -1,0 +1,490 @@
+
+/* ==================================================
+   AN:RIEL
+   SCHEDULE
+================================================== */
+
+.schedule-page {
+  min-height: 100vh;
+}
+
+/* ==================================================
+   SECTION
+================================================== */
+
+.schedule-section {
+  padding: 30px 24px 120px;
+}
+
+.schedule-inner {
+  width: min(1050px, 100%);
+  margin: 0 auto;
+}
+
+/* ==================================================
+   HEADING
+================================================== */
+
+.schedule-heading {
+  margin-bottom: 50px;
+}
+
+.schedule-heading-en {
+  margin: 0 0 7px;
+  color: #777;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.schedule-heading h2 {
+  margin: 0;
+  font-size: clamp(27px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.schedule-description {
+  margin: 15px 0 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* ==================================================
+   DATE GROUP
+================================================== */
+
+.schedule-date-group {
+  margin-bottom: 65px;
+}
+
+.schedule-date-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.schedule-date-main {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.schedule-date-year {
+  color: #777;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.schedule-date-week {
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ==================================================
+   ITEMS
+   PC: 3列
+================================================== */
+
+.schedule-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* ==================================================
+   CARD
+================================================== */
+
+.schedule-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+
+  color: #111;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.045);
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+a.schedule-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 17px 48px rgba(0, 0, 0, 0.07);
+}
+
+/* ==================================================
+   THUMBNAIL
+================================================== */
+
+.schedule-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.schedule-thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+a.schedule-card:hover .schedule-thumbnail img {
+  transform: scale(1.025);
+}
+
+/* サムネイル未設定 */
+
+.schedule-thumbnail-empty {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(0, 0, 0, 0.25);
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.schedule-card-content {
+  padding: 14px 15px 17px;
+  min-width: 0;
+}
+
+.schedule-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* TIME */
+
+.schedule-time {
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* CATEGORY */
+
+.schedule-category {
+  padding: 4px 8px;
+  color: #666;
+  background: rgba(0, 0, 0, 0.045);
+  border-radius: 999px;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* TALENT */
+
+.schedule-talent {
+  margin: 0 0 6px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* TITLE */
+
+.schedule-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* LINK TEXT */
+
+.schedule-link-text {
+  display: inline-block;
+  margin-top: 12px;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* ==================================================
+   CARD SUMMARY
+================================================== */
+
+.schedule-card-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.schedule-card-summary .schedule-talent {
+  margin: 0;
+  color: #111;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.schedule-stream-time {
+  color: #333;
+  font-size: 16px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.schedule-card-content .schedule-link-text {
+  display: inline-block;
+  margin-top: 11px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* 配信時間 */
+
+.schedule-card .schedule-time,
+.schedule-card .schedule-stream-time,
+.schedule-card .schedule-time-text {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+/* ==================================================
+   EMPTY / LOADING / ERROR
+================================================== */
+
+.schedule-loading,
+.schedule-empty,
+.schedule-error {
+  padding: 70px 30px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+
+  color: #777;
+  font-size: 13px;
+  line-height: 2;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ==================================================
+   TABLET
+   2列
+================================================== */
+
+@media (max-width: 800px) {
+
+  .schedule-section {
+    padding: 20px 16px 95px;
+  }
+
+  .schedule-inner {
+    width: min(620px, 100%);
+  }
+
+  .schedule-heading {
+    margin-bottom: 40px;
+  }
+
+  .schedule-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .schedule-date-group {
+    margin-bottom: 60px;
+  }
+
+  .schedule-card {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+   MOBILE
+   1列
+================================================== */
+
+@media (max-width: 520px) {
+
+  .schedule-heading h2 {
+    font-size: 25px;
+  }
+
+  .schedule-date-heading {
+    gap: 9px;
+  }
+
+  .schedule-date-main {
+    font-size: 28px;
+  }
+
+  .schedule-items {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .schedule-card {
+    border-radius: 14px;
+  }
+
+  .schedule-card-content {
+    padding: 16px 17px 19px;
+  }
+
+  .schedule-card-top {
+    margin-bottom: 10px;
+  }
+
+  .schedule-category {
+    font-size: 8px;
+  }
+
+  .schedule-talent {
+    font-size: 12px;
+  }
+
+  .schedule-title {
+    font-size: 13px;
+  }
+
+  .schedule-card-summary .schedule-talent {
+    font-size: 16px;
+  }
+
+  .schedule-stream-time {
+    font-size: 16px;
+  }
+
+  .schedule-card-content .schedule-link-text {
+    margin-top: 12px;
+    font-size: 10px;
+  }
+
+  .schedule-loading,
+  .schedule-empty,
+  .schedule-error {
+    padding: 60px 20px;
+    border-radius: 20px;
+  }
+}
+
+
+/* ==================================================
+   SCHEDULE
+   MOBILE COMPACT
+================================================== */
+
+@media (max-width: 520px) {
+
+  /* カードを横2列に変更 */
+  .schedule-items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  /* カード本体 */
+  .schedule-card {
+    min-width: 0;
+    border-radius: 10px;
+  }
+
+  /* サムネイルは16:9を維持 */
+  .schedule-thumbnail {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* カード内の余白 */
+  .schedule-card-content {
+    padding: 10px 10px 13px;
+  }
+
+  .schedule-card-top {
+    gap: 5px;
+    margin-bottom: 7px;
+  }
+
+  /* タレント名 */
+  .schedule-card-summary .schedule-talent {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* 配信時間 */
+  .schedule-card .schedule-time,
+  .schedule-card .schedule-stream-time,
+  .schedule-card .schedule-time-text {
+    font-size: 12px !important;
+  }
+
+  /* 配信タイトル */
+  .schedule-title {
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  /* カテゴリー */
+  .schedule-category {
+    padding: 3px 5px;
+    font-size: 7px;
+  }
+
+  /* WATCH */
+  .schedule-card-content .schedule-link-text {
+    margin-top: 8px;
+    font-size: 8px;
+  }
+}
+
+/* Weekly schedule visual */
+.weekly-public{margin:0 auto 85px;max-width:1100px}
+.weekly-public h2{font-size:clamp(26px,3.2vw,42px);margin:12px 0 28px}
+.weekly-public img{display:block;width:100%;height:auto;object-fit:contain;border:1px solid rgba(120,125,150,.15)}
+@media(max-width:600px){.weekly-public{margin-bottom:55px}.weekly-public h2{margin-bottom:20px}}

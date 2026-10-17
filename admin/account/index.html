@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>パスワード変更 | AN:RIEL ADMIN</title>
+<link href="../../css/admin.css" rel="stylesheet"/>
+<style>
+    .account-card { max-width:580px; margin:30px auto; background:#fff; border:1px solid #e4e5e8; border-radius:10px; padding:28px; }
+    .account-card h1 { margin:0 0 12px; font-size:24px; }
+    .account-card p { color:#555; line-height:1.8; }
+    .account-field { margin:18px 0; }
+    .account-field label { display:block; font-weight:700; margin-bottom:8px; font-size:13px; }
+    .account-field input { box-sizing:border-box; width:100%; padding:12px; border:1px solid #cfd2d8; border-radius:6px; background:#fff; color:#222; }
+    .account-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:20px; }
+    .account-actions button { cursor:pointer; }
+    .account-actions button:disabled { opacity:.5; cursor:wait; }
+    .account-note { font-size:13px; }
+    #accountMessage { min-height:1.5em; margin-top:15px; }
+    @media(max-width:600px) { .account-card { padding:20px; } }
+  </style>
+</head>
+<body class="admin-page">
+<header class="admin-header"><div class="admin-header-inner">
+<div class="admin-header-logo"><img alt="AN:RIEL" src="../../images/logo.png"/></div>
+<div class="admin-header-right">
+<a class="admin-site-button" href="ここにURLを入れる" onclick="return false;" aria-disabled="true" title="リンク準備中">公式サイト ↗</a><span class="admin-header-label">ADMIN</span><button class="logout-button" id="logoutButton" type="button">LOGOUT</button></div>
+</div></header>
+<main class="admin-main"><div class="admin-container">
+<section class="account-card">
+<h1>PASSWORD</h1>
+<p id="accountDescription">アカウント情報を確認中...</p>
+<form hidden="" id="passwordForm">
+<div class="account-field"><label for="currentPassword">現在のパスワード</label><input autocomplete="current-password" id="currentPassword" required="" type="password"/></div>
+<div class="account-field"><label for="newPassword">新しいパスワード（12〜128文字）</label><input autocomplete="new-password" id="newPassword" maxlength="128" minlength="12" required="" type="password"/></div>
+<div class="account-field"><label for="confirmPassword">新しいパスワード（確認）</label><input autocomplete="new-password" id="confirmPassword" maxlength="128" minlength="12" required="" type="password"/></div>
+<p class="account-note">現在のパスワードと異なるものを設定。変更後は再ログインが必要</p>
+<div class="account-actions"><button class="admin-primary-button" id="saveButton" type="submit">パスワードを変更</button><a hidden="" href="../index.html" id="backLink">管理TOPへ戻る</a></div>
+</form>
+<p aria-live="polite" id="accountMessage" role="status"></p>
+</section>
+</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../../js/supabase.js"></script>
+<script>
+    const form = document.getElementById('passwordForm');
+    const description = document.getElementById('accountDescription');
+    const message = document.getElementById('accountMessage');
+    const saveButton = document.getElementById('saveButton');
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+      await supabaseClient.auth.signOut();
+      location.replace('../login.html');
+    });
+    async function initialize() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (!session) { location.replace('../login.html'); return; }
+      const { data, error } = await supabaseClient.functions.invoke('admin-account', { method:'GET' });
+      if (error || !data?.user) { description.textContent = 'アカウント情報の確認失敗。管理者に連絡'; return; }
+      description.textContent = data.user.must_change_password
+        ? '初回ログイン時のパスワード変更が必要'
+        : 'アカウントのパスワード変更';
+      document.getElementById('backLink').hidden = !!data.user.must_change_password;
+      form.hidden = false;
+    }
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      if (newPassword !== confirmPassword) { message.textContent = '確認用パスワードが一致しません'; return; }
+      if (newPassword.length < 12 || newPassword.length > 128) { message.textContent = '新しいパスワードは12〜128文字'; return; }
+      if (currentPassword === newPassword) { message.textContent = '現在とは異なるパスワードを設定'; return; }
+      saveButton.disabled = true;
+      message.textContent = '変更処理中...';
+      try {
+        const { data, error } = await supabaseClient.functions.invoke('admin-account', {
+          method:'POST', body: { current_password:currentPassword, new_password:newPassword }
+        });
+        if (error || !data?.success) {
+          let detail = data?.error || '変更失敗';
+          if (error?.context instanceof Response) {
+            const result = await error.context.json().catch(() => null);
+            detail = result?.error || detail;
+          }
+          message.textContent = detail;
+          return;
+        }
+        form.hidden = true;
+        description.textContent = 'パスワード変更完了';
+        message.textContent = '新しいパスワードで再ログイン';
+        await supabaseClient.auth.signOut();
+        setTimeout(() => location.replace('../login.html'), 1200);
+      } catch (error) {
+        console.error(error);
+        message.textContent = '通信エラー。再試行';
+      } finally {
+        saveButton.disabled = false;
+      }
+    });
+    initialize().catch((error) => { console.error(error); description.textContent='通信エラー'; });
+  </script>
+</body>
+</html>

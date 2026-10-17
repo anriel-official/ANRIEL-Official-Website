@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="AN:RIEL（アンリエル）の公式グッズ情報です。"
+  >
+
+  <title>GOODS | AN:RIEL</title>
+
+
+  <!-- 共通CSS -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <!-- GOODS専用CSS -->
+  <link
+    rel="stylesheet"
+    href="css/goods.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- ==================================================
+       HEADER
+  =================================================== -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+
+      <!-- LOGO -->
+
+      <a
+        href="top.html"
+        class="header-logo"
+        aria-label="AN:RIEL TOP"
+      >
+
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+
+      </a>
+
+
+
+      <!-- MOBILE MENU BUTTON -->
+
+      <button
+        type="button"
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        aria-controls="globalNav"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+
+
+      <!-- NAVIGATION -->
+
+      <nav
+        class="global-nav"
+        id="globalNav"
+      >
+
+        <a href="top.html">
+          TOP
+        </a>
+
+        <a href="news.html">
+          NEWS
+        </a>
+
+        <a href="about.html">
+          ABOUT
+        </a>
+
+        <a href="talent.html">
+          TALENT
+        </a>
+
+        <a href="schedule.html">
+          SCHEDULE
+        </a>
+
+        <a
+          href="goods.html"
+          class="active"
+        >
+          GOODS
+        </a>
+
+        <a href="audition.html">
+          AUDITION
+        </a>
+
+        <a href="guideline.html">
+          GUIDELINE
+        </a>
+
+        <a href="contact.html">
+          CONTACT
+        </a>
+
+      </nav>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ==================================================
+       MAIN
+  =================================================== -->
+
+  <main class="goods-page">
+
+
+    <!-- ==================================================
+         PAGE HEADER
+    =================================================== -->
+
+    <section class="goods-hero">
+
+      <div class="goods-inner">
+
+        <div class="goods-page-title">
+
+          <p class="goods-page-title-en">
+            GOODS
+          </p>
+
+          <h1>
+            グッズ
+          </h1>
+
+          <p class="goods-page-description">
+            AN:RIELの公式グッズをご紹介します。
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         GOODS CONTENT
+    =================================================== -->
+
+    <section class="goods-content">
+
+      <div class="goods-inner">
+
+
+        <!-- ========================================
+             FILTER
+        ========================================= -->
+
+        <div class="goods-filter-area">
+
+          <div class="goods-filter-heading">
+
+            <h2>
+              FILTER
+            </h2>
+
+            <button
+              type="button"
+              id="goodsFilterReset"
+              class="goods-filter-reset"
+            >
+              RESET
+            </button>
+
+          </div>
+
+
+
+          <div class="goods-filters">
+
+
+            <!-- EVENT -->
+
+            <div class="goods-filter-item">
+
+              <label for="goodsEventFilter">
+                EVENT
+              </label>
+
+              <div class="goods-select-wrapper">
+
+                <select id="goodsEventFilter">
+
+                  <option value="">
+                    ALL
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- TALENT -->
+
+            <div class="goods-filter-item">
+
+              <label for="goodsTalentFilter">
+                TALENT
+              </label>
+
+              <div class="goods-select-wrapper">
+
+                <select id="goodsTalentFilter">
+
+                  <option value="">
+                    ALL
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- GOODS CATEGORY -->
+
+            <div class="goods-filter-item">
+
+              <label for="goodsCategoryFilter">
+                GOODS CATEGORY
+              </label>
+
+              <div class="goods-select-wrapper">
+
+                <select id="goodsCategoryFilter">
+
+                  <option value="">
+                    ALL
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             RESULT INFORMATION
+        ========================================= -->
+
+        <div class="goods-result-header">
+
+          <p
+            id="goodsResultCount"
+            class="goods-result-count"
+          >
+            読み込み中...
+          </p>
+
+        </div>
+
+
+
+        <!-- ========================================
+             GOODS LIST
+        ========================================= -->
+
+        <div
+          id="goodsList"
+          class="goods-grid"
+        >
+
+          <div class="goods-loading">
+
+            <p>
+              GOODSを読み込んでいます...
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             EMPTY
+        ========================================= -->
+
+        <div
+          id="goodsEmpty"
+          class="goods-empty"
+          hidden
+        >
+
+          <p class="goods-empty-title">
+            GOODS NOT FOUND
+          </p>
+
+          <p class="goods-empty-text">
+            条件に一致するグッズがありません。
+          </p>
+
+          <button
+            type="button"
+            id="goodsEmptyReset"
+            class="goods-empty-reset"
+          >
+            絞り込みを解除
+          </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+             ERROR
+        ========================================= -->
+
+        <div
+          id="goodsError"
+          class="goods-error"
+          hidden
+        >
+
+          <p class="goods-error-title">
+            ERROR
+          </p>
+
+          <p class="goods-error-text">
+            GOODSの読み込みに失敗しました。
+          </p>
+
+          <button
+            type="button"
+            id="goodsReloadButton"
+            class="goods-reload-button"
+          >
+            再読み込み
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ==================================================
+       FOOTER
+  =================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+
+
+      <!-- FOOTER LOGO -->
+
+      <a
+        href="top.html"
+        class="footer-logo"
+      >
+
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+
+      </a>
+
+
+
+      <!-- FOOTER NAVIGATION -->
+
+      <nav class="footer-nav">
+
+        <a href="top.html">
+          TOP
+        </a>
+
+        <a href="news.html">
+          NEWS
+        </a>
+
+        <a href="about.html">
+          ABOUT
+        </a>
+
+        <a href="talent.html">
+          TALENT
+        </a>
+
+        <a href="schedule.html">
+          SCHEDULE
+        </a>
+
+        <a href="goods.html">
+          GOODS
+        </a>
+
+        <a href="audition.html">
+          AUDITION
+        </a>
+
+        <a href="guideline.html">
+          GUIDELINE
+        </a>
+
+        <a href="contact.html">
+          CONTACT
+        </a>
+
+      </nav>
+
+
+
+      <!-- ========================================
+           FOOTER SOCIAL
+      ========================================= -->
+
+      <div class="footer-social-area">
+
+        <p class="footer-social-label">
+          FOLLOW / CONTACT
+        </p>
+
+
+        <div class="footer-social">
+
+
+          <!-- X -->
+
+          <a
+            href="https://x.com/ANRIEL_2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              X
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL ACCOUNT
+            </span>
+
+          </a>
+
+
+
+          <!-- YOUTUBE -->
+
+          <a
+            href="https://www.youtube.com/@ANRIEL-2026/videos"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              YOUTUBE
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL CHANNEL
+            </span>
+
+          </a>
+
+
+
+          <!-- MARSHMALLOW -->
+
+          <a
+            href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              MARSHMALLOW
+            </span>
+
+            <span class="footer-social-sub">
+              QUESTION BOX
+            </span>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- COPYRIGHT -->
+
+      <p class="copyright">
+        © 2026 AN:RIEL
+      </p>
+
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- ==================================================
+       SCRIPT
+  =================================================== -->
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- 共通Supabase設定 -->
+  <script src="js/supabase.js"></script>
+
+  <!-- GOODS -->
+  <script src="js/goods.js"></script>
+
+
+
+  <!-- ==================================================
+       MOBILE MENU
+  =================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const menuToggle =
+          document.getElementById(
+            "menuToggle"
+          );
+
+        const globalNav =
+          document.getElementById(
+            "globalNav"
+          );
+
+
+        if (
+          !menuToggle ||
+          !globalNav
+        ) {
+          return;
+        }
+
+
+        menuToggle.addEventListener(
+          "click",
+          () => {
+
+            const opened =
+              globalNav.classList.toggle(
+                "open"
+              );
+
+
+            menuToggle.classList.toggle(
+              "open",
+              opened
+            );
+
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              String(opened)
+            );
+
+          }
+        );
+
+
+        globalNav
+          .querySelectorAll("a")
+          .forEach(
+            (link) => {
+
+              link.addEventListener(
+                "click",
+                () => {
+
+                  globalNav.classList.remove(
+                    "open"
+                  );
+
+                  menuToggle.classList.remove(
+                    "open"
+                  );
+
+                  menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+
+                }
+              );
+
+            }
+          );
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>

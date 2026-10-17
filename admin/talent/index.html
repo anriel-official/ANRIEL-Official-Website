@@ -1,0 +1,4409 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex, nofollow" name="robots"/>
+<title>TALENT管理 | AN:RIEL ADMIN</title>
+<link href="../../css/admin.css" rel="stylesheet"/>
+<style>
+
+.talent-extra-section{border:1px solid #e6e6eb;border-radius:0;padding:22px;margin:22px 0;background:#fff}
+
+.talent-extra-section h3{margin:0 0 12px;font-size:17px}
+
+.talent-extra-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+
+.talent-extra-heading h3{margin:0}
+
+.talent-extra-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) auto;gap:10px;align-items:end;margin:12px 0}
+
+.talent-extra-row.voice{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto}
+
+.talent-extra-row label{display:block;font-size:13px;margin-bottom:5px}
+
+.talent-extra-row input{width:100%;box-sizing:border-box;min-width:0;border-radius:0}
+
+.talent-extra-section button{border-radius:0}
+
+.talent-extra-row audio{width:100%;max-width:330px;margin-top:8px}
+
+@media(max-width:700px){.talent-extra-row,.talent-extra-row.voice{grid-template-columns:1fr}.talent-extra-section{padding:16px}}
+
+
+
+/* TALENT v3: current square admin style, no framed additional sections */
+
+#talentForm .talent-simple-section{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0!important;margin:20px 0!important}
+
+#talentForm .talent-simple-section h3{font-size:15px;margin:0 0 10px}
+
+#talentForm .talent-extra-heading{margin:0 0 12px}
+
+#talentForm .talent-extra-row{margin:10px 0}
+
+#talentForm input,#talentForm select,#talentForm textarea,#talentForm button,#talentForm .image-drop-zone{border-radius:0!important}
+
+
+
+/* TALENT v4: compact single-line controls with existing square styling */
+
+#talentForm .talent-extra-heading{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 8px!important}
+
+#talentForm .talent-extra-heading h3{font-size:16px!important;font-weight:700;margin:0!important;line-height:1.5}
+
+#talentForm .talent-extra-heading .admin-secondary-button{margin:0!important;min-height:32px;padding:5px 12px;flex:none;width:auto!important;border-radius:0!important}
+
+#talentForm .talent-inline-note{font-size:12px;color:#777;line-height:1.6}
+
+#talentForm .talent-extra-row,#talentForm .talent-extra-row.voice{display:grid!important;grid-template-columns:minmax(130px,1fr) minmax(220px,1.7fr) auto!important;align-items:end;gap:10px;margin:8px 0 12px!important}
+
+#talentForm .talent-extra-row>div{min-width:0}
+
+#talentForm .talent-extra-row input{display:block;width:100%;min-width:0;max-width:none;box-sizing:border-box}
+
+#talentForm .talent-extra-row>button{width:auto!important;min-width:58px;align-self:end;margin:0!important;border-radius:0!important}
+
+#talentForm .talent-profile-values>label{font-size:18px!important;font-weight:700!important;line-height:1.5}
+
+#talentForm .talent-profile-values #talentDynamicProfileFields label{font-size:15px!important;font-weight:600}
+
+#talentForm .talent-channel-help{line-height:1.7}
+
+#talentForm .talent-channel-help a{margin-left:5px;text-decoration:underline}
+
+@media(max-width:700px){#talentForm .talent-extra-row,#talentForm .talent-extra-row.voice{grid-template-columns:minmax(0,1fr)!important;gap:8px}#talentForm .talent-extra-row>button{justify-self:start}#talentForm .talent-inline-note{flex-basis:100%}}
+
+
+
+/* TALENT v5: uniform square fields and section headings */
+
+#talentForm .talent-extra-row input[type="text"],
+
+#talentForm .talent-extra-row input[type="url"],
+
+#talentForm .talent-extra-row input[type="file"]{
+
+  display:block!important;width:100%!important;min-width:0!important;
+
+  box-sizing:border-box!important;min-height:45px!important;
+
+  padding:10px 13px!important;border:1px solid #cbd0d8!important;
+
+  border-radius:0!important;background:#fff!important;color:#111!important;
+
+  font:inherit!important;box-shadow:none!important;outline:none!important;
+
+}
+
+#talentForm .talent-extra-row input:focus{border-color:#888!important}
+
+#talentForm .talent-extra-row label{font-size:13px;font-weight:600;line-height:1.5}
+
+#talentForm .talent-extra-row{grid-template-columns:minmax(0,1fr) minmax(0,1.65fr) 60px!important;gap:10px!important}
+
+#talentForm .talent-extra-row>button{min-height:45px!important}
+
+#talentForm .talent-section-title,
+
+#talentForm .talent-profile-values>label,
+
+#talentForm .talent-hashtag-values>label{
+
+  display:block;font-size:18px!important;font-weight:700!important;
+
+  line-height:1.5;margin:20px 0 12px!important;
+
+}
+
+#talentForm .talent-profile-values #talentDynamicProfileFields label,
+
+#talentForm .talent-hashtag-values #talentHashtagFields label{
+
+  font-size:13px!important;font-weight:600!important;
+
+}
+
+@media(max-width:700px){#talentForm .talent-extra-row{grid-template-columns:minmax(0,1fr)!important}}
+
+</style></head>
+<body class="admin-page" data-admin-feature="talent">
+<!-- ==================================================
+
+
+
+       HEADER
+
+
+
+  ================================================== -->
+<header class="admin-header">
+<div class="admin-header-inner">
+<div class="admin-header-logo"><img alt="AN:RIEL" src="../../images/logo.png"/></div>
+<div class="admin-header-right">
+<a class="admin-site-button" href="ここにURLを入れる" onclick="return false;" aria-disabled="true" title="リンク準備中">公式サイト ↗</a>
+
+<span class="admin-header-label">ADMIN</span>
+<button class="logout-button" id="logoutButton" type="button">LOGOUT</button>
+</div>
+</div>
+</header>
+<!-- ==================================================
+
+
+
+       MAIN
+
+
+
+  ================================================== -->
+<main class="admin-main">
+<div class="admin-container">
+<!-- ==================================================
+
+
+
+           TITLE
+
+
+
+      ================================================== -->
+<div class="admin-title-area">
+<h1>
+
+
+
+          TALENT管理
+
+
+
+        </h1>
+</div>
+<!-- ==================================================
+
+
+
+           ADMIN MENU
+
+
+
+      ================================================== -->
+<nav aria-label="管理メニュー" class="admin-tabs">
+<a class="admin-tab" href="../index.html">管理TOP</a>
+<a class="admin-tab" href="../top/index.html">TOP画像管理</a>
+<a class="admin-tab" href="../news/index.html">NEWS管理</a>
+<a class="admin-tab" href="../schedule/index.html">SCHEDULE管理</a>
+<a class="admin-tab" href="../goods/index.html">GOODS管理</a>
+<a aria-current="page" class="admin-tab active" href="../talent/index.html">TALENT管理</a>
+</nav>
+<!-- ==================================================
+
+
+
+           TALENT PANEL
+
+
+
+      ================================================== -->
+<section class="admin-panel active" id="talentPanel">
+<!-- ==================================================
+
+
+
+             PANEL HEADING
+
+
+
+        ================================================== -->
+<div class="panel-heading">
+<div>
+<h2>
+
+
+
+              TALENT管理
+
+
+
+            </h2>
+<p class="panel-description">
+
+
+
+              所属タレントの追加・編集
+
+
+
+            </p>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             TALENT NAVIGATION
+
+
+
+        ================================================== -->
+<div class="news-admin-navigation">
+<button class="news-admin-nav-button active" data-talent-view="list" id="talentListTabButton" type="button">
+
+
+
+            TALENT一覧
+
+
+
+          </button>
+<button class="news-admin-nav-button" data-talent-view="new" id="talentNewTabButton" type="button">
+
+
+
+            TALENT追加
+
+
+
+          </button>
+<button class="news-admin-nav-button" data-talent-view="generation" id="talentGenerationTabButton" type="button">
+
+
+
+            期生管理
+
+
+
+          </button>
+<button class="news-admin-nav-button" data-talent-view="profile-fields" id="talentProfileFieldsTabButton" type="button">
+
+
+
+            プロフィール項目管理
+
+
+
+          </button>
+</div>
+<!-- ==================================================
+
+
+
+             TALENT LIST VIEW
+
+
+
+        ================================================== -->
+<div class="news-admin-view active" id="talentListView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+
+
+                TALENT一覧
+
+
+
+              </h3>
+<p class="news-view-description">
+
+
+
+                登録済みタレントの編集・削除
+
+
+
+              </p>
+</div>
+<button class="admin-secondary-button" id="reloadTalentButton" type="button">
+
+
+
+              再読み込み
+
+
+
+            </button>
+</div>
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+
+
+                  登録TALENT
+
+
+
+                </h3>
+<p class="list-count" id="talentListCount">
+
+
+
+                  読み込み中...
+
+
+
+                </p>
+</div>
+</div>
+<div class="admin-list" id="adminTalentList">
+<p class="loading-text">
+
+
+
+                読み込み中...
+
+
+
+              </p>
+</div>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             TALENT NEW / EDIT VIEW
+
+
+
+        ================================================== -->
+<div class="news-admin-view" id="talentNewView">
+<div class="editor-card" id="talentFormArea">
+<div class="editor-heading">
+<h3 id="talentFormTitle">
+
+
+
+                TALENTを追加
+
+
+
+              </h3>
+<button aria-label="閉じる" class="close-editor-button" id="talentCancelButton" type="button">
+
+
+
+                ×
+
+
+
+              </button>
+</div>
+<form id="talentForm">
+<!-- ==================================================
+
+
+
+                   BASIC
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   GENERATION
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   PROFILE
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   ILLUSTRATOR
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   DYNAMIC PROFILE
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   IMAGES
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   COLOR
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   SNS
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   YOUTUBE AUTO SYNC
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   HASHTAGS
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   PICKUP MOVIE
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   STATUS
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   MESSAGE
+
+
+
+              ================================================== -->
+<!-- ==================================================
+
+
+
+                   ACTIONS
+
+
+
+              ================================================== -->
+<input id="talentId" type="hidden"/><div class="form-group">
+<label for="talentName">
+
+
+
+                  タレント名
+
+
+
+                </label>
+<input id="talentName" placeholder="白瀬はまや" required="" type="text"/>
+</div><div class="form-row">
+<div class="form-group">
+<label for="talentNameEn">
+
+
+
+                    英字名
+
+
+
+                  </label>
+<input id="talentNameEn" placeholder="HAMAYA SHIROSE" type="text"/>
+</div>
+<div class="form-group">
+<label for="talentSlug">
+
+
+
+                    slug
+
+
+
+                  </label>
+<input autocomplete="off" id="talentSlug" placeholder="sirose-hamaya" required="" type="text"/>
+<p class="form-help">
+
+
+
+                    個別TALENTページのURLに使用。<br/>
+
+
+
+                    英数字とハイフンのみ。
+
+
+
+                  </p>
+</div>
+</div><div class="form-row">
+<div class="form-group">
+<label for="talentGeneration">
+
+
+
+                    所属期
+
+
+
+                  </label>
+<select id="talentGeneration" required="">
+<option value="">
+
+
+
+                      選択
+
+
+
+                    </option>
+</select>
+</div>
+
+</div><div class="form-row">
+<div class="form-group">
+<label for="talentXUrl">
+
+
+
+                    X URL
+
+
+
+                  </label>
+<input id="talentXUrl" placeholder="https://x.com/..." type="url"/>
+</div>
+<div class="form-group">
+<label for="talentYoutubeUrl">
+
+
+
+                    YouTube URL
+
+
+
+                  </label>
+<input id="talentYoutubeUrl" placeholder="https://www.youtube.com/@..." type="url"/>
+</div>
+</div><section class="talent-simple-section"><div class="talent-extra-heading"><h3>追加SNS</h3><button class="admin-secondary-button" id="addTalentPlatform" type="button">＋ SNS追加</button><span class="talent-inline-note">Twitch・TikTokなど、複数登録可能</span></div>
+<div id="talentPlatformRows"></div></section><div class="form-row">
+<div class="form-group">
+<label for="talentYoutubeChannelId">
+
+
+
+                    YouTube Channel ID
+
+
+
+                  </label>
+<input id="talentYoutubeChannelId" placeholder="UC..." type="text"/>
+<p class="form-help">SCHEDULEのYouTube自動取得で使用</p>
+<p class="form-help talent-channel-help">取得方法：YouTube Studio → 設定 → チャンネル → 詳細設定 →「チャンネル ID」をコピー。<a href="https://studio.youtube.com/" rel="noopener noreferrer" target="_blank">YouTube Studioを開く ↗</a></p></div>
+<div class="form-group">
+<label for="talentYoutubeHandle">
+
+
+
+                    YouTube Handle
+
+
+
+                  </label>
+<input id="talentYoutubeHandle" placeholder="@SIROSEHAMAYA" type="text"/>
+</div>
+</div><div class="form-group">
+<label for="talentProfile">
+
+
+
+                  プロフィール・紹介文
+
+
+
+                </label>
+<textarea id="talentProfile" placeholder="タレントの紹介文" rows="8"></textarea>
+</div><section class="talent-simple-section"><div class="talent-extra-heading"><h3>サンプルボイス</h3><button class="admin-secondary-button" id="addTalentVoice" type="button">＋ ボイス追加</button><span class="talent-inline-note">MP3 / WAV / OGG / M4A / WebM、1ファイル20MBまで。ファイルは保存時にアップロード。</span></div>
+<div id="talentVoiceRows"></div></section><div class="form-group talent-profile-values">
+<label>
+
+
+
+                  プロフィール項目
+
+
+
+                </label>
+<p class="form-help">
+
+
+
+                  プロフィール項目管理の設定から自動表示
+
+
+
+                </p>
+<div id="talentDynamicProfileFields"></div>
+</div><h3 class="talent-section-title">クリエイター</h3><div class="form-row">
+<div class="form-group">
+<label for="talentIllustratorName">
+
+
+
+                    イラストレーター
+
+
+
+                  </label>
+<input id="talentIllustratorName" placeholder="イラストレーター名" type="text"/>
+</div>
+<div class="form-group">
+<label for="talentIllustratorUrl">
+
+
+
+                    イラストレーターURL
+
+
+
+                  </label>
+<input id="talentIllustratorUrl" placeholder="https://..." type="url"/>
+</div>
+</div>
+<div class="form-row"><div class="form-group"><label for="talentModelerName">Live2Dモデラー</label><input id="talentModelerName" placeholder="モデラー名" type="text"/></div>
+<div class="form-group"><label for="talentModelerUrl">Live2DモデラーURL</label><input id="talentModelerUrl" placeholder="https://..." type="url"/></div></div>
+<div class="form-group talent-hashtag-values">
+<label>
+
+
+
+                  ハッシュタグ
+
+
+
+                </label>
+<p class="form-help">
+
+
+
+                  ハッシュタグ項目管理の設定から自動表示
+
+
+
+                </p>
+<div id="talentHashtagFields"></div>
+</div><h3 class="talent-section-title">ピックアップ動画</h3><div class="form-group">
+<label for="talentPickupVideoTitle">PICKUP動画タイトル</label>
+<input id="talentPickupVideoTitle" placeholder="デビューPV" type="text"/>
+</div><div class="form-group">
+<label for="talentPickupVideoUrl">PICKUP動画URL</label>
+<input id="talentPickupVideoUrl" placeholder="https://www.youtube.com/watch?v=..." type="url"/>
+<p class="form-help">
+
+
+
+                  TALENTページに掲載するYouTube動画を1本設定
+
+
+
+                </p>
+</div><div class="form-group">
+<label>一覧画像</label>
+<div class="news-image-drop-zone" id="talentListImageDropZone" role="button" tabindex="0">
+<p class="news-image-drop-title">
+
+
+
+                    画像をドラッグ＆ドロップ
+
+
+
+                  </p>
+<p class="news-image-drop-sub">
+
+
+
+                    またはクリックして画像を選択
+
+
+
+                  </p>
+<p class="news-image-drop-limit">
+
+
+
+                    JPEG / PNG / WebP・1枚5MBまで
+
+
+
+                  </p>
+</div>
+<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentListImageInput" type="file"/>
+<div class="news-image-list" id="talentListImagePreview"></div>
+</div><div class="form-group">
+<label>ロゴ画像</label>
+<div class="news-image-drop-zone" id="talentLogoImageDropZone" role="button" tabindex="0">
+<p class="news-image-drop-title">
+
+
+
+                    画像をドラッグ＆ドロップ
+
+
+
+                  </p>
+<p class="news-image-drop-sub">
+
+
+
+                    またはクリックして画像を選択
+
+
+
+                  </p>
+<p class="news-image-drop-limit">
+
+
+
+                    JPEG / PNG / WebP・1枚5MBまで
+
+
+
+                  </p>
+</div>
+<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentLogoImageInput" type="file"/>
+<div class="news-image-list" id="talentLogoImagePreview"></div>
+</div><div class="form-group">
+<label>立ち絵画像</label>
+<div class="news-image-drop-zone" id="talentProfileImageDropZone" role="button" tabindex="0">
+<p class="news-image-drop-title">
+
+
+
+                    画像をドラッグ＆ドロップ
+
+
+
+                  </p>
+<p class="news-image-drop-sub">
+
+
+
+                    またはクリックして画像を選択
+
+
+
+                  </p>
+<p class="news-image-drop-limit">
+
+
+
+                    JPEG / PNG / WebP・1枚5MBまで
+
+
+
+                  </p>
+</div>
+<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentProfileImageInput" type="file"/>
+<div class="news-image-list" id="talentProfileImagePreview"></div>
+</div><div class="form-row">
+<div class="form-group" style="display:none">
+<label for="talentMainColor">
+
+
+
+                    メインカラー
+
+
+
+                  </label>
+<input id="talentMainColor" type="color" value="#ffffff"/>
+</div>
+<div class="form-group">
+<label for="talentBackgroundColor">
+
+
+
+                    背景カラー
+
+
+
+                  </label>
+<input id="talentBackgroundColor" type="color" value="#ffffff"/>
+</div>
+<div class="form-group" style="display:none">
+<label for="talentTextColor">
+
+
+
+                    文字カラー
+
+
+
+                  </label>
+<input id="talentTextColor" type="color" value="#222222"/>
+</div>
+</div><div class="form-row">
+<div class="form-group">
+<label for="talentStatus">在籍状況</label>
+<select id="talentStatus">
+<option value="active">
+
+
+
+                      在籍
+
+
+
+                    </option>
+<option value="graduated">
+
+
+
+                      卒業
+
+
+
+                    </option>
+</select>
+</div>
+<div class="form-group checkbox-group">
+<label class="form-label">
+
+
+
+                    公開設定
+
+
+
+                  </label>
+<label class="checkbox-label">
+<input checked="" id="talentPublished" type="checkbox"/>
+<span>
+
+
+
+                      公式サイトに公開
+
+
+
+                    </span>
+</label>
+</div>
+</div><div class="form-row" data-legacy="true" style="display:none">
+<div class="form-group">
+<label for="talentBirthday">
+
+
+
+                    誕生日
+
+
+
+                  </label>
+<input id="talentBirthday" placeholder="4月1日" type="text"/>
+</div>
+<div class="form-group">
+<label for="talentHeight">
+
+
+
+                    身長
+
+
+
+                  </label>
+<input id="talentHeight" placeholder="160cm" type="text"/>
+</div>
+</div><div class="form-row" data-legacy="true" style="display:none">
+<div class="form-group">
+<label for="talentDebutDate">
+
+
+
+                    デビュー日
+
+
+
+                  </label>
+<input id="talentDebutDate" type="date"/>
+</div>
+<div class="form-group">
+<label for="talentFanName">
+
+
+
+                    ファンネーム
+
+
+
+                  </label>
+<input id="talentFanName" placeholder="ファンネーム" type="text"/>
+</div>
+</div><p class="form-message" id="talentFormMessage"></p><div class="editor-actions">
+<button class="admin-primary-button" type="submit">
+
+
+
+                  保存
+
+
+
+                </button>
+<button class="admin-secondary-button" id="talentCancelButtonBottom" type="button">
+
+
+
+                  キャンセル
+
+
+
+                </button>
+</div></form>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             GENERATION VIEW
+
+
+
+        ================================================== -->
+<div class="news-admin-view" id="talentGenerationView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+
+
+                期生管理
+
+
+
+              </h3>
+<p class="news-view-description">
+
+
+
+                0期生・1期生・2期生などの追加・管理
+
+
+
+              </p>
+</div>
+<button class="admin-primary-button small" id="openGenerationFormButton" type="button">
+
+
+
+              ＋ 期生追加
+
+
+
+            </button>
+</div>
+<!-- GENERATION FORM -->
+<div class="editor-card hidden" id="generationFormArea">
+<div class="editor-heading">
+<h3 id="generationFormTitle">
+
+
+
+                期生追加
+
+
+
+              </h3>
+<button aria-label="閉じる" class="close-editor-button" id="cancelGenerationButton" type="button">
+
+
+
+                ×
+
+
+
+              </button>
+</div>
+<input type="hidden" id="generationEditId" value=""/>
+<div class="form-row">
+<div class="form-group">
+<label for="newGenerationName">
+
+
+
+                  期生名
+
+
+
+                </label>
+<input id="newGenerationName" placeholder="0期生" type="text"/>
+</div>
+<div class="form-group">
+<label for="newGenerationColumnsCount">
+
+
+
+                  1行の表示人数
+
+
+
+                </label>
+<select id="newGenerationColumnsCount"><option value="1">1人</option><option value="2">2人</option><option value="3" selected>3人</option><option value="4">4人</option><option value="5">5人</option></select>
+</div>
+</div>
+<div class="form-group checkbox-group">
+<label class="checkbox-label">
+<input checked="" id="newGenerationPublished" type="checkbox"/>
+<span>
+
+
+
+                  公開
+
+
+
+                </span>
+</label>
+</div>
+<p class="form-message" id="generationFormMessage"></p>
+<div class="editor-actions">
+<button class="admin-primary-button" id="addGenerationButton" type="button">
+
+
+
+                追加
+
+
+
+              </button>
+<button class="admin-secondary-button" id="cancelGenerationButtonBottom" type="button">
+
+
+
+                キャンセル
+
+
+
+              </button>
+</div>
+</div>
+<!-- GENERATION LIST -->
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<h3>
+
+
+
+                  登録済み期生
+
+
+
+                </h3>
+<p class="list-count" id="generationListCount">
+
+
+
+                  読み込み中...
+
+
+
+                </p>
+</div>
+<button class="reload-button" id="reloadGenerationButton" type="button">
+
+
+
+                再読み込み
+
+
+
+              </button>
+</div>
+<div class="admin-category-list" id="adminGenerationList">
+<p class="loading-text">
+
+
+
+                読み込み中...
+
+
+
+              </p>
+</div>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+             PROFILE FIELD MANAGEMENT VIEW
+
+
+
+        ================================================== -->
+<div class="news-admin-view" id="talentProfileFieldsView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+
+
+                プロフィール項目管理
+
+
+
+              </h3>
+<p class="news-view-description">
+
+
+
+                TALENTプロフィールの入力項目設定
+
+
+
+              </p>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+               FIELD NAVIGATION
+
+
+
+          ================================================== -->
+<div class="news-admin-navigation">
+<button class="news-admin-nav-button active" id="profileFieldTabButton" type="button">
+
+
+
+              プロフィール項目
+
+
+
+            </button>
+<button class="news-admin-nav-button" id="hashtagFieldTabButton" type="button">
+
+
+
+              ハッシュタグ項目
+
+
+
+            </button>
+</div>
+<!-- ==================================================
+
+
+
+               PROFILE FIELD VIEW
+
+
+
+          ================================================== -->
+<div class="news-admin-view active" id="profileFieldView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+
+
+                  プロフィール項目
+
+
+
+                </h3>
+<p class="news-view-description">
+
+
+
+                  項目の追加・編集・並び替え
+
+
+
+                </p>
+</div>
+<button class="admin-primary-button small" id="openProfileFieldFormButton" type="button">
+
+
+
+                ＋ 項目追加
+
+
+
+              </button>
+</div>
+<!-- PROFILE FIELD FORM -->
+<div class="editor-card hidden" id="profileFieldFormArea">
+<div class="editor-heading">
+<h3 id="profileFieldFormTitle">
+
+
+
+                  プロフィール項目追加
+
+
+
+                </h3>
+<button aria-label="閉じる" class="close-editor-button" id="cancelProfileFieldButton" type="button">
+
+
+
+                  ×
+
+
+
+                </button>
+</div>
+<input id="profileFieldId" type="hidden"/>
+<div class="form-group">
+<label for="profileFieldLabel">
+
+
+
+                  項目名
+
+
+
+                </label>
+<input id="profileFieldLabel" placeholder="例：好きなゲーム" type="text"/>
+</div>
+<p class="form-message" id="profileFieldFormMessage"></p>
+<div class="editor-actions">
+<button class="admin-primary-button" id="saveProfileFieldButton" type="button">
+
+
+
+                  保存
+
+
+
+                </button>
+<button class="admin-secondary-button" id="cancelProfileFieldButtonBottom" type="button">
+
+
+
+                  キャンセル
+
+
+
+                </button>
+</div>
+</div>
+<!-- PROFILE FIELD LIST -->
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<p class="list-count" id="profileFieldListCount">
+
+
+
+                    読み込み中...
+
+
+
+                  </p>
+</div>
+<button class="reload-button" id="reloadProfileFieldsButton" type="button">
+
+
+
+                  再読み込み
+
+
+
+                </button>
+</div>
+<div class="admin-category-list" id="profileFieldList">
+<p class="loading-text">
+
+
+
+                  読み込み中...
+
+
+
+                </p>
+</div>
+</div>
+</div>
+<!-- ==================================================
+
+
+
+               HASHTAG FIELD VIEW
+
+
+
+          ================================================== -->
+<div class="news-admin-view" id="hashtagFieldView">
+<div class="news-view-heading">
+<div>
+<h3>
+
+
+
+                  ハッシュタグ項目
+
+
+
+                </h3>
+<p class="news-view-description">
+
+
+
+                  TALENTごとのハッシュタグ入力欄を管理
+
+
+
+                </p>
+</div>
+<button class="admin-primary-button small" id="openHashtagFieldFormButton" type="button">
+
+
+
+                ＋ 項目追加
+
+
+
+              </button>
+</div>
+<!-- HASHTAG FIELD FORM -->
+<div class="editor-card hidden" id="hashtagFieldFormArea">
+<div class="editor-heading">
+<h3 id="hashtagFieldFormTitle">
+
+
+
+                  ハッシュタグ項目追加
+
+
+
+                </h3>
+<button aria-label="閉じる" class="close-editor-button" id="cancelHashtagFieldButton" type="button">
+
+
+
+                  ×
+
+
+
+                </button>
+</div>
+<input id="hashtagFieldId" type="hidden"/>
+<div class="form-group">
+<label for="hashtagFieldLabel">
+
+
+
+                  項目名
+
+
+
+                </label>
+<input id="hashtagFieldLabel" placeholder="例：総合タグ" type="text"/>
+</div>
+<p class="form-message" id="hashtagFieldFormMessage"></p>
+<div class="editor-actions">
+<button class="admin-primary-button" id="saveHashtagFieldButton" type="button">
+
+
+
+                  保存
+
+
+
+                </button>
+<button class="admin-secondary-button" id="cancelHashtagFieldButtonBottom" type="button">
+
+
+
+                  キャンセル
+
+
+
+                </button>
+</div>
+</div>
+<!-- HASHTAG FIELD LIST -->
+<div class="admin-list-card">
+<div class="list-heading">
+<div>
+<p class="list-count" id="hashtagFieldListCount">
+
+
+
+                    読み込み中...
+
+
+
+                  </p>
+</div>
+<button class="reload-button" id="reloadHashtagFieldsButton" type="button">
+
+
+
+                  再読み込み
+
+
+
+                </button>
+</div>
+<div class="admin-category-list" id="hashtagFieldList">
+<p class="loading-text">
+
+
+
+                  読み込み中...
+
+
+
+                </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- ==================================================
+
+
+
+       SCRIPTS
+
+
+
+  ================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase.js"></script>
+<script src="../js/admin-navigation.js"></script>
+<script src="../js/talent-admin.js"></script>
+<!-- ==================================================
+
+
+
+       TALENT PAGE CONTROL
+
+
+
+  ================================================== -->
+<script>
+
+
+
+
+
+
+
+    const talentListTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "talentListTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentNewTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "talentNewTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentGenerationTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "talentGenerationTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentProfileFieldsTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "talentProfileFieldsTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    const talentListView =
+
+
+
+      document.getElementById(
+
+
+
+        "talentListView"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentNewView =
+
+
+
+      document.getElementById(
+
+
+
+        "talentNewView"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentGenerationView =
+
+
+
+      document.getElementById(
+
+
+
+        "talentGenerationView"
+
+
+
+      );
+
+
+
+
+
+
+
+    const talentProfileFieldsView =
+
+
+
+      document.getElementById(
+
+
+
+        "talentProfileFieldsView"
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ==================================================
+
+
+
+    // SWITCH TALENT VIEW
+
+
+
+    // ==================================================
+
+
+
+
+
+
+
+    async function switchTalentView(
+
+
+
+      view,
+
+
+
+      options = {}
+
+
+
+    ) {
+
+
+
+
+
+
+
+      const {
+
+
+
+        resetForm = true,
+
+
+
+        updateUrl = true
+
+
+
+      } = options;
+
+
+
+
+
+
+
+
+
+
+
+      /*
+
+
+
+       * VIEW RESET
+
+
+
+       */
+
+
+
+
+
+
+
+      talentListView
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentNewView
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentGenerationView
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentProfileFieldsView
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+      /*
+
+
+
+       * TAB RESET
+
+
+
+       */
+
+
+
+
+
+
+
+      talentListTabButton
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentNewTabButton
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentGenerationTabButton
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentProfileFieldsTabButton
+
+
+
+        ?.classList.remove(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // ==================================================
+
+
+
+      // NEW
+
+
+
+      // ==================================================
+
+
+
+
+
+
+
+      if (
+
+
+
+        view === "new"
+
+
+
+      ) {
+
+
+
+
+
+
+
+        talentNewView
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+        talentNewTabButton
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentGenerations ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          await loadTalentGenerations();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /*
+
+
+
+         * 動的プロフィール項目
+
+
+
+         */
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentProfileInputs ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          await loadTalentProfileInputs();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /*
+
+
+
+         * 動的ハッシュタグ項目
+
+
+
+         */
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentHashtagInputs ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          await loadTalentHashtagInputs();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          resetForm &&
+
+
+
+          typeof openNewTalentForm ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          openNewTalentForm();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          updateUrl
+
+
+
+        ) {
+
+
+
+
+
+
+
+          history.replaceState(
+
+
+
+            null,
+
+
+
+            "",
+
+
+
+            "?view=new"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // ==================================================
+
+
+
+      // GENERATION
+
+
+
+      // ==================================================
+
+
+
+
+
+
+
+      if (
+
+
+
+        view === "generation"
+
+
+
+      ) {
+
+
+
+
+
+
+
+        talentGenerationView
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+        talentGenerationTabButton
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentGenerations ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          await loadTalentGenerations();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          updateUrl
+
+
+
+        ) {
+
+
+
+
+
+
+
+          history.replaceState(
+
+
+
+            null,
+
+
+
+            "",
+
+
+
+            "?view=generation"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // ==================================================
+
+
+
+      // PROFILE FIELDS
+
+
+
+      // ==================================================
+
+
+
+
+
+
+
+      if (
+
+
+
+        view === "profile-fields"
+
+
+
+      ) {
+
+
+
+
+
+
+
+        talentProfileFieldsView
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+        talentProfileFieldsTabButton
+
+
+
+          ?.classList.add(
+
+
+
+            "active"
+
+
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof initializeTalentFieldManagement ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          await initializeTalentFieldManagement();
+
+
+
+
+
+
+
+        } else {
+
+
+
+
+
+
+
+          if (
+
+
+
+            typeof loadTalentProfileFields ===
+
+
+
+            "function"
+
+
+
+          ) {
+
+
+
+
+
+
+
+            await loadTalentProfileFields();
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+          if (
+
+
+
+            typeof loadTalentHashtagFields ===
+
+
+
+            "function"
+
+
+
+          ) {
+
+
+
+
+
+
+
+            await loadTalentHashtagFields();
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        if (
+
+
+
+          updateUrl
+
+
+
+        ) {
+
+
+
+
+
+
+
+          history.replaceState(
+
+
+
+            null,
+
+
+
+            "",
+
+
+
+            "?view=profile-fields"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+        return;
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // ==================================================
+
+
+
+      // LIST
+
+
+
+      // ==================================================
+
+
+
+
+
+
+
+      talentListView
+
+
+
+        ?.classList.add(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+      talentListTabButton
+
+
+
+        ?.classList.add(
+
+
+
+          "active"
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+      if (
+
+
+
+        typeof loadTalents ===
+
+
+
+        "function"
+
+
+
+      ) {
+
+
+
+
+
+
+
+        await loadTalents();
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+      if (
+
+
+
+        updateUrl
+
+
+
+      ) {
+
+
+
+
+
+
+
+        history.replaceState(
+
+
+
+          null,
+
+
+
+          "",
+
+
+
+          "?view=list"
+
+
+
+        );
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    window.switchTalentView =
+
+
+
+      switchTalentView;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ==================================================
+
+
+
+    // TAB EVENTS
+
+
+
+    // ==================================================
+
+
+
+
+
+
+
+    talentListTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        async () => {
+
+
+
+
+
+
+
+          await switchTalentView(
+
+
+
+            "list"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    talentNewTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        async () => {
+
+
+
+
+
+
+
+          await switchTalentView(
+
+
+
+            "new"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    talentGenerationTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        async () => {
+
+
+
+
+
+
+
+          await switchTalentView(
+
+
+
+            "generation"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    talentProfileFieldsTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        async () => {
+
+
+
+
+
+
+
+          await switchTalentView(
+
+
+
+            "profile-fields"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ==================================================
+
+
+
+    // PROFILE FIELD INNER VIEW
+
+
+
+    // ==================================================
+
+
+
+
+
+
+
+    const profileFieldTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "profileFieldTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+    const hashtagFieldTabButton =
+
+
+
+      document.getElementById(
+
+
+
+        "hashtagFieldTabButton"
+
+
+
+      );
+
+
+
+
+
+
+
+    const profileFieldView =
+
+
+
+      document.getElementById(
+
+
+
+        "profileFieldView"
+
+
+
+      );
+
+
+
+
+
+
+
+    const hashtagFieldView =
+
+
+
+      document.getElementById(
+
+
+
+        "hashtagFieldView"
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    function switchTalentFieldView(
+
+
+
+      view
+
+
+
+    ) {
+
+
+
+
+
+
+
+      const isProfile =
+
+
+
+        view === "profile";
+
+
+
+
+
+
+
+
+
+
+
+      profileFieldView
+
+
+
+        ?.classList.toggle(
+
+
+
+          "active",
+
+
+
+          isProfile
+
+
+
+        );
+
+
+
+
+
+
+
+      hashtagFieldView
+
+
+
+        ?.classList.toggle(
+
+
+
+          "active",
+
+
+
+          !isProfile
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+      profileFieldTabButton
+
+
+
+        ?.classList.toggle(
+
+
+
+          "active",
+
+
+
+          isProfile
+
+
+
+        );
+
+
+
+
+
+
+
+      hashtagFieldTabButton
+
+
+
+        ?.classList.toggle(
+
+
+
+          "active",
+
+
+
+          !isProfile
+
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+
+      if (
+
+
+
+        isProfile
+
+
+
+      ) {
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentProfileFields ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          loadTalentProfileFields();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+      } else {
+
+
+
+
+
+
+
+        if (
+
+
+
+          typeof loadTalentHashtagFields ===
+
+
+
+          "function"
+
+
+
+        ) {
+
+
+
+
+
+
+
+          loadTalentHashtagFields();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    window.switchTalentFieldView =
+
+
+
+      switchTalentFieldView;
+
+
+
+
+
+
+
+
+
+
+
+    profileFieldTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        () => {
+
+
+
+
+
+
+
+          switchTalentFieldView(
+
+
+
+            "profile"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+    hashtagFieldTabButton
+
+
+
+      ?.addEventListener(
+
+
+
+        "click",
+
+
+
+        () => {
+
+
+
+
+
+
+
+          switchTalentFieldView(
+
+
+
+            "hashtag"
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+      );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ==================================================
+
+
+
+    // AUTH + INITIAL VIEW
+
+
+
+    // ==================================================
+
+
+
+
+
+
+
+    document.addEventListener(
+
+
+
+      "DOMContentLoaded",
+
+
+
+      async () => {
+
+
+
+
+
+
+
+        try {
+
+
+
+
+
+
+
+          const {
+
+
+
+            data,
+
+
+
+            error
+
+
+
+          } =
+
+
+
+            await supabaseClient
+
+
+
+              .auth
+
+
+
+              .getSession();
+
+
+
+
+
+
+
+
+
+
+
+          if (
+
+
+
+            error
+
+
+
+          ) {
+
+
+
+
+
+
+
+            console.error(
+
+
+
+              "セッション確認エラー:",
+
+
+
+              error
+
+
+
+            );
+
+
+
+
+
+
+
+            return;
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+          if (
+
+
+
+            !data.session
+
+
+
+          ) {
+
+
+
+
+
+
+
+            window.location.replace(
+
+
+
+              "../login.html"
+
+
+
+            );
+
+
+
+
+
+
+
+            return;
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          /*
+
+
+
+           * URL PARAMETER
+
+
+
+           */
+
+
+
+
+
+
+
+          const params =
+
+
+
+            new URLSearchParams(
+
+
+
+              window.location.search
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+          let initialView =
+
+
+
+            params.get(
+
+
+
+              "view"
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+          const initialAction =
+
+
+
+            params.get(
+
+
+
+              "action"
+
+
+
+            );
+
+
+
+
+
+
+
+
+
+
+
+          if (
+
+
+
+            initialAction === "new"
+
+
+
+          ) {
+
+
+
+
+
+
+
+            initialView =
+
+
+
+              "new";
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+          if (
+
+
+
+            ![
+
+
+
+              "list",
+
+
+
+              "new",
+
+
+
+              "generation",
+
+
+
+              "profile-fields"
+
+
+
+            ].includes(
+
+
+
+              initialView
+
+
+
+            )
+
+
+
+          ) {
+
+
+
+
+
+
+
+            initialView =
+
+
+
+              "list";
+
+
+
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+          await switchTalentView(
+
+
+
+            initialView,
+
+
+
+            {
+
+
+
+              resetForm: true,
+
+
+
+              updateUrl: false
+
+
+
+            }
+
+
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+        } catch (
+
+
+
+          error
+
+
+
+        ) {
+
+
+
+
+
+
+
+          console.error(
+
+
+
+            "TALENT管理画面初期化エラー:",
+
+
+
+            error
+
+
+
+          );
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ==================================================
+
+
+
+        // LOGOUT
+
+
+
+        // ==================================================
+
+
+
+
+
+
+
+        const logoutButton =
+
+
+
+          document.getElementById(
+
+
+
+            "logoutButton"
+
+
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+        logoutButton
+
+
+
+          ?.addEventListener(
+
+
+
+            "click",
+
+
+
+            async () => {
+
+
+
+
+
+
+
+              try {
+
+
+
+
+
+
+
+                const {
+
+
+
+                  error
+
+
+
+                } =
+
+
+
+                  await supabaseClient
+
+
+
+                    .auth
+
+
+
+                    .signOut();
+
+
+
+
+
+
+
+
+
+
+
+                if (
+
+
+
+                  error
+
+
+
+                ) {
+
+
+
+
+
+
+
+                  console.error(
+
+
+
+                    "ログアウトエラー:",
+
+
+
+                    error
+
+
+
+                  );
+
+
+
+
+
+
+
+                  alert(
+
+
+
+                    "ログアウトに失敗"
+
+
+
+                  );
+
+
+
+
+
+
+
+                  return;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+                window.location.replace(
+
+
+
+                  "../login.html"
+
+
+
+                );
+
+
+
+
+
+
+
+
+
+
+
+              } catch (
+
+
+
+                error
+
+
+
+              ) {
+
+
+
+
+
+
+
+                console.error(
+
+
+
+                  "ログアウトエラー:",
+
+
+
+                  error
+
+
+
+                );
+
+
+
+
+
+
+
+                alert(
+
+
+
+                  "ログアウトに失敗"
+
+
+
+                );
+
+
+
+
+
+
+
+              }
+
+
+
+
+
+
+
+            }
+
+
+
+          );
+
+
+
+
+
+
+
+      }
+
+
+
+    );
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
