@@ -948,6 +948,7 @@ async function uploadTalentImage(
 
   }
 
+  file = await window.ANRIELImageOptimizer.optimize(file, 'talent');
   const extension =
 
     file.name

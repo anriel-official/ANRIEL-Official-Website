@@ -1654,7 +1654,7 @@ async function uploadNewsImages(
 
     for (
 
-      const file of fileList
+      let file of fileList
 
     ) {
 
@@ -1682,6 +1682,7 @@ async function uploadNewsImages(
 
       }
 
+      file = await window.ANRIELImageOptimizer.optimize(file, 'news');
       const filePath =
 
         createNewsImageFileName(

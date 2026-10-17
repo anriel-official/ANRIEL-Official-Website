@@ -501,6 +501,7 @@
     file
   ) {
 
+    file = await window.ANRIELImageOptimizer.optimize(file, 'top');
     const storagePath =
       createStorageFilePath(
         file

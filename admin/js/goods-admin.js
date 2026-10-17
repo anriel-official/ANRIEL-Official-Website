@@ -1461,6 +1461,7 @@ async function uploadGoodsImage(
     );
     pendingGoodsImagePath = "";
   }
+  file = await window.ANRIELImageOptimizer.optimize(file, 'goods');
   const path =
     createGoodsImageFileName(
       file

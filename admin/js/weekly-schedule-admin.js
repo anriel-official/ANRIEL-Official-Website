@@ -37,6 +37,7 @@
       let image_url = saved?.image_url || null, image_path = saved?.image_path || null;
       let uploadedPath = null;
       if (selected) {
+        selected = await window.ANRIELImageOptimizer.optimize(selected, 'weekly');
         const ext = { 'image/jpeg':'jpg', 'image/png':'png', 'image/webp':'webp', 'image/gif':'gif' }[selected.type];
         uploadedPath = `weekly-schedule/${Date.now()}-${crypto.randomUUID()}.${ext}`;
         const result = await supabaseClient.storage.from(bucket).upload(uploadedPath, selected, {contentType:selected.type,upsert:false});

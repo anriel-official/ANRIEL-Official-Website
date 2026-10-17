@@ -1122,6 +1122,7 @@ async function uploadScheduleImage(
 
   try {
 
+    file = await window.ANRIELImageOptimizer.optimize(file, 'schedule');
     const path =
       createScheduleImagePath(
         file
