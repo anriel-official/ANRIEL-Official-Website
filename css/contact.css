@@ -54,3 +54,5 @@
   .contact-form { gap: 24px; }
   .contact-field textarea { min-height: 180px; }
 }
+
+.contact-turnstile { min-height: 65px; display: flex; align-items: center; }

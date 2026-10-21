@@ -69,6 +69,7 @@
               <label for="contactWebsite">ウェブサイト</label>
               <input id="contactWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
+            <div class="contact-turnstile"><div class="cf-turnstile" data-sitekey="0x4AAAAAAFfHNGk8FZ1E3VbJ" data-theme="auto"></div></div>
             <p class="contact-privacy">ご入力いただいた情報は、お問い合わせへの対応に使用します。</p>
             <p id="contactResult" class="contact-result" role="status" aria-live="polite"></p>
             <button id="contactSubmit" class="contact-submit" type="submit">送信する <span aria-hidden="true">↗</span></button>
@@ -106,6 +107,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="js/contact.js"></script>
 </body>
 </html>

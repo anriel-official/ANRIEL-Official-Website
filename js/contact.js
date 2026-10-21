@@ -25,10 +25,16 @@
       category: String(data.get("category") || "").trim(),
       message: String(data.get("message") || "").trim(),
       website: String(data.get("website") || ""),
+      turnstileToken: String(data.get("cf-turnstile-response") || ""),
     };
 
     if (!payload.name || !payload.email || !payload.category || !payload.message) {
       showResult("必須項目を入力してください。", false);
+      return;
+    }
+
+    if (!payload.turnstileToken) {
+      showResult("ボット認証が完了していません。認証後に再度送信してください。", false);
       return;
     }
 
@@ -51,10 +57,12 @@
         throw new Error(typeof body.error === "string" ? body.error : "送信できませんでした。時間をおいて再度お試しください。");
       }
       form.reset();
+      window.turnstile?.reset();
       showResult("お問い合わせを受け付けました。", true);
     } catch (error) {
       console.error("CONTACT送信エラー:", error);
       showResult(error instanceof Error ? error.message : "送信に失敗しました。", false);
+      window.turnstile?.reset();
     } finally {
       button.disabled = false;
       button.innerHTML = '送信する <span aria-hidden="true">↗</span>';
