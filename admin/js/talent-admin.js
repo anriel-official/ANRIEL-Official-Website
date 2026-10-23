@@ -2580,6 +2580,9 @@ async function saveTalent(event) {
 
         null,
 
+      // Channel ID登録済みのタレントはYouTube自動取得を有効化。
+      youtube_sync_enabled: Boolean(talentYoutubeChannelId?.value.trim()),
+
       youtube_handle:
 
         talentYoutubeHandle
