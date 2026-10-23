@@ -1,89 +1,220 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AN:RIEL 1期生VTuberオーディション。未来は、予定調和じゃない。">
-  <meta name="theme-color" content="#f5f6f8">
-  <title>1期生オーディション | AN:RIEL</title>
-  <link rel="stylesheet" href="css/audition.css">
-  <script src="js/audition.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AN:RIEL オーディション情報。現在、応募受付は行っておりません。">
+  <title>AUDITION | AN:RIEL Official Website</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .audition-closed { min-height: calc(100svh - 82px); padding: 150px 24px 100px; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .audition-closed-inner { width: min(100%, 800px); }
+    .audition-closed-label { font-family: Montserrat, sans-serif; font-size: clamp(34px, 7vw, 68px); font-weight: 800; letter-spacing: .13em; line-height: 1.3; }
+    .audition-closed-line { width: 48px; height: 2px; margin: 30px auto 36px; background: #111; }
+    .audition-closed-message { font-size: clamp(14px, 2.4vw, 18px); font-weight: 600; letter-spacing: .06em; line-height: 2.2; }
+    @media(max-width: 600px) { .audition-closed { padding: 130px 22px 75px; } .audition-closed-line { margin: 25px auto 30px; } }
+  </style>
 </head>
 <body>
-  <header class="site-topbar" id="top">
-    <a class="wordmark" href="#top" aria-label="AN:RIEL オーディション トップ">
-      <img src="images/logo.png" alt="AN:RIEL">
-      <span>1ST GENERATION / AUDITION</span>
-    </a>
-    <nav class="desktop-nav" aria-label="ページ内ナビゲーション">
-      <a href="#concept">CONCEPT</a><a href="#member">MEMBER</a><a href="#audition">AUDITION</a><a href="#flow">FLOW</a>
-    </nav>
-    <div class="header-actions">
-      <a class="official-link" href="https://anriel-official.github.io/anriel-Audition/">公式サイト <span aria-hidden="true">↗</span></a>
-      <a class="header-entry" href="#entry">ENTRY <span aria-hidden="true">→</span></a>
-      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
+<header class="site-header">
+
+    <div class="header-inner">
+
+      <a
+        href="top.html"
+        class="header-logo"
+      >
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+      </a>
+
+
+      <nav
+        class="global-nav"
+        id="globalNav"
+      >
+
+        <a href="top.html">TOP</a>
+
+        <a href="news.html">NEWS</a>
+
+        <a href="about.html">ABOUT</a>
+
+        <a href="talent.html">TALENT</a>
+
+        <a href="schedule.html">SCHEDULE</a>
+
+        <a href="goods.html">GOODS</a>
+
+        <a href="audition.html">AUDITION</a>
+
+        <a href="guideline.html">GUIDELINE</a>
+
+        <a href="contact.html">CONTACT</a>
+
+      </nav>
+
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="メニューを開く"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
     </div>
-    <nav class="mobile-menu" id="mobile-menu" aria-label="モバイルナビゲーション" hidden>
-      <a href="#concept">CONCEPT</a><a href="#member">MEMBER</a><a href="#audition">AUDITION</a><a href="#flow">FLOW</a><a href="#entry">ENTRY</a>
-    </nav>
+
   </header>
+<main class="audition-closed">
+  <section class="audition-closed-inner" aria-labelledby="audition-title">
+    <h1 class="audition-closed-label" id="audition-title">AUDITION</h1>
+    <div class="audition-closed-line" aria-hidden="true"></div>
+    <p class="audition-closed-message">現在、オーディションの応募受付は行っておりません。</p>
+  </section>
+</main>
+<footer class="site-footer">
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-art" aria-hidden="true"><div class="hero-art-panel panel-one"></div><div class="hero-art-panel panel-two"></div><div class="hero-art-panel panel-three"></div><span class="art-outline"></span><span class="art-coordinate">35° 39′ / AN:RIEL</span></div>
-      <div class="wrap hero-inner">
-        <p class="eyebrow"><span class="eyebrow-line"></span> AN:RIEL / 1ST GENERATION AUDITION</p>
-        <h1 id="hero-title">未来は、<br><em>予定調和</em>じゃない<span class="hero-period">。</span></h1>
-        <div class="hero-subrow"><p class="hero-lead">まだ知らない才能が、<br>まだ知らない未来をつくる。</p><div class="hero-stamp">NEW PLAYER.<br>NEW STORY.<br>NEW WORLD.<br>AND YOU.</div></div>
-        <a class="primary-link" href="#entry"><span>ENTRY <small>応募案内を見る</small></span><span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="hero-side" aria-hidden="true">THE FUTURE IS UNWRITTEN.</div>
-      <div class="hero-bottom"><span>01 / 06</span><a href="#concept">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
-    </section>
+    <div class="footer-inner">
 
-    <section class="section concept" id="concept" aria-labelledby="concept-title">
-      <div class="wrap">
-        <div class="section-heading"><span class="section-number">02</span><p class="section-label">CONCEPT <small>コンセプト</small></p></div>
-        <div class="concept-grid"><h2 id="concept-title">0からつくる、<br><em>新しい物語。</em></h2><div class="concept-copy"><p class="concept-intro">好きなことを、もっと自由に。</p><p>未来は、最初から決まっているものじゃない。</p><p>一人ひとりの個性を大切にし、新しい挑戦を応援する。AN:RIELは、タレントそれぞれが自分らしい活動を形にしていける場所を目指しています。</p><p>まだ出会っていない仲間と、想像もしていなかった未来へ。</p></div></div>
-        <div class="values"><div><span>01</span><strong>INDIVIDUALITY</strong><small>個性を、大切に。</small></div><div><span>02</span><strong>CHALLENGE</strong><small>挑戦を、次の一歩に。</small></div><div><span>03</span><strong>TOGETHER</strong><small>ともにつくる、未来。</small></div></div>
-      </div>
-    </section>
 
-    <section class="section member" id="member" aria-labelledby="member-title">
-      <div class="wrap">
-        <div class="section-heading"><span class="section-number">03</span><p class="section-label">MEMBER <small>所属メンバー</small></p></div>
-        <div class="split-title"><h2 id="member-title">すでに始まっている、<br>物語がある。</h2><p>AN:RIEL 0期生のメンバーたち。<br>それぞれの表現が、次の未来へつながっていく。</p></div>
-        <div class="member-panel"><div class="member-placeholder"><span>AN:RIEL / TALENT</span><strong>0TH GENERATION</strong><small>MEMBER VISUAL — 画像差し替え予定</small></div><span class="member-corner">001 — TALENT</span></div>
-        <a class="underlined-link" href="talent.html">0期生を見る <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+      <!-- FOOTER LOGO -->
 
-    <section class="section audition" id="audition" aria-labelledby="audition-title">
-      <div class="wrap">
-        <div class="section-heading"><span class="section-number">04</span><p class="section-label">REQUIREMENTS <small>募集要項</small></p></div>
-        <div class="split-title"><h2 id="audition-title">新しい仲間を、<br>募集します。</h2><p>経験や数字だけではなく、<br>あなたの個性とこれからの可能性を大切に。</p></div>
-        <div class="info-table">
-          <div><h3><span>01</span> 募集内容</h3><p>AN:RIEL 1期生 VTuberタレント</p></div>
-          <div><h3><span>02</span> 応募対象</h3><p>配信未経験の方・現在個人で活動しているVTuberの方</p></div>
-          <div><h3><span>03</span> 応募資格</h3><p>18歳以上（高校生不可）<br>継続的にVTuber活動に取り組める方<br>運営・所属メンバーとのコミュニケーションを大切にできる方</p></div>
-          <div><h3><span>04</span> 活動条件</h3><p>月30時間以上・週3回以上の配信活動ができる方<br>配信に必要なPC・インターネット環境を準備できる、または準備について相談できる方</p></div>
-          <div><h3><span>05</span> 応募形態</h3><p>活動経験の有無を問わず応募可能。<br>現在の活動名・モデル・SNSなどの継続は、権利関係を確認したうえで個別に相談。</p></div>
-          <div><h3><span>06</span> 応募期間</h3><p>詳細発表までお待ちください</p></div>
+      <a
+        href="top.html"
+        class="footer-logo"
+      >
+        <img
+          src="images/logo.png"
+          alt="AN:RIEL"
+        >
+      </a>
+
+
+
+      <!-- FOOTER NAVIGATION -->
+
+      <nav class="footer-nav">
+
+        <a href="top.html">TOP</a>
+
+        <a href="news.html">NEWS</a>
+
+        <a href="about.html">ABOUT</a>
+
+        <a href="talent.html">TALENT</a>
+
+        <a href="schedule.html">SCHEDULE</a>
+
+        <a href="goods.html">GOODS</a>
+
+        <a href="audition.html">AUDITION</a>
+
+        <a href="guideline.html">GUIDELINE</a>
+
+        <a href="contact.html">CONTACT</a>
+
+      </nav>
+
+
+
+      <!-- =========================
+           FOOTER SOCIAL
+      ========================== -->
+
+      <div class="footer-social-area">
+
+        <p class="footer-social-label">
+          FOLLOW / CONTACT
+        </p>
+
+
+        <div class="footer-social">
+
+
+          <!-- X -->
+
+          <a
+            href="https://x.com/ANRIEL_2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              X
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL ACCOUNT
+            </span>
+
+          </a>
+
+
+
+          <!-- YOUTUBE -->
+
+          <a
+            href="https://www.youtube.com/@ANRIEL-2026/videos"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              YOUTUBE
+            </span>
+
+            <span class="footer-social-sub">
+              OFFICIAL CHANNEL
+            </span>
+
+          </a>
+
+
+
+          <!-- MARSHMALLOW -->
+
+          <a
+            href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-link"
+          >
+
+            <span class="footer-social-name">
+              MARSHMALLOW
+            </span>
+
+            <span class="footer-social-sub">
+              QUESTION BOX
+            </span>
+
+          </a>
+
+
         </div>
-        <p class="fine-print">※ 応募資格・活動条件は前回の0期生オーディションを参考にした1期生向けの暫定案。正式な募集要項は公開前に確定。前回の「魂あり・女性限定」条件は1期生に適用するか未確定のため掲載していません。</p>
+
       </div>
-    </section>
 
-    <section class="section flow" id="flow" aria-labelledby="flow-title">
-      <div class="wrap"><div class="section-heading"><span class="section-number">05</span><p class="section-label">FLOW <small>選考フロー</small></p></div><h2 id="flow-title">選考の流れ。</h2>
-        <div class="flow-grid"><div><span>01</span><h3>応募・書類選考</h3><p>応募フォームから必要事項を送信。応募内容・提出資料をもとに選考。</p></div><div><span>02</span><h3>一次面談</h3><p>通過者へ個別に連絡し、オンライン面談などを実施。</p></div><div><span>03</span><h3>最終選考</h3><p>活動方針などを確認し、所属について最終案内。</p></div></div>
-        <p class="fine-print">※ 前回の選考フローを参考にした暫定案。連絡時期などは正式発表時に案内。</p>
-      </div>
-    </section>
 
-    <section class="entry" id="entry" aria-labelledby="entry-title"><div class="entry-art" aria-hidden="true"></div><div class="wrap entry-inner"><div class="section-heading"><span class="section-number">06</span><p class="section-label">ENTRY <small>応募案内</small></p></div><p class="entry-english">THE FUTURE IS UNWRITTEN.</p><h2 id="entry-title">次は、<br><em>あなたと。</em></h2><div class="entry-bottom"><p class="entry-desc">まだ知らない未来へ。<br>その一歩を、ここから。</p><div class="entry-action"><span class="entry-disabled" aria-disabled="true">ENTRY — COMING SOON <span aria-hidden="true">↗</span></span><p class="fine-print">応募フォーム公開後にリンクを設置</p></div></div></div></section>
-  </main>
 
-  <footer class="footer"><div class="wrap"><div class="footer-upper"><div class="footer-brand"><img src="images/logo.png" alt="AN:RIEL"><span>1ST GENERATION AUDITION</span></div><a class="underlined-link" href="https://anriel-official.github.io/anriel-Audition/">AN:RIEL公式サイトはこちら <span aria-hidden="true">↗</span></a></div><div class="socials"><a href="https://x.com/ANRIEL_2026" target="_blank" rel="noopener noreferrer"><strong>X</strong><span>OFFICIAL ACCOUNT ↗</span></a><a href="https://www.youtube.com/@ANRIEL-2026/videos" target="_blank" rel="noopener noreferrer"><strong>YOUTUBE</strong><span>OFFICIAL CHANNEL ↗</span></a><a href="https://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy" target="_blank" rel="noopener noreferrer"><strong>MARSHMALLOW</strong><span>QUESTION BOX ↗</span></a></div><div class="footer-bottom"><span>© 2026 AN:RIEL</span><a href="#top">BACK TO TOP ↑</a></div></div></footer>
+      <!-- COPYRIGHT -->
+
+      <p class="copyright">
+        © 2026 AN:RIEL
+      </p>
+
+
+    </div>
+
+  </footer>
+<script src="js/main.js"></script>
 </body>
 </html>
