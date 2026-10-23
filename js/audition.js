@@ -22,7 +22,7 @@
     window.addEventListener('resize', () => { if (window.innerWidth > 850) closeMenu(); });
   }
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const targets = document.querySelectorAll('.section-heading, .concept-grid, .values > div, .split-title, .member-panel, .underlined-link, .info-table > div, .flow h2, .flow-grid > div, .entry-english, .entry h2, .entry-bottom, .socials a');
+  const targets = document.querySelectorAll('.section-heading, .concept-grid, .values > div, .split-title, .member-panel, .underlined-link, .info-table > div, .flow h2, .flow-grid > div, .faq-item, .faq-contact, .entry-english, .entry h2, .entry-bottom, .socials a');
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
