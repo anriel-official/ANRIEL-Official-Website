@@ -93,19 +93,19 @@ async function loadUpcomingTalentSchedules(talent) {
   const empty = $('talentScheduleEmpty');
   if (!list) return;
   try {
-    const {data, error} = await supabaseClient.from('schedules').select('*').limit(500);
+    const {data, error} = await supabaseClient.from('schedules').select('*').eq('published', true).order('stream_date', {ascending:true}).order('start_time', {ascending:true});
     if (error) throw error;
     const today = new Date();
-    const localToday = [today.getFullYear(), String(today.getMonth()+1).padStart(2,'0'), String(today.getDate()).padStart(2,'0')].join('-');
+    const localToday = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Tokyo', year:'numeric', month:'2-digit', day:'2-digit'}).format(today);
     const normalized = (data || []).filter(s => {
       if (s.published === false || s.is_published === false) return false;
-      // Different schedule schemas may identify the talent by ID or by name.
+      // 新旧SCHEDULEデータのID・表示名を照合する。
+      // 古い登録データではIDが一致しなくても表示名が一致する場合がある。
       const id = s.talent_id ?? s.talent_uuid;
-      if (id != null && String(id) !== String(talent.id)) return false;
-      if (id == null) {
-        const name = s.talent_name ?? s.talent ?? s.member_name;
-        if (!name || String(name).trim() !== String(talent.name).trim()) return false;
-      }
+      const name = s.talent ?? s.talent_name ?? s.member_name;
+      const idMatches = id != null && String(id) === String(talent.id);
+      const nameMatches = name != null && String(name).trim() === String(talent.name).trim();
+      if (!idMatches && !nameMatches) return false;
       return true;
     }).map(s => {
       const raw = s.stream_date ?? s.date ?? s.schedule_date ?? s.scheduled_date ?? s.scheduled_at ?? s.start_at ?? s.start_date;
