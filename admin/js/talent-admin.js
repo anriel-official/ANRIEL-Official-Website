@@ -468,6 +468,8 @@ function normalizeTalentSlug(value) {
 
     .toLowerCase()
 
+    .replace(/[‐‑‒–—―ー－−]/g, "-")
+
     .replace(/\s+/g, "-")
 
     .replace(/[^a-z0-9-]/g, "")
@@ -2759,8 +2761,10 @@ async function saveTalent(event) {
 
     await loadTalents();
 
-    // 保存後も編集画面を保持。画面の切替・リセットは明示操作のみ。
-    if (talentId) talentId.value = String(savedTalentId);
+    // 保存成功時は新規作成・編集ともにタレント一覧へ戻る。
+    if (typeof window.switchTalentView === "function") {
+      await window.switchTalentView("list");
+    }
 
   } catch (error) {
 
@@ -3740,49 +3744,29 @@ document
 
 // ==================================================
 
-talentSlug
-
-  ?.addEventListener(
-
-    "input",
-
-    () => {
-
-      const position =
-
-        talentSlug
-
-          .selectionStart;
-
-      talentSlug.value =
-
-        normalizeTalentSlug(
-
-          talentSlug.value
-
-        );
-
-      try {
-
-        talentSlug
-
-          .setSelectionRange(
-
-            position,
-
-            position
-
-          );
-
-      } catch (_) {
-
-        // ignore
-
-      }
-
-    }
-
-  );
+// IME変換中は入力値を書き換えず、ハイフンを入力できるようにする。
+let talentSlugComposing = false;
+talentSlug?.addEventListener("compositionstart", () => {
+  talentSlugComposing = true;
+});
+talentSlug?.addEventListener("compositionend", () => {
+  talentSlugComposing = false;
+  talentSlug.value = normalizeTalentSlug(talentSlug.value);
+});
+talentSlug?.addEventListener("input", (event) => {
+  if (talentSlugComposing || event.isComposing) return;
+  const oldValue = talentSlug.value;
+  const position = talentSlug.selectionStart ?? oldValue.length;
+  const normalized = normalizeTalentSlug(oldValue);
+  if (normalized === oldValue) return;
+  const beforeCursor = normalizeTalentSlug(oldValue.slice(0, position)).length;
+  talentSlug.value = normalized;
+  try {
+    talentSlug.setSelectionRange(beforeCursor, beforeCursor);
+  } catch (_) {
+    // ignore
+  }
+});
 
 // ==================================================
 
