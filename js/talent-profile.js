@@ -108,7 +108,7 @@ async function loadUpcomingTalentSchedules(talent) {
       }
       return true;
     }).map(s => {
-      const raw = s.date ?? s.schedule_date ?? s.scheduled_date ?? s.scheduled_at ?? s.start_at ?? s.start_date;
+      const raw = s.stream_date ?? s.date ?? s.schedule_date ?? s.scheduled_date ?? s.scheduled_at ?? s.start_at ?? s.start_date;
       const date = typeof raw === 'string' ? raw.slice(0,10) : '';
       const time = s.start_time ?? s.time ?? (typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : '');
       return {...s, _date:date, _time:String(time || '').slice(0,5)};
@@ -118,7 +118,7 @@ async function loadUpcomingTalentSchedules(talent) {
     const selected = nearest ? normalized.filter(s => s._date === nearest) : [];
     list.innerHTML = selected.map(s => {
       const title = escapeHtml(s.title ?? s.stream_title ?? '配信予定');
-      const url = safeUrl(s.stream_url ?? s.youtube_url ?? s.url ?? s.broadcast_url);
+      const url = safeUrl(s.url ?? s.stream_url ?? s.youtube_url ?? s.broadcast_url);
       const dateText = `${escapeHtml(s._date.replaceAll('-','/'))}${s._time ? '　'+escapeHtml(s._time) : ''}`;
       return `<article class="talent-schedule-card"><div class="talent-schedule-date">${dateText}</div><p class="talent-schedule-title">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>` : title}</p></article>`;
     }).join('');
