@@ -3744,28 +3744,18 @@ document
 
 // ==================================================
 
-// IME変換中は入力値を書き換えず、ハイフンを入力できるようにする。
+// 入力中は末尾のハイフンを削除しない（例: "shirase-"）。
+// 正規化は保存時に行うため、入力途中の値を保持する。
 let talentSlugComposing = false;
 talentSlug?.addEventListener("compositionstart", () => {
   talentSlugComposing = true;
 });
 talentSlug?.addEventListener("compositionend", () => {
   talentSlugComposing = false;
-  talentSlug.value = normalizeTalentSlug(talentSlug.value);
 });
 talentSlug?.addEventListener("input", (event) => {
   if (talentSlugComposing || event.isComposing) return;
-  const oldValue = talentSlug.value;
-  const position = talentSlug.selectionStart ?? oldValue.length;
-  const normalized = normalizeTalentSlug(oldValue);
-  if (normalized === oldValue) return;
-  const beforeCursor = normalizeTalentSlug(oldValue.slice(0, position)).length;
-  talentSlug.value = normalized;
-  try {
-    talentSlug.setSelectionRange(beforeCursor, beforeCursor);
-  } catch (_) {
-    // ignore
-  }
+  // 保存時の normalizeTalentSlug が形式を確定する。
 });
 
 // ==================================================
