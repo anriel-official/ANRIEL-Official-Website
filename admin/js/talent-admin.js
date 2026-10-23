@@ -3753,10 +3753,7 @@ talentSlug?.addEventListener("compositionstart", () => {
 talentSlug?.addEventListener("compositionend", () => {
   talentSlugComposing = false;
 });
-talentSlug?.addEventListener("input", (event) => {
-  if (talentSlugComposing || event.isComposing) return;
-  // 保存時の normalizeTalentSlug が形式を確定する。
-});
+
 
 // ==================================================
 
