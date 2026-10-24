@@ -5,4406 +5,882 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="noindex, nofollow" name="robots"/>
-<title>TALENT管理 | AN:RIEL ADMIN</title>
-<link href="../../css/admin.css" rel="stylesheet"/>
+<title>ADMIN | AN:RIEL</title>
+<link href="../css/admin.css" rel="stylesheet"/>
 <style>
 
-.talent-extra-section{border:1px solid #e6e6eb;border-radius:0;padding:22px;margin:22px 0;background:#fff}
+    /* ========================================
 
-.talent-extra-section h3{margin:0 0 12px;font-size:17px}
+       ADMIN TOP
 
-.talent-extra-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+       機能一覧
 
-.talent-extra-heading h3{margin:0}
+    ========================================= */
 
-.talent-extra-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) auto;gap:10px;align-items:end;margin:12px 0}
+    .admin-function-sections {
 
-.talent-extra-row.voice{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) auto}
+      display: flex;
 
-.talent-extra-row label{display:block;font-size:13px;margin-bottom:5px}
+      flex-direction: column;
 
-.talent-extra-row input{width:100%;box-sizing:border-box;min-width:0;border-radius:0}
+      gap: 42px;
 
-.talent-extra-section button{border-radius:0}
+    }
 
-.talent-extra-row audio{width:100%;max-width:330px;margin-top:8px}
+    .admin-function-section {
 
-@media(max-width:700px){.talent-extra-row,.talent-extra-row.voice{grid-template-columns:1fr}.talent-extra-section{padding:16px}}
+      width: 100%;
 
+    }
 
+    /* セクションタイトル */
 
-/* TALENT v3: current square admin style, no framed additional sections */
+    .admin-function-section-header {
 
-#talentForm .talent-simple-section{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0!important;margin:20px 0!important}
+      display: flex;
 
-#talentForm .talent-simple-section h3{font-size:15px;margin:0 0 10px}
+      align-items: center;
 
-#talentForm .talent-extra-heading{margin:0 0 12px}
+      justify-content: space-between;
 
-#talentForm .talent-extra-row{margin:10px 0}
+      margin-bottom: 12px;
 
-#talentForm input,#talentForm select,#talentForm textarea,#talentForm button,#talentForm .image-drop-zone{border-radius:0!important}
+      padding: 0 2px;
 
+    }
 
+    .admin-function-section-title {
 
-/* TALENT v4: compact single-line controls with existing square styling */
+      margin: 0;
 
-#talentForm .talent-extra-heading{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 8px!important}
+      font-size: 20px;
 
-#talentForm .talent-extra-heading h3{font-size:16px!important;font-weight:700;margin:0!important;line-height:1.5}
+      font-weight: 700;
 
-#talentForm .talent-extra-heading .admin-secondary-button{margin:0!important;min-height:32px;padding:5px 12px;flex:none;width:auto!important;border-radius:0!important}
+      letter-spacing: 0.04em;
 
-#talentForm .talent-inline-note{font-size:12px;color:#777;line-height:1.6}
+    }
 
-#talentForm .talent-extra-row,#talentForm .talent-extra-row.voice{display:grid!important;grid-template-columns:minmax(130px,1fr) minmax(220px,1.7fr) auto!important;align-items:end;gap:10px;margin:8px 0 12px!important}
+    .admin-function-section-link {
 
-#talentForm .talent-extra-row>div{min-width:0}
+      color: #777;
 
-#talentForm .talent-extra-row input{display:block;width:100%;min-width:0;max-width:none;box-sizing:border-box}
+      font-size: 12px;
 
-#talentForm .talent-extra-row>button{width:auto!important;min-width:58px;align-self:end;margin:0!important;border-radius:0!important}
+      text-decoration: none;
 
-#talentForm .talent-profile-values>label{font-size:18px!important;font-weight:700!important;line-height:1.5}
+      transition:
 
-#talentForm .talent-profile-values #talentDynamicProfileFields label{font-size:15px!important;font-weight:600}
+        color 0.2s ease;
 
-#talentForm .talent-channel-help{line-height:1.7}
+    }
 
-#talentForm .talent-channel-help a{margin-left:5px;text-decoration:underline}
+    .admin-function-section-link:hover {
 
-@media(max-width:700px){#talentForm .talent-extra-row,#talentForm .talent-extra-row.voice{grid-template-columns:minmax(0,1fr)!important;gap:8px}#talentForm .talent-extra-row>button{justify-self:start}#talentForm .talent-inline-note{flex-basis:100%}}
+      color: #111;
 
+    }
 
+    /* 一覧本体 */
 
-/* TALENT v5: uniform square fields and section headings */
+    .admin-function-list {
 
-#talentForm .talent-extra-row input[type="text"],
+      overflow: hidden;
 
-#talentForm .talent-extra-row input[type="url"],
+      background: #fff;
 
-#talentForm .talent-extra-row input[type="file"]{
+      border: 1px solid #e4e5e8;
 
-  display:block!important;width:100%!important;min-width:0!important;
+      border-radius: 10px;
 
-  box-sizing:border-box!important;min-height:45px!important;
+    }
 
-  padding:10px 13px!important;border:1px solid #cbd0d8!important;
+    /* 各機能 */
 
-  border-radius:0!important;background:#fff!important;color:#111!important;
+    .admin-function-item {
 
-  font:inherit!important;box-shadow:none!important;outline:none!important;
+      display: grid;
 
-}
+      grid-template-columns:
 
-#talentForm .talent-extra-row input:focus{border-color:#888!important}
+        minmax(150px, 210px)
 
-#talentForm .talent-extra-row label{font-size:13px;font-weight:600;line-height:1.5}
+        1fr
 
-#talentForm .talent-extra-row{grid-template-columns:minmax(0,1fr) minmax(0,1.65fr) 60px!important;gap:10px!important}
+        30px;
 
-#talentForm .talent-extra-row>button{min-height:45px!important}
+      align-items: center;
 
-#talentForm .talent-section-title,
+      gap: 24px;
 
-#talentForm .talent-profile-values>label,
+      min-height: 82px;
 
-#talentForm .talent-hashtag-values>label{
+      padding:
 
-  display:block;font-size:18px!important;font-weight:700!important;
+        18px
 
-  line-height:1.5;margin:20px 0 12px!important;
+        22px;
 
-}
+      color: #111;
 
-#talentForm .talent-profile-values #talentDynamicProfileFields label,
+      text-decoration: none;
 
-#talentForm .talent-hashtag-values #talentHashtagFields label{
+      border-bottom:
 
-  font-size:13px!important;font-weight:600!important;
+        1px solid #ececef;
 
-}
+      transition:
 
-@media(max-width:700px){#talentForm .talent-extra-row{grid-template-columns:minmax(0,1fr)!important}}
+        background 0.18s ease,
 
-</style></head>
-<body class="admin-page" data-admin-feature="talent">
-<!-- ==================================================
+        padding-left 0.18s ease;
 
+    }
 
+    .admin-function-item:last-child {
+
+      border-bottom: none;
+
+    }
+
+    .admin-function-item:hover {
+
+      background: #f8f8f9;
+
+      padding-left: 26px;
+
+    }
+
+    /* 機能名 */
+
+    .admin-function-name {
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.02em;
+
+    }
+
+    /* 説明 */
+
+    .admin-function-description {
+
+      color: #777;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+    }
+
+    /* 矢印 */
+
+    .admin-function-arrow {
+
+      color: #999;
+
+      font-size: 18px;
+
+      text-align: right;
+
+      transition:
+
+        transform 0.18s ease,
+
+        color 0.18s ease;
+
+    }
+
+    .admin-function-item:hover
+
+    .admin-function-arrow {
+
+      color: #111;
+
+      transform:
+
+        translateX(3px);
+
+    }
+
+    /* ========================================
+
+       RESPONSIVE
+
+    ========================================= */
+
+    @media (max-width: 700px) {
+
+      .admin-function-sections {
+
+        gap: 32px;
+
+      }
+
+      .admin-function-item {
+
+        grid-template-columns:
+
+          1fr
+
+          24px;
+
+        gap:
+
+          6px
+
+          14px;
+
+        min-height: auto;
+
+        padding:
+
+          17px
+
+          18px;
+
+      }
+
+      .admin-function-item:hover {
+
+        padding-left: 18px;
+
+      }
+
+      .admin-function-name {
+
+        grid-column: 1;
+
+        grid-row: 1;
+
+        font-size: 14px;
+
+      }
+
+      .admin-function-description {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        font-size: 12px;
+
+      }
+
+      .admin-function-arrow {
+
+        grid-column: 2;
+
+        grid-row:
+
+          1 / 3;
+
+        align-self: center;
+
+      }
+
+    }
+    /* 認証・権限確認が完了するまで管理機能を非表示 */
+    body:not(.admin-access-ready) .admin-main { display: none; }
+    .admin-access-message { max-width: 680px; margin: 60px auto; padding: 24px; text-align: center; color: #444; }
+    .admin-function-section[hidden], .admin-tab[hidden] { display: none !important; }
+</style>
+</head>
+<body class="admin-page" data-admin-feature="home">
+<!-- ========================================
 
        HEADER
 
-
-
-  ================================================== -->
+  ========================================= -->
 <header class="admin-header">
 <div class="admin-header-inner">
-<div class="admin-header-logo"><img alt="AN:RIEL" src="../../images/logo.png"/></div>
+<div class="admin-header-logo">
+<img alt="AN:RIEL" src="../images/logo.png"/>
+</div>
 <div class="admin-header-right">
 <a class="admin-site-button" href="https://anriel-official.github.io/ANRIEL-Official-Website/top.html" target="_blank" rel="noopener noreferrer">公式サイト ↗</a>
+<span class="admin-header-label">
 
-<span class="admin-header-label">ADMIN</span>
-<button class="logout-button" id="logoutButton" type="button">LOGOUT</button>
+          ADMIN
+
+        </span>
+<button class="logout-button" id="logoutButton" type="button">
+
+          LOGOUT
+
+        </button>
 </div>
 </div>
 </header>
-<!-- ==================================================
-
-
+<!-- ========================================
 
        MAIN
 
-
-
-  ================================================== -->
+  ========================================= -->
 <main class="admin-main">
 <div class="admin-container">
-<!-- ==================================================
-
-
-
-           TITLE
-
-
-
-      ================================================== -->
+<!-- TITLE -->
 <div class="admin-title-area">
-<h1>
-
-
-
-          TALENT管理
-
-
-
-        </h1>
+<h1>管理画面</h1>
 </div>
-<!-- ==================================================
-
-
+<!-- ========================================
 
            ADMIN MENU
 
-
-
-      ================================================== -->
+      ========================================= -->
 <nav aria-label="管理メニュー" class="admin-tabs">
-<a class="admin-tab" href="../index.html">管理TOP</a>
-<a class="admin-tab" href="../top/index.html">TOP画像管理</a>
-<a class="admin-tab" href="../news/index.html">NEWS管理</a>
-<a class="admin-tab" href="../schedule/index.html">SCHEDULE管理</a>
-<a class="admin-tab" href="../goods/index.html">GOODS管理</a>
-<a aria-current="page" class="admin-tab active" href="../talent/index.html">TALENT管理</a>
+<a aria-current="page" class="admin-tab active" href="./index.html">
+
+          管理TOP
+
+        </a>
+<a class="admin-tab" data-feature="top" href="./top/index.html">
+
+          TOP画像管理
+
+        </a>
+<a class="admin-tab" data-feature="news" href="./news/index.html">
+
+          NEWS管理
+
+        </a>
+<a class="admin-tab" data-feature="schedule" href="./schedule/index.html">
+
+          SCHEDULE管理
+
+        </a>
+<a class="admin-tab" data-feature="goods" href="./goods/index.html">
+
+          GOODS管理
+
+        </a>
+<a class="admin-tab" data-feature="talent" href="./talent/index.html">TALENT管理</a>
+<a class="admin-tab" data-feature="contact" href="./contact/index.html">CONTACT管理</a><a class="admin-tab" data-feature="permissions" href="./permissions/index.html">権限管理</a>
 </nav>
-<!-- ==================================================
+<!-- ========================================
 
+           PANEL
 
-
-           TALENT PANEL
-
-
-
-      ================================================== -->
-<section class="admin-panel active" id="talentPanel">
-<!-- ==================================================
-
-
-
-             PANEL HEADING
-
-
-
-        ================================================== -->
+      ========================================= -->
+<section class="admin-panel active">
 <div class="panel-heading">
 <div>
-<h2>
-
-
-
-              TALENT管理
-
-
-
-            </h2>
+<h2>管理TOP</h2>
 <p class="panel-description">
 
-
-
-              所属タレントの追加・編集
-
-
+              管理機能一覧
 
             </p>
 </div>
 </div>
-<!-- ==================================================
+<!-- ========================================
 
+             FUNCTION LIST
 
+        ========================================= -->
+<div class="admin-function-sections">
+<!-- ====================================
 
-             TALENT NAVIGATION
+               TOP
 
+          ===================================== -->
+<!-- ====================================
 
+               NEWS
 
-        ================================================== -->
-<div class="news-admin-navigation">
-<button class="news-admin-nav-button active" data-talent-view="list" id="talentListTabButton" type="button">
+          ===================================== -->
+<!-- ====================================
 
+     TALENT
 
+\\===================================== -->
+<!-- ====================================
 
-            TALENT一覧
+               SCHEDULE
 
+          ===================================== -->
+<!-- ====================================
 
+               GOODS
 
-          </button>
-<button class="news-admin-nav-button" data-talent-view="new" id="talentNewTabButton" type="button">
+          ===================================== -->
+<section class="admin-function-section" data-feature="top">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
 
-
-
-            TALENT追加
-
-
-
-          </button>
-<button class="news-admin-nav-button" data-talent-view="generation" id="talentGenerationTabButton" type="button">
-
-
-
-            期生管理
-
-
-
-          </button>
-<button class="news-admin-nav-button" data-talent-view="profile-fields" id="talentProfileFieldsTabButton" type="button">
-
-
-
-            プロフィール項目管理
-
-
-
-          </button>
-</div>
-<!-- ==================================================
-
-
-
-             TALENT LIST VIEW
-
-
-
-        ================================================== -->
-<div class="news-admin-view active" id="talentListView">
-<div class="news-view-heading">
-<div>
-<h3>
-
-
-
-                TALENT一覧
-
-
+                TOP
 
               </h3>
-<p class="news-view-description">
+<a class="admin-function-section-link" href="./top/index.html">
 
+                TOP画像管理を開く →
 
-
-                登録済みタレントの編集・削除
-
-
-
-              </p>
+              </a>
 </div>
-<button class="admin-secondary-button" id="reloadTalentButton" type="button">
+<div class="admin-function-list">
+<!-- TOP IMAGE LIST -->
+<a class="admin-function-item" href="./top/index.html?view=list">
+<div class="admin-function-name">
 
+                  TOP画像一覧
 
+                </div>
+<div class="admin-function-description">
 
-              再読み込み
+                  公式サイトTOPに表示する画像の確認・編集・削除
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-            </button>
+                </div>
+</a>
+<!-- TOP IMAGE ADD -->
+<a class="admin-function-item" href="./top/index.html?view=form&amp;action=new">
+<div class="admin-function-name">
+
+                  TOP画像追加
+
+                </div>
+<div class="admin-function-description">
+
+                  TOPスライダーに新しい画像を追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
 </div>
-<div class="admin-list-card">
-<div class="list-heading">
-<div>
-<h3>
+</section><section class="admin-function-section" data-feature="news">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
 
-
-
-                  登録TALENT
-
-
-
-                </h3>
-<p class="list-count" id="talentListCount">
-
-
-
-                  読み込み中...
-
-
-
-                </p>
-</div>
-</div>
-<div class="admin-list" id="adminTalentList">
-<p class="loading-text">
-
-
-
-                読み込み中...
-
-
-
-              </p>
-</div>
-</div>
-</div>
-<!-- ==================================================
-
-
-
-             TALENT NEW / EDIT VIEW
-
-
-
-        ================================================== -->
-<div class="news-admin-view" id="talentNewView">
-<div class="editor-card" id="talentFormArea">
-<div class="editor-heading">
-<h3 id="talentFormTitle">
-
-
-
-                TALENTを追加
-
-
+                NEWS
 
               </h3>
-<button aria-label="閉じる" class="close-editor-button" id="talentCancelButton" type="button">
+<a class="admin-function-section-link" href="./news/index.html">
 
+                NEWS管理を開く →
 
-
-                ×
-
-
-
-              </button>
+              </a>
 </div>
-<form id="talentForm">
-<!-- ==================================================
+<div class="admin-function-list">
+<!-- NEWS LIST -->
+<a class="admin-function-item" href="./news/index.html?view=list">
+<div class="admin-function-name">
 
+                  NEWS一覧
 
+                </div>
+<div class="admin-function-description">
 
-                   BASIC
+                  登録済みNEWSの確認・編集・削除
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-              ================================================== -->
-<!-- ==================================================
+                </div>
+</a>
+<!-- NEWS ADD -->
+<a class="admin-function-item" href="./news/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
 
+                  NEWS追加
 
+                </div>
+<div class="admin-function-description">
 
-                   GENERATION
+                  新しいNEWSを追加
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-              ================================================== -->
-<!-- ==================================================
+                </div>
+</a>
+<!-- NEWS CATEGORY -->
+<a class="admin-function-item" href="./news/index.html?view=category">
+<div class="admin-function-name">
 
+                  カテゴリー編集
 
+                </div>
+<div class="admin-function-description">
 
-                   PROFILE
+                  NEWSカテゴリーの追加・削除
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   ILLUSTRATOR
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   DYNAMIC PROFILE
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   IMAGES
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   COLOR
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   SNS
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   YOUTUBE AUTO SYNC
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   HASHTAGS
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   PICKUP MOVIE
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   STATUS
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   MESSAGE
-
-
-
-              ================================================== -->
-<!-- ==================================================
-
-
-
-                   ACTIONS
-
-
-
-              ================================================== -->
-<input id="talentId" type="hidden"/><div class="form-group">
-<label for="talentName">
-
-
-
-                  タレント名
-
-
-
-                </label>
-<input id="talentName" placeholder="白瀬はまや" required="" type="text"/>
-</div><div class="form-row">
-<div class="form-group">
-<label for="talentNameEn">
-
-
-
-                    英字名
-
-
-
-                  </label>
-<input id="talentNameEn" placeholder="HAMAYA SHIROSE" type="text"/>
+                </div>
+</a>
 </div>
-<div class="form-group">
-<label for="talentSlug">
+</section><section class="admin-function-section" data-feature="talent">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
 
+      TALENT
 
+    </h3>
+<a class="admin-function-section-link" href="./talent/index.html">
 
-                    slug
+      TALENT管理を開く →
 
-
-
-                  </label>
-<input autocomplete="off" id="talentSlug" placeholder="sirose-hamaya" required="" type="text"/>
-<p class="form-help">
-
-
-
-                    個別TALENTページのURLに使用。<br/>
-
-
-
-                    英数字とハイフンのみ。
-
-
-
-                  </p>
+    </a>
 </div>
-</div><div class="form-row">
-<div class="form-group">
-<label for="talentGeneration">
+<div class="admin-function-list">
+<!-- TALENT LIST -->
+<a class="admin-function-item" href="./talent/index.html?view=list">
+<div class="admin-function-name">
 
+        TALENT一覧
 
+      </div>
+<div class="admin-function-description">
 
-                    所属期
+        登録済みタレントの確認・編集・削除
 
+      </div>
+<div class="admin-function-arrow">
 
+        →
 
-                  </label>
-<select id="talentGeneration" required="">
-<option value="">
+      </div>
+</a>
+<!-- TALENT ADD -->
+<a class="admin-function-item" href="./talent/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
 
+        TALENT追加
 
+      </div>
+<div class="admin-function-description">
 
-                      選択
+        新しいタレントを追加
 
+      </div>
+<div class="admin-function-arrow">
 
+        →
 
-                    </option>
-</select>
+      </div>
+</a>
+<!-- PROFILE FIELD MANAGEMENT -->
+<a class="admin-function-item" href="./talent/index.html?view=profile-fields">
+<div class="admin-function-name">
+
+        プロフィール項目管理
+
+      </div>
+<div class="admin-function-description">
+
+        プロフィール・ハッシュタグの項目設定
+
+      </div>
+<div class="admin-function-arrow">
+
+        →
+
+      </div>
+</a>
 </div>
-
-</div><div class="form-row">
-<div class="form-group">
-<label for="talentXUrl">
-
-
-
-                    X URL
-
-
-
-                  </label>
-<input id="talentXUrl" placeholder="https://x.com/..." type="url"/>
-</div>
-<div class="form-group">
-<label for="talentYoutubeUrl">
-
-
-
-                    YouTube URL
-
-
-
-                  </label>
-<input id="talentYoutubeUrl" placeholder="https://www.youtube.com/@..." type="url"/>
-</div>
-</div><section class="talent-simple-section"><div class="talent-extra-heading"><h3>追加SNS</h3><button class="admin-secondary-button" id="addTalentPlatform" type="button">＋ SNS追加</button><span class="talent-inline-note">Twitch・TikTokなど、複数登録可能</span></div>
-<div id="talentPlatformRows"></div></section><div class="form-row">
-<div class="form-group">
-<label for="talentYoutubeChannelId">
-
-
-
-                    YouTube Channel ID
-
-
-
-                  </label>
-<input id="talentYoutubeChannelId" placeholder="UC..." type="text"/>
-<p class="form-help">SCHEDULEのYouTube自動取得で使用</p>
-<p class="form-help talent-channel-help">取得方法：YouTube Studio → 設定 → チャンネル → 詳細設定 →「チャンネル ID」をコピー。<a href="https://studio.youtube.com/" rel="noopener noreferrer" target="_blank">YouTube Studioを開く ↗</a></p></div>
-<div class="form-group">
-<label for="talentYoutubeHandle">
-
-
-
-                    YouTube Handle
-
-
-
-                  </label>
-<input id="talentYoutubeHandle" placeholder="@SIROSEHAMAYA" type="text"/>
-</div>
-</div><div class="form-group">
-<label for="talentProfile">
-
-
-
-                  プロフィール・紹介文
-
-
-
-                </label>
-<textarea id="talentProfile" placeholder="タレントの紹介文" rows="8"></textarea>
-</div><section class="talent-simple-section"><div class="talent-extra-heading"><h3>サンプルボイス</h3><button class="admin-secondary-button" id="addTalentVoice" type="button">＋ ボイス追加</button><span class="talent-inline-note">MP3 / WAV / OGG / M4A / WebM、1ファイル20MBまで。ファイルは保存時にアップロード。</span></div>
-<div id="talentVoiceRows"></div></section><div class="form-group talent-profile-values">
-<label>
-
-
-
-                  プロフィール項目
-
-
-
-                </label>
-<p class="form-help">
-
-
-
-                  プロフィール項目管理の設定から自動表示
-
-
-
-                </p>
-<div id="talentDynamicProfileFields"></div>
-</div><h3 class="talent-section-title">クリエイター</h3><div class="form-row">
-<div class="form-group">
-<label for="talentIllustratorName">
-
-
-
-                    イラストレーター
-
-
-
-                  </label>
-<input id="talentIllustratorName" placeholder="イラストレーター名" type="text"/>
-</div>
-<div class="form-group">
-<label for="talentIllustratorUrl">
-
-
-
-                    イラストレーターURL
-
-
-
-                  </label>
-<input id="talentIllustratorUrl" placeholder="https://..." type="url"/>
-</div>
-</div>
-<div class="form-row"><div class="form-group"><label for="talentModelerName">Live2Dモデラー</label><input id="talentModelerName" placeholder="モデラー名" type="text"/></div>
-<div class="form-group"><label for="talentModelerUrl">Live2DモデラーURL</label><input id="talentModelerUrl" placeholder="https://..." type="url"/></div></div>
-<div class="form-group talent-hashtag-values">
-<label>
-
-
-
-                  ハッシュタグ
-
-
-
-                </label>
-<p class="form-help">
-
-
-
-                  ハッシュタグ項目管理の設定から自動表示
-
-
-
-                </p>
-<div id="talentHashtagFields"></div>
-</div><h3 class="talent-section-title">ピックアップ動画</h3><div class="form-group">
-<label for="talentPickupVideoTitle">PICKUP動画タイトル</label>
-<input id="talentPickupVideoTitle" placeholder="デビューPV" type="text"/>
-</div><div class="form-group">
-<label for="talentPickupVideoUrl">PICKUP動画URL</label>
-<input id="talentPickupVideoUrl" placeholder="https://www.youtube.com/watch?v=..." type="url"/>
-<p class="form-help">
-
-
-
-                  TALENTページに掲載するYouTube動画を1本設定
-
-
-
-                </p>
-</div><div class="form-group">
-<label>一覧画像</label>
-<div class="news-image-drop-zone" id="talentListImageDropZone" role="button" tabindex="0">
-<p class="news-image-drop-title">
-
-
-
-                    画像をドラッグ＆ドロップ
-
-
-
-                  </p>
-<p class="news-image-drop-sub">
-
-
-
-                    またはクリックして画像を選択
-
-
-
-                  </p>
-<p class="news-image-drop-limit">
-
-
-
-                    JPEG / PNG / WebP・1枚5MBまで
-
-
-
-                  </p>
-</div>
-<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentListImageInput" type="file"/>
-<div class="news-image-list" id="talentListImagePreview"></div>
-</div><div class="form-group">
-<label>ロゴ画像</label>
-<div class="news-image-drop-zone" id="talentLogoImageDropZone" role="button" tabindex="0">
-<p class="news-image-drop-title">
-
-
-
-                    画像をドラッグ＆ドロップ
-
-
-
-                  </p>
-<p class="news-image-drop-sub">
-
-
-
-                    またはクリックして画像を選択
-
-
-
-                  </p>
-<p class="news-image-drop-limit">
-
-
-
-                    JPEG / PNG / WebP・1枚5MBまで
-
-
-
-                  </p>
-</div>
-<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentLogoImageInput" type="file"/>
-<div class="news-image-list" id="talentLogoImagePreview"></div>
-</div><div class="form-group">
-<label>立ち絵画像</label>
-<div class="news-image-drop-zone" id="talentProfileImageDropZone" role="button" tabindex="0">
-<p class="news-image-drop-title">
-
-
-
-                    画像をドラッグ＆ドロップ
-
-
-
-                  </p>
-<p class="news-image-drop-sub">
-
-
-
-                    またはクリックして画像を選択
-
-
-
-                  </p>
-<p class="news-image-drop-limit">
-
-
-
-                    JPEG / PNG / WebP・1枚5MBまで
-
-
-
-                  </p>
-</div>
-<input accept="image/jpeg,image/png,image/webp" hidden="" id="talentProfileImageInput" type="file"/>
-<div class="news-image-list" id="talentProfileImagePreview"></div>
-</div><div class="form-row">
-<div class="form-group" style="display:none">
-<label for="talentMainColor">
-
-
-
-                    メインカラー
-
-
-
-                  </label>
-<input id="talentMainColor" type="color" value="#ffffff"/>
-</div>
-<div class="form-group">
-<label for="talentBackgroundColor">
-
-
-
-                    背景カラー
-
-
-
-                  </label>
-<input id="talentBackgroundColor" type="color" value="#ffffff"/>
-</div>
-<div class="form-group" style="display:none">
-<label for="talentTextColor">
-
-
-
-                    文字カラー
-
-
-
-                  </label>
-<input id="talentTextColor" type="color" value="#222222"/>
-</div>
-</div><div class="form-row">
-<div class="form-group">
-<label for="talentStatus">在籍状況</label>
-<select id="talentStatus">
-<option value="active">
-
-
-
-                      在籍
-
-
-
-                    </option>
-<option value="graduated">
-
-
-
-                      卒業
-
-
-
-                    </option>
-</select>
-</div>
-<div class="form-group checkbox-group">
-<label class="form-label">
-
-
-
-                    公開設定
-
-
-
-                  </label>
-<label class="checkbox-label">
-<input checked="" id="talentPublished" type="checkbox"/>
-<span>
-
-
-
-                      公式サイトに公開
-
-
-
-                    </span>
-</label>
-</div>
-</div><div class="form-row" data-legacy="true" style="display:none">
-<div class="form-group">
-<label for="talentBirthday">
-
-
-
-                    誕生日
-
-
-
-                  </label>
-<input id="talentBirthday" placeholder="4月1日" type="text"/>
-</div>
-<div class="form-group">
-<label for="talentHeight">
-
-
-
-                    身長
-
-
-
-                  </label>
-<input id="talentHeight" placeholder="160cm" type="text"/>
-</div>
-</div><div class="form-row" data-legacy="true" style="display:none">
-<div class="form-group">
-<label for="talentDebutDate">
-
-
-
-                    デビュー日
-
-
-
-                  </label>
-<input id="talentDebutDate" type="date"/>
-</div>
-<div class="form-group">
-<label for="talentFanName">
-
-
-
-                    ファンネーム
-
-
-
-                  </label>
-<input id="talentFanName" placeholder="ファンネーム" type="text"/>
-</div>
-</div><p class="form-message" id="talentFormMessage"></p><div class="editor-actions">
-<button class="admin-primary-button" type="submit">
-
-
-
-                  保存
-
-
-
-                </button>
-<button class="admin-secondary-button" id="talentCancelButtonBottom" type="button">
-
-
-
-                  キャンセル
-
-
-
-                </button>
-</div></form>
-</div>
-</div>
-<!-- ==================================================
-
-
-
-             GENERATION VIEW
-
-
-
-        ================================================== -->
-<div class="news-admin-view" id="talentGenerationView">
-<div class="news-view-heading">
-<div>
-<h3>
-
-
-
-                期生管理
-
-
+</section><section class="admin-function-section" data-feature="schedule">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
+
+                SCHEDULE
 
               </h3>
-<p class="news-view-description">
+<a class="admin-function-section-link" href="./schedule/index.html">
 
+                SCHEDULE管理を開く →
 
-
-                0期生・1期生・2期生などの追加・管理
-
-
-
-              </p>
+              </a>
 </div>
-<button class="admin-primary-button small" id="openGenerationFormButton" type="button">
+<div class="admin-function-list">
+<!-- SCHEDULE LIST -->
+<a class="admin-function-item" href="./schedule/index.html?view=list">
+<div class="admin-function-name">
 
+                  SCHEDULE一覧
 
+                </div>
+<div class="admin-function-description">
 
-              ＋ 期生追加
+                  登録済みスケジュールの確認・編集・削除
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-            </button>
+                </div>
+</a>
+<!-- SCHEDULE ADD -->
+<a class="admin-function-item" href="./schedule/index.html?view=new">
+<div class="admin-function-name">
+
+                  SCHEDULE追加
+
+                </div>
+<div class="admin-function-description">
+
+                  新しいスケジュールを追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- YOUTUBE -->
+<a class="admin-function-item" href="./schedule/index.html?view=youtube">
+<div class="admin-function-name">
+
+                  YouTube連携
+
+                </div>
+<div class="admin-function-description">
+
+                  YouTube自動取得の時刻設定・手動取得
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- YOUTUBE TALENTS -->
+<a class="admin-function-item" href="./schedule/index.html?view=talent">
+<div class="admin-function-name">
+
+                  連携タレント
+
+                </div>
+<div class="admin-function-description">
+
+                  YouTubeからスケジュールを取得するタレントを管理
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- AUTO DELETE -->
+<a class="admin-function-item" href="./schedule/index.html?view=auto-delete">
+<div class="admin-function-name">
+
+                  自動削除設定
+
+                </div>
+<div class="admin-function-description">
+
+                  終了したスケジュールの自動削除設定
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
 </div>
-<!-- GENERATION FORM -->
-<div class="editor-card hidden" id="generationFormArea">
-<div class="editor-heading">
-<h3 id="generationFormTitle">
+</section><section class="admin-function-section" data-feature="goods">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">
 
-
-
-                期生追加
-
-
+                GOODS
 
               </h3>
-<button aria-label="閉じる" class="close-editor-button" id="cancelGenerationButton" type="button">
+<a class="admin-function-section-link" href="./goods/index.html">
 
+                GOODS管理を開く →
 
-
-                ×
-
-
-
-              </button>
+              </a>
 </div>
-<input type="hidden" id="generationEditId" value=""/>
-<div class="form-row">
-<div class="form-group">
-<label for="newGenerationName">
+<div class="admin-function-list">
+<!-- GOODS LIST -->
+<a class="admin-function-item" href="./goods/index.html?view=list">
+<div class="admin-function-name">
 
+                  GOODS一覧
 
+                </div>
+<div class="admin-function-description">
 
-                  期生名
+                  登録済み商品の確認・編集・削除
 
+                </div>
+<div class="admin-function-arrow">
 
+                  →
 
-                </label>
-<input id="newGenerationName" placeholder="0期生" type="text"/>
+                </div>
+</a>
+<!-- GOODS ADD -->
+<a class="admin-function-item" href="./goods/index.html?view=list&amp;action=new">
+<div class="admin-function-name">
+
+                  GOODS追加
+
+                </div>
+<div class="admin-function-description">
+
+                  新しい商品を追加
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
+<!-- GOODS CATEGORY -->
+<a class="admin-function-item" href="./goods/index.html?view=category">
+<div class="admin-function-name">
+
+                  カテゴリー編集
+
+                </div>
+<div class="admin-function-description">
+
+                  グッズカテゴリーの追加・削除
+
+                </div>
+<div class="admin-function-arrow">
+
+                  →
+
+                </div>
+</a>
 </div>
-<div class="form-group">
-<label for="newGenerationColumnsCount">
-
-
-
-                  1行の表示人数
-
-
-
-                </label>
-<select id="newGenerationColumnsCount"><option value="1">1人</option><option value="2">2人</option><option value="3" selected>3人</option><option value="4">4人</option><option value="5">5人</option></select>
+</section><section class="admin-function-section" data-feature="contact">
+<div class="admin-function-section-header"><h3 class="admin-function-section-title">CONTACT管理</h3><a class="admin-function-section-link" href="./contact/index.html">CONTACT管理を開く →</a></div>
+<div class="admin-function-list"><a class="admin-function-item" href="./contact/index.html"><div class="admin-function-name">お問い合わせ一覧</div><div class="admin-function-description">お問い合わせの確認・対応状況の管理</div><div class="admin-function-arrow">→</div></a></div>
+</section><section class="admin-function-section" data-feature="permissions">
+<div class="admin-function-section-header">
+<h3 class="admin-function-section-title">権限管理</h3>
+<a class="admin-function-section-link" href="./permissions/index.html">権限管理を開く →</a>
 </div>
+<div class="admin-function-list">
+<a class="admin-function-item" href="./permissions/index.html">
+<div class="admin-function-name">アカウント管理</div>
+<div class="admin-function-description">管理者・エンジニア・スタッフの権限確認とアカウント管理</div>
+<div class="admin-function-arrow">→</div>
+</a>
 </div>
-<div class="form-group checkbox-group">
-<label class="checkbox-label">
-<input checked="" id="newGenerationPublished" type="checkbox"/>
-<span>
-
-
-
-                  公開
-
-
-
-                </span>
-</label>
-</div>
-<p class="form-message" id="generationFormMessage"></p>
-<div class="editor-actions">
-<button class="admin-primary-button" id="addGenerationButton" type="button">
-
-
-
-                追加
-
-
-
-              </button>
-<button class="admin-secondary-button" id="cancelGenerationButtonBottom" type="button">
-
-
-
-                キャンセル
-
-
-
-              </button>
-</div>
-</div>
-<!-- GENERATION LIST -->
-<div class="admin-list-card">
-<div class="list-heading">
-<div>
-<h3>
-
-
-
-                  登録済み期生
-
-
-
-                </h3>
-<p class="list-count" id="generationListCount">
-
-
-
-                  読み込み中...
-
-
-
-                </p>
-</div>
-<button class="reload-button" id="reloadGenerationButton" type="button">
-
-
-
-                再読み込み
-
-
-
-              </button>
-</div>
-<div class="admin-category-list" id="adminGenerationList">
-<p class="loading-text">
-
-
-
-                読み込み中...
-
-
-
-              </p>
-</div>
-</div>
-</div>
-<!-- ==================================================
-
-
-
-             PROFILE FIELD MANAGEMENT VIEW
-
-
-
-        ================================================== -->
-<div class="news-admin-view" id="talentProfileFieldsView">
-<div class="news-view-heading">
-<div>
-<h3>
-
-
-
-                プロフィール項目管理
-
-
-
-              </h3>
-<p class="news-view-description">
-
-
-
-                TALENTプロフィールの入力項目設定
-
-
-
-              </p>
-</div>
-</div>
-<!-- ==================================================
-
-
-
-               FIELD NAVIGATION
-
-
-
-          ================================================== -->
-<div class="news-admin-navigation">
-<button class="news-admin-nav-button active" id="profileFieldTabButton" type="button">
-
-
-
-              プロフィール項目
-
-
-
-            </button>
-<button class="news-admin-nav-button" id="hashtagFieldTabButton" type="button">
-
-
-
-              ハッシュタグ項目
-
-
-
-            </button>
-</div>
-<!-- ==================================================
-
-
-
-               PROFILE FIELD VIEW
-
-
-
-          ================================================== -->
-<div class="news-admin-view active" id="profileFieldView">
-<div class="news-view-heading">
-<div>
-<h3>
-
-
-
-                  プロフィール項目
-
-
-
-                </h3>
-<p class="news-view-description">
-
-
-
-                  項目の追加・編集・並び替え
-
-
-
-                </p>
-</div>
-<button class="admin-primary-button small" id="openProfileFieldFormButton" type="button">
-
-
-
-                ＋ 項目追加
-
-
-
-              </button>
-</div>
-<!-- PROFILE FIELD FORM -->
-<div class="editor-card hidden" id="profileFieldFormArea">
-<div class="editor-heading">
-<h3 id="profileFieldFormTitle">
-
-
-
-                  プロフィール項目追加
-
-
-
-                </h3>
-<button aria-label="閉じる" class="close-editor-button" id="cancelProfileFieldButton" type="button">
-
-
-
-                  ×
-
-
-
-                </button>
-</div>
-<input id="profileFieldId" type="hidden"/>
-<div class="form-group">
-<label for="profileFieldLabel">
-
-
-
-                  項目名
-
-
-
-                </label>
-<input id="profileFieldLabel" placeholder="例：好きなゲーム" type="text"/>
-</div>
-<p class="form-message" id="profileFieldFormMessage"></p>
-<div class="editor-actions">
-<button class="admin-primary-button" id="saveProfileFieldButton" type="button">
-
-
-
-                  保存
-
-
-
-                </button>
-<button class="admin-secondary-button" id="cancelProfileFieldButtonBottom" type="button">
-
-
-
-                  キャンセル
-
-
-
-                </button>
-</div>
-</div>
-<!-- PROFILE FIELD LIST -->
-<div class="admin-list-card">
-<div class="list-heading">
-<div>
-<p class="list-count" id="profileFieldListCount">
-
-
-
-                    読み込み中...
-
-
-
-                  </p>
-</div>
-<button class="reload-button" id="reloadProfileFieldsButton" type="button">
-
-
-
-                  再読み込み
-
-
-
-                </button>
-</div>
-<div class="admin-category-list" id="profileFieldList">
-<p class="loading-text">
-
-
-
-                  読み込み中...
-
-
-
-                </p>
-</div>
-</div>
-</div>
-<!-- ==================================================
-
-
-
-               HASHTAG FIELD VIEW
-
-
-
-          ================================================== -->
-<div class="news-admin-view" id="hashtagFieldView">
-<div class="news-view-heading">
-<div>
-<h3>
-
-
-
-                  ハッシュタグ項目
-
-
-
-                </h3>
-<p class="news-view-description">
-
-
-
-                  TALENTごとのハッシュタグ入力欄を管理
-
-
-
-                </p>
-</div>
-<button class="admin-primary-button small" id="openHashtagFieldFormButton" type="button">
-
-
-
-                ＋ 項目追加
-
-
-
-              </button>
-</div>
-<!-- HASHTAG FIELD FORM -->
-<div class="editor-card hidden" id="hashtagFieldFormArea">
-<div class="editor-heading">
-<h3 id="hashtagFieldFormTitle">
-
-
-
-                  ハッシュタグ項目追加
-
-
-
-                </h3>
-<button aria-label="閉じる" class="close-editor-button" id="cancelHashtagFieldButton" type="button">
-
-
-
-                  ×
-
-
-
-                </button>
-</div>
-<input id="hashtagFieldId" type="hidden"/>
-<div class="form-group">
-<label for="hashtagFieldLabel">
-
-
-
-                  項目名
-
-
-
-                </label>
-<input id="hashtagFieldLabel" placeholder="例：総合タグ" type="text"/>
-</div>
-<p class="form-message" id="hashtagFieldFormMessage"></p>
-<div class="editor-actions">
-<button class="admin-primary-button" id="saveHashtagFieldButton" type="button">
-
-
-
-                  保存
-
-
-
-                </button>
-<button class="admin-secondary-button" id="cancelHashtagFieldButtonBottom" type="button">
-
-
-
-                  キャンセル
-
-
-
-                </button>
-</div>
-</div>
-<!-- HASHTAG FIELD LIST -->
-<div class="admin-list-card">
-<div class="list-heading">
-<div>
-<p class="list-count" id="hashtagFieldListCount">
-
-
-
-                    読み込み中...
-
-
-
-                  </p>
-</div>
-<button class="reload-button" id="reloadHashtagFieldsButton" type="button">
-
-
-
-                  再読み込み
-
-
-
-                </button>
-</div>
-<div class="admin-category-list" id="hashtagFieldList">
-<p class="loading-text">
-
-
-
-                  読み込み中...
-
-
-
-                </p>
-</div>
-</div>
-</div>
-</div>
+</section></div>
 </section>
 </div>
 </main>
-<!-- ==================================================
+<!-- ========================================
 
+       SUPABASE
 
+  ========================================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="./js/admin-navigation.js"></script>
+<!-- ========================================
 
-       SCRIPTS
+       AUTH
 
-
-
-  ================================================== -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../js/supabase.js"></script>
-<script src="../js/admin-navigation.js"></script>
-<script src="../js/image-optimizer.js"></script>
-<script src="../js/talent-admin.js?v=20261023-2"></script>
-<!-- ==================================================
-
-
-
-       TALENT PAGE CONTROL
-
-
-
-  ================================================== -->
+  ========================================= -->
 <script>
-
-
-
-
-
-
-
-    const talentListTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "talentListTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentNewTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "talentNewTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentGenerationTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "talentGenerationTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentProfileFieldsTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "talentProfileFieldsTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    const talentListView =
-
-
-
-      document.getElementById(
-
-
-
-        "talentListView"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentNewView =
-
-
-
-      document.getElementById(
-
-
-
-        "talentNewView"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentGenerationView =
-
-
-
-      document.getElementById(
-
-
-
-        "talentGenerationView"
-
-
-
-      );
-
-
-
-
-
-
-
-    const talentProfileFieldsView =
-
-
-
-      document.getElementById(
-
-
-
-        "talentProfileFieldsView"
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ==================================================
-
-
-
-    // SWITCH TALENT VIEW
-
-
-
-    // ==================================================
-
-
-
-
-
-
-
-    async function switchTalentView(
-
-
-
-      view,
-
-
-
-      options = {}
-
-
-
-    ) {
-
-
-
-
-
-
-
-      const {
-
-
-
-        resetForm = true,
-
-
-
-        updateUrl = true
-
-
-
-      } = options;
-
-
-
-
-
-
-
-
-
-
-
-      /*
-
-
-
-       * VIEW RESET
-
-
-
-       */
-
-
-
-
-
-
-
-      talentListView
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentNewView
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentGenerationView
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentProfileFieldsView
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-
-
-
-
-      /*
-
-
-
-       * TAB RESET
-
-
-
-       */
-
-
-
-
-
-
-
-      talentListTabButton
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentNewTabButton
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentGenerationTabButton
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentProfileFieldsTabButton
-
-
-
-        ?.classList.remove(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // ==================================================
-
-
-
-      // NEW
-
-
-
-      // ==================================================
-
-
-
-
-
-
-
-      if (
-
-
-
-        view === "new"
-
-
-
-      ) {
-
-
-
-
-
-
-
-        talentNewView
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-        talentNewTabButton
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentGenerations ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          await loadTalentGenerations();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-
-
-         * 動的プロフィール項目
-
-
-
-         */
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentProfileInputs ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          await loadTalentProfileInputs();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-
-
-         * 動的ハッシュタグ項目
-
-
-
-         */
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentHashtagInputs ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          await loadTalentHashtagInputs();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          resetForm &&
-
-
-
-          typeof openNewTalentForm ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          openNewTalentForm();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          updateUrl
-
-
-
-        ) {
-
-
-
-
-
-
-
-          history.replaceState(
-
-
-
-            null,
-
-
-
-            "",
-
-
-
-            "?view=new"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
+  document.addEventListener("DOMContentLoaded", async () => {
+    const logoutButton = document.getElementById("logoutButton");
+    logoutButton?.addEventListener("click", async () => {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) {
+        alert("ログアウトに失敗");
         return;
-
-
-
-
-
-
-
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // ==================================================
-
-
-
-      // GENERATION
-
-
-
-      // ==================================================
-
-
-
-
-
-
-
-      if (
-
-
-
-        view === "generation"
-
-
-
-      ) {
-
-
-
-
-
-
-
-        talentGenerationView
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-        talentGenerationTabButton
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentGenerations ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          await loadTalentGenerations();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          updateUrl
-
-
-
-        ) {
-
-
-
-
-
-
-
-          history.replaceState(
-
-
-
-            null,
-
-
-
-            "",
-
-
-
-            "?view=generation"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-        return;
-
-
-
-
-
-
-
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // ==================================================
-
-
-
-      // PROFILE FIELDS
-
-
-
-      // ==================================================
-
-
-
-
-
-
-
-      if (
-
-
-
-        view === "profile-fields"
-
-
-
-      ) {
-
-
-
-
-
-
-
-        talentProfileFieldsView
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-        talentProfileFieldsTabButton
-
-
-
-          ?.classList.add(
-
-
-
-            "active"
-
-
-
-          );
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof initializeTalentFieldManagement ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          await initializeTalentFieldManagement();
-
-
-
-
-
-
-
-        } else {
-
-
-
-
-
-
-
-          if (
-
-
-
-            typeof loadTalentProfileFields ===
-
-
-
-            "function"
-
-
-
-          ) {
-
-
-
-
-
-
-
-            await loadTalentProfileFields();
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-          if (
-
-
-
-            typeof loadTalentHashtagFields ===
-
-
-
-            "function"
-
-
-
-          ) {
-
-
-
-
-
-
-
-            await loadTalentHashtagFields();
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        if (
-
-
-
-          updateUrl
-
-
-
-        ) {
-
-
-
-
-
-
-
-          history.replaceState(
-
-
-
-            null,
-
-
-
-            "",
-
-
-
-            "?view=profile-fields"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-        return;
-
-
-
-
-
-
-
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // ==================================================
-
-
-
-      // LIST
-
-
-
-      // ==================================================
-
-
-
-
-
-
-
-      talentListView
-
-
-
-        ?.classList.add(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-      talentListTabButton
-
-
-
-        ?.classList.add(
-
-
-
-          "active"
-
-
-
-        );
-
-
-
-
-
-
-
-
-
-
-
-      if (
-
-
-
-        typeof loadTalents ===
-
-
-
-        "function"
-
-
-
-      ) {
-
-
-
-
-
-
-
-        await loadTalents();
-
-
-
-
-
-
-
-      }
-
-
-
-
-
-
-
-
-
-
-
-      if (
-
-
-
-        updateUrl
-
-
-
-      ) {
-
-
-
-
-
-
-
-        history.replaceState(
-
-
-
-          null,
-
-
-
-          "",
-
-
-
-          "?view=list"
-
-
-
-        );
-
-
-
-
-
-
-
-      }
-
-
-
-
-
-
-
+      window.location.replace("./login.html");
+    });
+
+    function showError(message) {
+      document.querySelector(".admin-main")?.remove();
+      const panel = document.createElement("div");
+      panel.className = "admin-access-message";
+      panel.textContent = message;
+      document.body.appendChild(panel);
     }
 
-
-
-
-
-
-
-
-
-
-
-    window.switchTalentView =
-
-
-
-      switchTalentView;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ==================================================
-
-
-
-    // TAB EVENTS
-
-
-
-    // ==================================================
-
-
-
-
-
-
-
-    talentListTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        async () => {
-
-
-
-
-
-
-
-          await switchTalentView(
-
-
-
-            "list"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    talentNewTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        async () => {
-
-
-
-
-
-
-
-          await switchTalentView(
-
-
-
-            "new"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    talentGenerationTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        async () => {
-
-
-
-
-
-
-
-          await switchTalentView(
-
-
-
-            "generation"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    talentProfileFieldsTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        async () => {
-
-
-
-
-
-
-
-          await switchTalentView(
-
-
-
-            "profile-fields"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ==================================================
-
-
-
-    // PROFILE FIELD INNER VIEW
-
-
-
-    // ==================================================
-
-
-
-
-
-
-
-    const profileFieldTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "profileFieldTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-    const hashtagFieldTabButton =
-
-
-
-      document.getElementById(
-
-
-
-        "hashtagFieldTabButton"
-
-
-
-      );
-
-
-
-
-
-
-
-    const profileFieldView =
-
-
-
-      document.getElementById(
-
-
-
-        "profileFieldView"
-
-
-
-      );
-
-
-
-
-
-
-
-    const hashtagFieldView =
-
-
-
-      document.getElementById(
-
-
-
-        "hashtagFieldView"
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    function switchTalentFieldView(
-
-
-
-      view
-
-
-
-    ) {
-
-
-
-
-
-
-
-      const isProfile =
-
-
-
-        view === "profile";
-
-
-
-
-
-
-
-
-
-
-
-      profileFieldView
-
-
-
-        ?.classList.toggle(
-
-
-
-          "active",
-
-
-
-          isProfile
-
-
-
-        );
-
-
-
-
-
-
-
-      hashtagFieldView
-
-
-
-        ?.classList.toggle(
-
-
-
-          "active",
-
-
-
-          !isProfile
-
-
-
-        );
-
-
-
-
-
-
-
-
-
-
-
-      profileFieldTabButton
-
-
-
-        ?.classList.toggle(
-
-
-
-          "active",
-
-
-
-          isProfile
-
-
-
-        );
-
-
-
-
-
-
-
-      hashtagFieldTabButton
-
-
-
-        ?.classList.toggle(
-
-
-
-          "active",
-
-
-
-          !isProfile
-
-
-
-        );
-
-
-
-
-
-
-
-
-
-
-
-      if (
-
-
-
-        isProfile
-
-
-
-      ) {
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentProfileFields ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          loadTalentProfileFields();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-      } else {
-
-
-
-
-
-
-
-        if (
-
-
-
-          typeof loadTalentHashtagFields ===
-
-
-
-          "function"
-
-
-
-        ) {
-
-
-
-
-
-
-
-          loadTalentHashtagFields();
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabaseClient.auth.getSession();
+      if (sessionError || !sessionData.session) {
+        window.location.replace("./login.html");
+        return;
       }
 
+      // サーバー側で本人・管理アカウントの有効状態を確認
+      const { data, error } = await supabaseClient.functions.invoke(
+        "admin-account",
+        { method: "GET" }
+      );
+      if (error || !data?.user || data.user.is_active !== true) {
+        showError("管理アカウントの認証に失敗。管理者に確認してください。");
+        return;
+      }
+      if (data.user.must_change_password === true) {
+        window.location.replace("./account/index.html");
+        return;
+      }
 
+      const role = data.user.role;
+      const isManager = role === "owner" || role === "engineer";
+      if (!isManager && role !== "staff") {
+        showError("管理アカウントの権限なし");
+        return;
+      }
 
+      if (!isManager) {
+        // 同じ機能の権限確認をまとめ、並列実行して待ち時間を削減
+        const elements = [...document.querySelectorAll("[data-feature]")];
+        const featureNames = [...new Set(
+          elements.map((el) => el.getAttribute("data-feature")).filter(Boolean)
+        )].filter((feature) => feature !== "permissions");
 
+        const checks = await Promise.all(featureNames.map(async (feature) => {
+          try {
+            const { data: allowed, error: permissionError } = await supabaseClient.rpc(
+              "has_admin_feature_permission",
+              { requested_feature: feature, requested_action: "view" }
+            );
+            return [feature, !permissionError && allowed === true];
+          } catch (error) {
+            console.error("権限確認エラー:", feature, error);
+            return [feature, false];
+          }
+        }));
+        const permissions = new Map(checks);
+        for (const el of elements) {
+          const feature = el.getAttribute("data-feature");
+          el.hidden = feature === "permissions" || permissions.get(feature) !== true;
+        }
+      }
 
-
-
+      document.body.classList.add("admin-access-ready");
+    } catch (error) {
+      console.error("Admin access check failed:", error);
+      showError("権限確認中にエラーが発生。再読み込みしてください。");
     }
-
-
-
-
-
-
-
-
-
-
-
-    window.switchTalentFieldView =
-
-
-
-      switchTalentFieldView;
-
-
-
-
-
-
-
-
-
-
-
-    profileFieldTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        () => {
-
-
-
-
-
-
-
-          switchTalentFieldView(
-
-
-
-            "profile"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-    hashtagFieldTabButton
-
-
-
-      ?.addEventListener(
-
-
-
-        "click",
-
-
-
-        () => {
-
-
-
-
-
-
-
-          switchTalentFieldView(
-
-
-
-            "hashtag"
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-      );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ==================================================
-
-
-
-    // AUTH + INITIAL VIEW
-
-
-
-    // ==================================================
-
-
-
-
-
-
-
-    document.addEventListener(
-
-
-
-      "DOMContentLoaded",
-
-
-
-      async () => {
-
-
-
-
-
-
-
-        try {
-
-
-
-
-
-
-
-          const {
-
-
-
-            data,
-
-
-
-            error
-
-
-
-          } =
-
-
-
-            await supabaseClient
-
-
-
-              .auth
-
-
-
-              .getSession();
-
-
-
-
-
-
-
-
-
-
-
-          if (
-
-
-
-            error
-
-
-
-          ) {
-
-
-
-
-
-
-
-            console.error(
-
-
-
-              "セッション確認エラー:",
-
-
-
-              error
-
-
-
-            );
-
-
-
-
-
-
-
-            return;
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-          if (
-
-
-
-            !data.session
-
-
-
-          ) {
-
-
-
-
-
-
-
-            window.location.replace(
-
-
-
-              "../login.html"
-
-
-
-            );
-
-
-
-
-
-
-
-            return;
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          /*
-
-
-
-           * URL PARAMETER
-
-
-
-           */
-
-
-
-
-
-
-
-          const params =
-
-
-
-            new URLSearchParams(
-
-
-
-              window.location.search
-
-
-
-            );
-
-
-
-
-
-
-
-
-
-
-
-          let initialView =
-
-
-
-            params.get(
-
-
-
-              "view"
-
-
-
-            );
-
-
-
-
-
-
-
-
-
-
-
-          const initialAction =
-
-
-
-            params.get(
-
-
-
-              "action"
-
-
-
-            );
-
-
-
-
-
-
-
-
-
-
-
-          if (
-
-
-
-            initialAction === "new"
-
-
-
-          ) {
-
-
-
-
-
-
-
-            initialView =
-
-
-
-              "new";
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-          if (
-
-
-
-            ![
-
-
-
-              "list",
-
-
-
-              "new",
-
-
-
-              "generation",
-
-
-
-              "profile-fields"
-
-
-
-            ].includes(
-
-
-
-              initialView
-
-
-
-            )
-
-
-
-          ) {
-
-
-
-
-
-
-
-            initialView =
-
-
-
-              "list";
-
-
-
-
-
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-          await switchTalentView(
-
-
-
-            initialView,
-
-
-
-            {
-
-
-
-              resetForm: true,
-
-
-
-              updateUrl: false
-
-
-
-            }
-
-
-
-          );
-
-
-
-
-
-
-
-
-
-
-
-        } catch (
-
-
-
-          error
-
-
-
-        ) {
-
-
-
-
-
-
-
-          console.error(
-
-
-
-            "TALENT管理画面初期化エラー:",
-
-
-
-            error
-
-
-
-          );
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ==================================================
-
-
-
-        // LOGOUT
-
-
-
-        // ==================================================
-
-
-
-
-
-
-
-        const logoutButton =
-
-
-
-          document.getElementById(
-
-
-
-            "logoutButton"
-
-
-
-          );
-
-
-
-
-
-
-
-
-
-
-
-        logoutButton
-
-
-
-          ?.addEventListener(
-
-
-
-            "click",
-
-
-
-            async () => {
-
-
-
-
-
-
-
-              try {
-
-
-
-
-
-
-
-                const {
-
-
-
-                  error
-
-
-
-                } =
-
-
-
-                  await supabaseClient
-
-
-
-                    .auth
-
-
-
-                    .signOut();
-
-
-
-
-
-
-
-
-
-
-
-                if (
-
-
-
-                  error
-
-
-
-                ) {
-
-
-
-
-
-
-
-                  console.error(
-
-
-
-                    "ログアウトエラー:",
-
-
-
-                    error
-
-
-
-                  );
-
-
-
-
-
-
-
-                  alert(
-
-
-
-                    "ログアウトに失敗"
-
-
-
-                  );
-
-
-
-
-
-
-
-                  return;
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-                window.location.replace(
-
-
-
-                  "../login.html"
-
-
-
-                );
-
-
-
-
-
-
-
-
-
-
-
-              } catch (
-
-
-
-                error
-
-
-
-              ) {
-
-
-
-
-
-
-
-                console.error(
-
-
-
-                  "ログアウトエラー:",
-
-
-
-                  error
-
-
-
-                );
-
-
-
-
-
-
-
-                alert(
-
-
-
-                  "ログアウトに失敗"
-
-
-
-                );
-
-
-
-
-
-
-
-              }
-
-
-
-
-
-
-
-            }
-
-
-
-          );
-
-
-
-
-
-
-
-      }
-
-
-
-    );
-
-
-
-
-
-
-
-  </script>
-</body>
+  });
+</script></body>
 </html>
