@@ -112,14 +112,14 @@ async function loadUpcomingTalentSchedules(talent) {
       const date = typeof raw === 'string' ? raw.slice(0,10) : '';
       const time = s.start_time ?? s.time ?? (typeof raw === 'string' && raw.includes('T') ? raw.slice(11,16) : '');
       return {...s, _date:date, _time:String(time || '').slice(0,5)};
-    }).filter(s => /^\d{4}-\d{2}-\d{2}$/.test(s._date) && s._date >= localToday)
-      .sort((a,b) => (a._date + a._time).localeCompare(b._date + b._time));
-    const nearest = normalized[0]?._date;
-    const selected = nearest ? normalized.filter(s => s._date === nearest) : [];
+    }).filter(s => /^\d{4}-\d{2}-\d{2}$/.test(s._date) && (s._date >= localToday || s.status === 'live'))
+      .sort((a,b) => (a.status === 'live' ? -1 : 0) - (b.status === 'live' ? -1 : 0) || (a._date + a._time).localeCompare(b._date + b._time));
+    const nearest = normalized.find(s => s.status !== 'live')?._date;
+    const selected = normalized.filter(s => s.status === 'live' || (nearest && s._date === nearest));
     list.innerHTML = selected.map(s => {
       const title = escapeHtml(s.title ?? s.stream_title ?? '配信予定');
       const url = safeUrl(s.url ?? s.stream_url ?? s.youtube_url ?? s.broadcast_url);
-      const dateText = `${escapeHtml(s._date.replaceAll('-','/'))}${s._time ? '　'+escapeHtml(s._time) : ''}`;
+      const dateText = `${s.status === 'live' ? '🔴 LIVE　' : ''}${escapeHtml(s._date.replaceAll('-','/'))}${s._time ? '　'+escapeHtml(s._time) : ''}`;
       return `<article class="talent-schedule-card"><div class="talent-schedule-date">${dateText}</div><p class="talent-schedule-title">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>` : title}</p></article>`;
     }).join('');
     list.hidden = !selected.length;

@@ -426,6 +426,8 @@ function sortPublicSchedules(
 
 
 
+  const live = schedules.filter(schedule => schedule.status === "live");
+
   const futureAndToday =
 
     schedules
@@ -434,7 +436,7 @@ function sortPublicSchedules(
 
         (schedule) =>
 
-          schedule.stream_date >=
+          schedule.status !== "live" && schedule.status !== "completed" && schedule.stream_date >=
 
           today
 
@@ -512,7 +514,7 @@ function sortPublicSchedules(
 
         (schedule) =>
 
-          schedule.stream_date <
+          schedule.status !== "live" && schedule.stream_date <
 
           today
 
@@ -584,6 +586,7 @@ function sortPublicSchedules(
 
   return [
 
+    ...live,
     ...futureAndToday,
 
     ...past
@@ -810,7 +813,7 @@ function createScheduleCard(
     <div class="schedule-card-content">
       <div class="schedule-card-summary">
         <span class="schedule-talent">${talent}</span>
-        <span class="schedule-stream-time">${escapeScheduleHTML(time)}～配信予定</span>
+        <span class="schedule-stream-time">${item.status === "live" ? "🔴 LIVE 配信中" : item.status === "completed" ? `${escapeScheduleHTML(time)}～配信終了` : `${escapeScheduleHTML(time)}～配信予定`}</span>
       </div>
       ${hasURL ? `<span class="schedule-link-text">WATCH →</span>` : ""}
     </div>
