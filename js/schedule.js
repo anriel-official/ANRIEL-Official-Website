@@ -380,6 +380,15 @@ function getScheduleTodayString() {
 
 
 
+// 日本時間で「昨日」の日付を取得（端末のタイムゾーンに依存しない）
+function getScheduleYesterdayString() {
+  const today = getScheduleTodayString();
+  const yesterday = new Date(`${today}T00:00:00Z`);
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  return yesterday.toISOString().slice(0, 10);
+}
+
+
 // ==================================================
 
 // SORT
@@ -436,7 +445,7 @@ function sortPublicSchedules(
 
         (schedule) =>
 
-          schedule.status !== "live" && schedule.status !== "completed" && schedule.stream_date >=
+          schedule.status !== "live" && schedule.stream_date >=
 
           today
 
@@ -813,7 +822,7 @@ function createScheduleCard(
     <div class="schedule-card-content">
       <div class="schedule-card-summary">
         <span class="schedule-talent">${talent}</span>
-        <span class="schedule-stream-time">${item.status === "live" ? "🔴 LIVE 配信中" : item.status === "completed" ? `${escapeScheduleHTML(time)}～配信終了` : `${escapeScheduleHTML(time)}～配信予定`}</span>
+        <span class="schedule-stream-time${item.status === "live" ? " is-live" : ""}">${item.status === "live" ? '<span class="schedule-live-dot" aria-hidden="true"></span>LIVE 配信中' : item.status === "completed" ? `${escapeScheduleHTML(time)}～配信終了` : `${escapeScheduleHTML(time)}～配信予定`}</span>
       </div>
       ${hasURL ? `<span class="schedule-link-text">WATCH →</span>` : ""}
     </div>
@@ -956,6 +965,18 @@ function renderSchedule(
 
 
 
+  // 昨日より古い配信は非表示。LIVE中は日付に関係なく表示。
+  const yesterday = getScheduleYesterdayString();
+  const visibleSchedules = schedules.filter((item) =>
+    item.status === "live" ||
+    (typeof item.stream_date === "string" && item.stream_date >= yesterday)
+  );
+
+  if (visibleSchedules.length === 0) {
+    scheduleList.innerHTML = `<div class="schedule-empty">現在公開されている配信予定はありません。</div>`;
+    return;
+  }
+
   // ==================================================
 
   // 今日 → 未来 → 過去 の順に並び替え
@@ -968,7 +989,7 @@ function renderSchedule(
 
     sortPublicSchedules(
 
-      schedules
+      visibleSchedules
 
     );
 

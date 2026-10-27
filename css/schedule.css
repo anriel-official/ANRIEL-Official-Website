@@ -488,3 +488,27 @@ a.schedule-card:hover .schedule-thumbnail img {
 .weekly-public h2{font-size:clamp(26px,3.2vw,42px);margin:12px 0 28px}
 .weekly-public img{display:block;width:100%;height:auto;object-fit:contain;border:1px solid rgba(120,125,150,.15)}
 @media(max-width:600px){.weekly-public{margin-bottom:55px}.weekly-public h2{margin-bottom:20px}}
+
+/* LIVE中のタレントを視覚的に強調 */
+.schedule-card .schedule-stream-time.is-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #d82443;
+  font-weight: 900 !important;
+}
+.schedule-live-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: #ed2447;
+  box-shadow: 0 0 0 4px rgba(237, 36, 71, .12);
+  animation: schedule-live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes schedule-live-pulse {
+  50% { opacity: .45; box-shadow: 0 0 0 7px rgba(237, 36, 71, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .schedule-live-dot { animation: none; }
+}
