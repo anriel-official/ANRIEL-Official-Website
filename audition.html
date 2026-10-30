@@ -1,220 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AN:RIEL オーディション情報。現在、応募受付は行っておりません。">
-  <title>AUDITION | AN:RIEL Official Website</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .audition-closed { min-height: calc(100svh - 82px); padding: 150px 24px 100px; display: flex; align-items: center; justify-content: center; text-align: center; }
-    .audition-closed-inner { width: min(100%, 800px); }
-    .audition-closed-label { font-family: Montserrat, sans-serif; font-size: clamp(34px, 7vw, 68px); font-weight: 800; letter-spacing: .13em; line-height: 1.3; }
-    .audition-closed-line { width: 48px; height: 2px; margin: 30px auto 36px; background: #111; }
-    .audition-closed-message { font-size: clamp(14px, 2.4vw, 18px); font-weight: 600; letter-spacing: .06em; line-height: 2.2; }
-    @media(max-width: 600px) { .audition-closed { padding: 130px 22px 75px; } .audition-closed-line { margin: 25px auto 30px; } }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AN:RIEL 1期生VTuberオーディション。未来は、予定調和じゃない。">
+  <meta name="theme-color" content="#f5f6f8">
+  <title>1期生オーディション | AN:RIEL</title>
+  <link rel="stylesheet" href="css/audition.css">
+  <script src="js/audition.js" defer></script>
 </head>
 <body>
-<header class="site-header">
+  <!-- 応募フォーム公開時：このファイル内の「【ここにフォームurlを入れる】」を実際のURLに一括置換 -->
+  <header class="site-topbar" id="top">
+    <a class="wordmark" href="#top" aria-label="AN:RIEL オーディション トップ">
+      <img src="images/logo.png" alt="AN:RIEL">
 
-    <div class="header-inner">
-
-      <a
-        href="top.html"
-        class="header-logo"
-      >
-        <img
-          src="images/logo.png"
-          alt="AN:RIEL"
-        >
-      </a>
-
-
-      <nav
-        class="global-nav"
-        id="globalNav"
-      >
-
-        <a href="top.html">TOP</a>
-
-        <a href="news.html">NEWS</a>
-
-        <a href="about.html">ABOUT</a>
-
-        <a href="talent.html">TALENT</a>
-
-        <a href="schedule.html">SCHEDULE</a>
-
-        <a href="goods.html">GOODS</a>
-
-        <a href="audition.html">AUDITION</a>
-
-        <a href="guideline.html">GUIDELINE</a>
-
-        <a href="contact.html">CONTACT</a>
-
-      </nav>
-
-
-      <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="メニューを開く"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
+    </a>
+    <nav class="desktop-nav" aria-label="ページ内ナビゲーション">
+      <a href="#concept">CONCEPT</a><a href="#member">MEMBER</a><a href="#audition">AUDITION</a><a href="#flow">FLOW</a><a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="official-link" href="https://anriel-official.github.io/ANRIEL-Official-Website/top.html">公式サイト <span aria-hidden="true">↗</span></a>
+      <a class="header-entry" href="https://docs.google.com/forms/d/e/1FAIpQLSc2ft6TxGKd3Q8PMKmF40G6zYCGu1SOX6Eu8ls9ORH6kI5J_w/viewform">ENTRY <span aria-hidden="true">→</span></a>
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
     </div>
-
+    <nav class="mobile-menu" id="mobile-menu" aria-label="モバイルナビゲーション" hidden>
+      <a href="#concept">CONCEPT</a><a href="#member">MEMBER</a><a href="#audition">AUDITION</a><a href="#flow">FLOW</a><a href="#faq">FAQ</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2ft6TxGKd3Q8PMKmF40G6zYCGu1SOX6Eu8ls9ORH6kI5J_w/viewform">ENTRY</a>
+    </nav>
   </header>
-<main class="audition-closed">
-  <section class="audition-closed-inner" aria-labelledby="audition-title">
-    <h1 class="audition-closed-label" id="audition-title">AUDITION</h1>
-    <div class="audition-closed-line" aria-hidden="true"></div>
-    <p class="audition-closed-message">現在、オーディションの応募受付は行っておりません。</p>
-  </section>
-</main>
-<footer class="site-footer">
 
-    <div class="footer-inner">
-
-
-      <!-- FOOTER LOGO -->
-
-      <a
-        href="top.html"
-        class="footer-logo"
-      >
-        <img
-          src="images/logo.png"
-          alt="AN:RIEL"
-        >
-      </a>
-
-
-
-      <!-- FOOTER NAVIGATION -->
-
-      <nav class="footer-nav">
-
-        <a href="top.html">TOP</a>
-
-        <a href="news.html">NEWS</a>
-
-        <a href="about.html">ABOUT</a>
-
-        <a href="talent.html">TALENT</a>
-
-        <a href="schedule.html">SCHEDULE</a>
-
-        <a href="goods.html">GOODS</a>
-
-        <a href="audition.html">AUDITION</a>
-
-        <a href="guideline.html">GUIDELINE</a>
-
-        <a href="contact.html">CONTACT</a>
-
-      </nav>
-
-
-
-      <!-- =========================
-           FOOTER SOCIAL
-      ========================== -->
-
-      <div class="footer-social-area">
-
-        <p class="footer-social-label">
-          FOLLOW / CONTACT
-        </p>
-
-
-        <div class="footer-social">
-
-
-          <!-- X -->
-
-          <a
-            href="https://x.com/ANRIEL_2026"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-social-link"
-          >
-
-            <span class="footer-social-name">
-              X
-            </span>
-
-            <span class="footer-social-sub">
-              OFFICIAL ACCOUNT
-            </span>
-
-          </a>
-
-
-
-          <!-- YOUTUBE -->
-
-          <a
-            href="https://www.youtube.com/@ANRIEL-2026/videos"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-social-link"
-          >
-
-            <span class="footer-social-name">
-              YOUTUBE
-            </span>
-
-            <span class="footer-social-sub">
-              OFFICIAL CHANNEL
-            </span>
-
-          </a>
-
-
-
-          <!-- MARSHMALLOW -->
-
-          <a
-            href="http://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-social-link"
-          >
-
-            <span class="footer-social-name">
-              MARSHMALLOW
-            </span>
-
-            <span class="footer-social-sub">
-              QUESTION BOX
-            </span>
-
-          </a>
-
-
-        </div>
-
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-art" aria-hidden="true"><div class="hero-art-panel panel-one"></div><div class="hero-art-panel panel-two"></div><div class="hero-art-panel panel-three"></div><span class="art-outline"></span></div>
+      <div class="wrap hero-inner">
+        <p class="hero-audition-label">1ST GENERATION AUDITION</p>
+        <h1 id="hero-title">未来は、<br><em>予定調和</em>じゃない<span class="hero-period">。</span></h1>
+        <div class="hero-subrow"><p class="hero-lead">まだ知らない才能が、<br>まだ知らない未来をつくる。</p></div>
+        <a class="primary-link" href="https://docs.google.com/forms/d/e/1FAIpQLSc2ft6TxGKd3Q8PMKmF40G6zYCGu1SOX6Eu8ls9ORH6kI5J_w/viewform"><span>ENTRY</span><span aria-hidden="true">→</span></a>
+        <p class="hero-application-period"><strong>応募期間</strong> 2026/10/30～2026/11/30</p>
       </div>
+    </section>
 
+    <!-- AUDITION MOVIE -->
+    <section class="section audition-movie" aria-label="オーディション紹介動画" style="padding-top: 48px; padding-bottom: 48px;">
+      <div class="wrap">
+        <div style="width: 100%; max-width: 960px; margin: 0 auto; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px;">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/NddbkMaEXlw"
+            title="AN:RIEL オーディション紹介動画"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            style="display: block; width: 100%; height: 100%; border: 0;"
+          ></iframe>
+        </div>
+      </div>
+    </section>
 
+    <section class="section concept" id="concept" aria-labelledby="concept-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="section-label">CONCEPT <small>コンセプト</small></p></div>
+        <div class="concept-grid"><h2 id="concept-title">心を動かす、<br><em>余白に色を。</em></h2><div class="concept-copy"><p class="concept-intro">一人ひとりの個性が、新しい彩りになる。</p><p>AN:RIELは、タレントそれぞれの個性と可能性を大切にするVTuber事務所。</p><p>自分らしい表現、新しい挑戦、そしてリスナーとの出会いを通して、誰かの心を動かす活動を目指します。</p></div></div>
+      </div>
+    </section>
 
-      <!-- COPYRIGHT -->
+    <section class="section member" id="member" aria-labelledby="member-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="section-label">MEMBER <small>所属メンバー</small></p></div>
+        <div class="split-title"><h2 id="member-title">すでに始まっている、<br>物語がある。</h2><p>AN:RIEL 0期生のメンバーたち。<br>それぞれの表現が、次の未来へつながっていく。</p></div>
+        <a class="member-panel member-image-link" href="https://anriel-official.github.io/ANRIEL-Official-Website/talent.html" aria-label="0期生のタレント一覧を見る"><img src="images/Auditiontalent.png.png" alt="AN:RIEL 0期生メンバー" width="2000" height="1000" loading="lazy"></a>
+        <a class="underlined-link" href="https://anriel-official.github.io/ANRIEL-Official-Website/talent.html">0期生を見る <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
 
-      <p class="copyright">
-        © 2026 AN:RIEL
-      </p>
+    <section class="section audition" id="audition" aria-labelledby="audition-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="section-label">REQUIREMENTS <small>募集要項</small></p></div>
+        <div class="split-title"><h2 id="audition-title">新しい仲間を、<br>募集します。</h2><p>経験や数字だけではなく、<br>あなたの個性とこれからの可能性を大切に。</p></div>
+        <div class="info-table">
+          <div><h3>募集内容</h3><p>AN:RIEL 1期生 VTuberタレント</p></div>
+          <div><h3>応募対象</h3><p>性別問わず<br>配信未経験の方・現在個人で活動しているVTuberの方</p></div>
+          <div><h3>応募資格</h3><p>18歳以上（高校生不可）<br>継続的にVTuber活動に取り組める方<br>運営・所属メンバーとのコミュニケーションを大切にできる方</p></div>
+          <div><h3>活動条件</h3><p>月30時間以上・週3回以上の配信活動ができる方<br>必要なPC・インターネットがある方</p></div>
+          <div><h3>応募形態</h3><p>活動経験の有無を問わず応募可能。<br>現在の活動名・モデル・SNSなどの継続は、権利関係を確認したうえで個別に相談。</p></div>
+          <div><h3>応募期間</h3><p>2026/10/30～2026/11/30</p></div>
+        </div>
+      </div>
+    </section>
 
+    <section class="section flow" id="flow" aria-labelledby="flow-title">
+      <div class="wrap"><div class="section-heading"><p class="section-label">FLOW <small>選考フロー</small></p></div><h2 id="flow-title">選考の流れ。</h2>
+        <div class="flow-grid"><div><h3>応募・書類選考</h3><p>応募フォームから必要事項を送信。応募内容・提出資料をもとに選考。</p></div><div><h3>一次面談</h3><p>通過者へ個別に連絡し、オンライン面談などを実施。</p></div><div><h3>最終選考</h3><p>活動方針などを確認し、所属について最終案内。</p></div></div>
+        <p class="fine-print flow-notice"><strong>※選考に通過された方のみに、応募より1週間以内に連絡させていただきます。</strong></p>
+      </div>
+    </section>
 
-    </div>
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section-heading"><p class="section-label">FAQ <small>よくある質問</small></p></div>
+        <div class="split-title"><h2 id="faq-title">よくある質問</h2><p>応募前によくいただく質問をまとめました。</p></div>
+        <div class="faq-list">
+          <details class="faq-item"><summary><span class="faq-index">Q01</span><span class="faq-question">VTuberとして活動した経験がなくても応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>はい。VTuberとしての活動経験がない方も応募可能です。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q02</span><span class="faq-question">現在個人VTuberとして活動していますが応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>はい。現在個人VTuberとして活動中の方も応募可能です。活動名・モデル・SNSなどの継続については、権利関係を確認したうえで個別に相談します。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q03</span><span class="faq-question">性別による応募制限はありますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>性別を問わずご応募いただけます。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q04</span><span class="faq-question">学生でも応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>学生の方も、正式な募集要項に定める年齢・活動条件などを満たしていれば応募可能です。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q05</span><span class="faq-question">配信未経験でも応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>はい。配信経験の有無だけで判断することはありません。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q06</span><span class="faq-question">すでに別の事務所・グループに所属していても応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>現在の契約・所属状況によります。契約内容をご確認のうえ、ご応募前にご相談ください。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q07</span><span class="faq-question">選考結果はいつ届きますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>選考に通過された方のみに、応募より1週間以内にご連絡します。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q08</span><span class="faq-question">不合格の理由を教えてもらえますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>選考内容や不採用理由についての個別回答は行っておりません。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q09</span><span class="faq-question">応募時点で機材がないと応募できませんか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>応募時点で、活動に必要なPC・インターネット環境をご用意いただける方を対象としています。</p></div></details>
+          <details class="faq-item"><summary><span class="faq-index">Q10</span><span class="faq-question">すでにLive2Dモデルなどのアバターを持っていますが、まだデビューしていません。応募できますか？</span><span class="faq-toggle" aria-hidden="true"></span></summary><div class="faq-answer"><span class="faq-answer-label">A.</span><p>はい、応募可能です。すでにLive2Dモデルなどのアバターをお持ちの方や、デビュー前のVTuber準備中の方もご応募いただけます。現在の準備状況にかかわらず、活動への意欲や今後の可能性を重視して選考いたします。</p></div></details>
+          
+<details class="faq-item">
+  <summary>
+    <span class="faq-index">Q11</span>
+    <span class="faq-question">事務所に所属する際、費用はかかりますか？</span>
+    <span class="faq-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer">
+    <span class="faq-answer-label">A.</span>
+    <p>いいえ。AN:RIELへの所属にあたり、入所金や所属費用などをお支払いいただく必要はありません。</p>
+  </div>
+</details>
 
-  </footer>
-<script src="js/main.js"></script>
+<details class="faq-item">
+  <summary>
+    <span class="faq-index">Q12</span>
+    <span class="faq-question">Live2Dモデルや立ち絵の制作費用は自己負担ですか？</span>
+    <span class="faq-toggle" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer">
+    <span class="faq-answer-label">A.</span>
+    <p>いいえ。活動開始時に必要なLive2Dモデルや立ち絵は事務所が負担します。</p>
+  </div>
+</details>
+
+        
+        </div>
+        <div class="faq-contact"><div><span class="faq-contact-eyebrow">ANY QUESTIONS?</span><h3>質問はこちらまで。</h3><p>オーディションについて気になることがあれば、マシュマロからお気軽にお送りください。</p></div><a class="underlined-link" href="https://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy" target="_blank" rel="noopener noreferrer">質問を送る <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="entry" id="entry" aria-labelledby="entry-title"><div class="entry-art" aria-hidden="true"></div><div class="wrap entry-inner"><div class="section-heading"><p class="section-label">ENTRY <small>応募案内</small></p></div><p class="entry-english">THE FUTURE IS UNWRITTEN.</p><h2 id="entry-title">次は、<br><em>あなたと。</em></h2><div class="entry-bottom"><p class="entry-desc">まだ知らない未来へ。<br>その一歩を、ここから。</p><div class="entry-action"><a class="header-entry entry-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSc2ft6TxGKd3Q8PMKmF40G6zYCGu1SOX6Eu8ls9ORH6kI5J_w/viewform">ENTRY <span aria-hidden="true">→</span></a><p class="entry-period"><strong>応募期間</strong> 2026/10/30～2026/11/30</p></div></div></div></section>
+  </main>
+
+  <footer class="footer"><div class="wrap"><div class="footer-upper"><div class="footer-brand"><img src="images/logo.png" alt="AN:RIEL"><span>1ST GENERATION AUDITION</span></div><a class="underlined-link" href="https://anriel-official.github.io/ANRIEL-Official-Website/top.html">AN:RIEL公式サイトはこちら <span aria-hidden="true">↗</span></a></div><div class="socials"><a href="https://x.com/ANRIEL_2026" target="_blank" rel="noopener noreferrer"><strong>X</strong><span>OFFICIAL ACCOUNT ↗</span></a><a href="https://www.youtube.com/@ANRIEL-2026/videos" target="_blank" rel="noopener noreferrer"><strong>YOUTUBE</strong><span>OFFICIAL CHANNEL ↗</span></a><a href="https://marshmallow-qa.com/6yudidmy3k9hp7t?t=EvrDuy" target="_blank" rel="noopener noreferrer"><strong>MARSHMALLOW</strong><span>QUESTION BOX ↗</span></a></div><div class="footer-bottom"><span>© 2026 AN:RIEL</span><a href="#top">BACK TO TOP ↑</a></div></div></footer>
 </body>
 </html>
